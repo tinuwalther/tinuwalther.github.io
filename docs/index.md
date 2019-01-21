@@ -1,1 +1,3 @@
 # Index
+
+* [Class](class.md)
