@@ -5,3 +5,4 @@
 ## PowerShell Development
 
 * [Class](./devops/class.md)
+* [Module](./devops/module.md)
