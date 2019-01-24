@@ -1,5 +1,3 @@
-# #EngOps - Engineering and Operating
-
 Under construction, please visit me later.
 
 ## Projects
