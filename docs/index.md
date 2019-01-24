@@ -1,5 +1,3 @@
-# Index
-
 ## System Engineering
 
 * [Key Management Server](./syseng/kms.md)
