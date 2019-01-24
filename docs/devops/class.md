@@ -1,28 +1,37 @@
 # Class
 
+A file, could have a psm1-Extension.
+
+````powershell
+Class PsNetTools {...}
+````
+
 ## Properties
 
 ````powershell
-bla
+[string]$message = $null
 ````
 
 ## Constructor
 
 ````powershell
-bla
+PsNetTools(){
+    $this.message = "Loading PsNetTools"
+}
 ````
 
 ## Methods
 
 ````powershell
-bla
+[object]static dig() {...}
+
+[object]static tping() {...}
+
+[object]static uping() {...}
+
+[object]static wping() {...}
 ````
 
 ## Export-Members
 
-The Members should be exported within a Module manifest (New-ModuleManifest).
-
-````powershell
-# Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
-FunctionsToExport = @('PsNetDig', 'PsNetTping', 'PsNetUping', 'PsNetWping')
-````
+The Function should be exported within a Module manifest, see here [Module](./module.md#export-members)
