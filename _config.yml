@@ -1,7 +1,7 @@
 theme: jekyll-theme-minimal
 
-title: Martin Walther
+title: Tinus IT Wiki
 
 logo: ./images/PsEngOps.png
 
-show_downloads: false
+show_downloads: true
