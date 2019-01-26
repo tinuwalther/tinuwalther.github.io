@@ -1,4 +1,7 @@
 theme: jekyll-theme-minimal
-title: [Martin Walther Foto & IT]
-logo: [tinuwalther.github.io\images\PsEngOps.png]
-show_downloads: ["false"]
+
+title: Martin Walther Foto & IT
+
+logo: ./images/PsEngOps.png
+
+show_downloads: "false"
