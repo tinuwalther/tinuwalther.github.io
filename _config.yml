@@ -1,6 +1,8 @@
 theme: jekyll-theme-minimal
 
-title: Tinus IT Wiki
+title: Tinus EngOps Wiki
+
+description: OpsaC - Operating as code
 
 logo: ./images/PsEngOps.png
 
