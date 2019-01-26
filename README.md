@@ -1,3 +1,7 @@
+# Home
+
+OpsaC - Operating as PowerShell code, what else?
+
 ## GitHub Projects
 
 * [PsNetTools](./docs/projects/psnettools.md)
@@ -8,6 +12,7 @@
 
 ## PowerShell Wiki
 
+* [Function](./docs/devops/function.md)
 * [Class](./docs/devops/class.md)
 * [Module](./docs/devops/module.md)
 
