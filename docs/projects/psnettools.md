@@ -15,81 +15,86 @@ List all ExportedCommands:
 ````powershell
 Get-Module PsNetTools
 
-ModuleType Version    Name            ExportedCommands
----------- -------    ----            ----------------
-Script     0.1.0      PsNetTools      {PsNetDig, PsNetTping, PsNetUping, PsNetWping}
+ModuleType Version Name       ExportedCommands
+---------- ------- ----       ----------------
+Script     0.1.2   PsNetTools {PsNetDig, PsNetTping, PsNetUping, PsNetWping}
 ````
 
 ## PsNetDig
 
-dig - domain information groper.  
-Resolves a hostname to his IP addresses or an IP Address to his hostname.  
+PsNetDig - domain information groper.  
+Resolves a hostname to the IP addresses or an IP Address to the hostname.  
 
 ### Get-Help PsNetDig
 
 PsNetDig -Destination
 
-- Destination: Hostname | IP Address | Alias | WebUrl
+- Destination: Hostname or IP Address or Alias or WebUrl
 
 ### Example PsNetDig
 
-````
-PS /> PsNetDig -Destination 'sbb.ch'
+````powershell
+PsNetDig -Destination 'sbb.ch' | Format-List
 
-TargetName IpV4Address     IpV6Address
----------- -----------     -----------
-sbb.ch     194.150.245.142 2a00:4bc0:ffff:ffff::c296:f58e
+TargetName  : sbb.ch
+IpV4Address : 194.150.245.142
+IpV6Address : 2a00:4bc0:ffff:ffff::c296:f58e
+Duration    : 4ms
 ````
 
 ## PsNetTping
 
-tping - tcp port scanner.  
+PsNetTping - tcp port scanner.  
 It's like the cmdlet Test-NetConnection, but with the ability to specify a timeout in ms.  
 
 ### Get-Help PsNetTping
 
 PsNetTping -Destination -TcpPort -Timeout
 
-- Destination: Hostname | IP Address | Alias | WebUrl
+- Destination: Hostname or IP Address or Alias or WebUrl
 - TcpPort:     Tcp Port to use
 - Timeout:     Timeout in ms
 
 ### Example PsNetTping
 
-````
-PS /> PsNetTping -Destination 'sbb.ch' -TcpPort 443 -Timeout 100
+````powershell
+PsNetTping -Destination 'sbb.ch' -TcpPort 443 -Timeout 100
 
-TargetName TcpPort TcpSucceeded MaxTimeout
----------- ------- ------------ ----------
-sbb.ch         443         True 100ms
+TargetName   : sbb.ch
+TcpPort      : 443
+TcpSucceeded : True
+Duration     : 22ms
+MaxTimeout   : 100ms
 ````
 
 ## PsNetUping
 
-uping - udp port scanner.  
+PsNetUping - udp port scanner.  
 It's like the cmdlet Test-NetConnection, but with the ability to specify a timeout in ms and query for udp.  
 
 ### Get-Help PsNetUping
 
 PsNetTping -Destination -UdpPort -Timeout
 
-- Destination: Hostname | IP Address | Alias | WebUrl
+- Destination: Hostname or IP Address or Alias or WebUrl
 - UdpPort:     Udp Port to use
 - Timeout:     Timeout in ms
 
 ### Example PsNetUping
 
-````
-PS /> PsNetUping -Destination 'sbb.ch' -UdpPort 53 -Timeout 100
+````powershell
+PsNetUping -Destination 'sbb.ch' -UdpPort 53 -Timeout 100
 
-TargetName UdpPort UdpSucceeded MaxTimeout
----------- ------- ------------ ----------
-sbb.ch          53         True 100ms
+TargetName   : sbb.ch
+UdpPort      : 53
+UdpSucceeded : False
+Duration     : 103ms
+MaxTimeout   : 100ms
 ````
 
 ## PsNetWping
 
-wping - http web request scanner.  
+PsNetWping - http web request scanner.  
 It's like the cmdlet Invoke-WebRequest, but with the ability to specify 'noproxy' with PowerShell 5.1.  
 
 ### Get-Help PsNetWping
@@ -102,10 +107,12 @@ PsNetWping -Destination -Timeout [-NoProxy]
 
 ### Example PsNetWping
 
-````
-PS /> PsNetWping -Destination 'https://sbb.ch' -Timeout 1000 -NoProxy
+````powershell
+PsNetWping -Destination 'https://sbb.ch' -Timeout 1000 -NoProxy
 
-TargetName     ResponseUri            StatusCode MaxTimeout
-----------     -----------            ---------- ----------
-https://sbb.ch https://www.sbb.ch/de/         OK 1000ms
+TargetName  : https://sbb.ch
+ResponseUri : https://www.sbb.ch/de/
+StatusCode  : OK
+Duration    : 231ms
+MaxTimeout  : 1000ms
 ````
