@@ -2,8 +2,8 @@ theme: jekyll-theme-minimal
 
 title: Tinus EngOps Wiki
 
-description: OpsaC - Operating as PowerShell code
+description: OpaPsC - Operating as PowerShell code
 
 logo: ./images/PsEngOps.png
 
-show_downloads: true
+show_downloads: false
