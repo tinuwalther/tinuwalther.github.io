@@ -2,7 +2,7 @@ theme: jekyll-theme-minimal
 
 title: Tinus EngOps Wiki
 
-description: OpsaC - Operating as code
+description: OpsaC - Operating as PowerShell code
 
 logo: ./images/PsEngOps.png
 
