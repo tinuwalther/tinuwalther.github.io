@@ -15,6 +15,7 @@ OpsaC - Operating as PowerShell code, what else?
 * [Function](./docs/devops/function.md)
 * [Class](./docs/devops/class.md)
 * [Module](./docs/devops/module.md)
+* [Manifest](./docs/devops/manifest.md)
 
 ## Additional Websites
 
