@@ -4,7 +4,7 @@ Under construction, please visit me later.
 
 ## GitHub Projects
 
-[PsNetTools](./projects/psnettools.md) - dig, tcp-ping, udp-ping, web-ping
+[PsNetTools](./docs/index.md) - dig, tcp-ping, udp-ping, web-ping
 
 ## Additional Websites
 
