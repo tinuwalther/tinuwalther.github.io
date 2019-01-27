@@ -6,10 +6,6 @@ OpsaC - Operating as PowerShell code, what else?
 
 * [PsNetTools](./docs/psnettools.md)
 
-## System Engineering Wiki
-
-* [Key Management Server](./docs/kms.md)
-
 ## PowerShell Wiki
 
 * [Function](./docs/function.md)
