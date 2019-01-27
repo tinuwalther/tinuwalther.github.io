@@ -3,7 +3,8 @@ layout: default
 title: Blog
 ---
 
-{% for tag in site.tags %}
+{% assign sorted_tags = site.tags | sort:"name" %}
+{% for tag in sorted_tags %}
   <h2>Tag: {{ tag[0] }}</h2>
   <ul>
     {% for post in tag[1] %}
