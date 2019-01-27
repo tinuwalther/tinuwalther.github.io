@@ -5,9 +5,10 @@ title: Projects
 <h1>GitHub Projects</h1>
 
 <ul>
-    {% for page in site.pages %}
-      <li>
-        <h2><a href="{{ page.url }}">{{ page.title }}</a></h2>
-      </li>
-    {% endfor %}
-  </ul>
+  {% for page in site.pages %}
+  <h2>{{ page[0] }}</h2>
+    <li>
+      <a href="{{ page.url }}">{{ page.title }}</a>
+    </li>
+  {% endfor %}
+</ul>
