@@ -2,10 +2,6 @@
 
 OpsaC - Operating as PowerShell code, what else?
 
-## Blog
-
-* [PowerShell Blog](/blog.html)
-
 ## GitHub Projects
 
 * [PsNetTools](./docs/projects/psnettools.md)
