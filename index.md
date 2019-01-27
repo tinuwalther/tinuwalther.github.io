@@ -20,8 +20,3 @@ OpsaC - Operating as PowerShell code, what else?
 * [Class](./docs/devops/class.md)
 * [Module](./docs/devops/module.md)
 * [Manifest](./docs/devops/manifest.md)
-
-## Additional Websites
-
-* [it.martin-walther.ch](https://it.martin-walther.ch)
-* [foto.martin-walther.ch](https://foto.martin-walther.ch)
