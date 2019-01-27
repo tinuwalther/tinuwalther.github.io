@@ -1,6 +1,8 @@
-# Get KMS Infos
+# Key Management Service Info
 
 ## Registry
+
+How to obtain the registered KMS server from the registry:
 
 ````powershell
 Get-Item 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SoftwareProtectionPlatform'
@@ -10,11 +12,15 @@ The KMS Server is list on KeyManagementServiceName.
 
 ## Software licensing service (slmgr)
 
+How to obtain the registered KMS server from the Software licensing service: 
+
 ````powershell
 cscript "$($env:windir)\system32\slmgr.vbs" -dlv //Nologo
 ````
 
 The KMS Server is list on 'KMS machine IP address'.  
+
+### My Function Get-SettingsFromSlmgr
 
 ````powershell
 function Get-SettingsFromSlmgr{

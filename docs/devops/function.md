@@ -3,6 +3,19 @@
 A function which returns an object, either if an error occure or not.
 
 ````powershell
+<#
+.SYNOPSIS
+Short description
+
+.DESCRIPTION
+Long description
+
+.EXAMPLE
+An example
+
+.NOTES
+General notes
+#>
 function Get-Something{
     [CmdletBinding()]
     param(

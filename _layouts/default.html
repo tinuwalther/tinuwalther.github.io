@@ -26,13 +26,12 @@
         <p class="view"><a href="{{ site.github.repository_url }}">View the Project on GitHub <small>{{ site.github.repository_nwo }}</small></a></p>
         {% endif %}
 
-        {% if site.github.is_user_page %}
-        <p class="view"><a href="{{ site.github.owner_url }}">View My GitHub Profile</a></p>
-        {% endif %}
-
         <h2><a>Additional Websites</a></h2>
-        <p class="view"><a href="[it.martin-walther.ch](https://it.martin-walther.ch)">it.martin-walther.ch</a></p>
-        <p class="view"><a href="[foto.martin-walther.ch](https://foto.martin-walther.ch)">foto.martin-walther.ch</a></p>
+        {% if site.github.is_user_page %}
+        <p class="view"><a href="{{ site.github.owner_url }}">View my GitHub Profile</a></p>
+        {% endif %}
+        <p class="view"><a href="[it.martin-walther.ch](https://it.martin-walther.ch)">View Tinus IT Wiki</a></p>
+        <p class="view"><a href="[foto.martin-walther.ch](https://foto.martin-walther.ch)">View my photo website</a></p>
 
         {% if site.show_downloads %}
         <ul class="downloads">
