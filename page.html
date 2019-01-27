@@ -1,14 +1,11 @@
 ---
 layout: default
-title: Projects
+title: Pages
 ---
-<h1>GitHub Projects</h1>
 
-<ul>
-  {% for page in site.pages %}
-    <h2>{{ page[0] }}</h2>
-    <li>
-      <a href="{{ page.url }}">{{ page.title }}</a>
-    </li>
-  {% endfor %}
-</ul>
+{% for page in site.pages %}
+  <h2>Page: {{ page[0] }}</h2>
+  <ul>
+    <li><a href="{{ page.url }}">{{ page.title }}</a></li>
+  <ul>
+{% endfor %}
