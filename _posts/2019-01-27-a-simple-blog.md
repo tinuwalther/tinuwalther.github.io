@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "PowerShell!"
+author: Tinu
 ---
 
 # Welcome with PowerShell
