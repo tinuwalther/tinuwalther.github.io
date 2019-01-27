@@ -1,1 +1,0 @@
-[Pages](https://jekyllrb.com/docs/pages/)
