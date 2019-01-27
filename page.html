@@ -5,7 +5,5 @@ title: Pages
 
 {% for page in site.pages %}
   <h2>Page: {{ page[0] }}</h2>
-  <ul>
-    <li><a href="{{ page.url }}">{{ page.title }}</a></li>
-  <ul>
+  <li><a href="{{ page.url }}">{{ page.title }}</a></li>
 {% endfor %}

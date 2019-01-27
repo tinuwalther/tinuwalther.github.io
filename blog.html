@@ -2,13 +2,14 @@
 layout: default
 title: Blog
 ---
-<h1>Latest Posts</h1>
 
 {% for tag in site.tags %}
   <h2>Tag: {{ tag[0] }}</h2>
+  {% if {{ tag[0] }} contains 'powershell' %}
   <ul>
     {% for post in tag[1] %}
       <li><a href="{{ post.url }}">{{ post.title }}</a></li>
     {% endfor %}
   </ul>
+  {% endfor %}
 {% endfor %}
