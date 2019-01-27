@@ -16,7 +16,7 @@ function PsNetWping {...}
 
 ## Export-Members
 
-The Members should be exported within a Module manifest (New-ModuleManifest).
+The Members should be exported within a Module manifest, see here [FunctionsToExport](./manifest.md#additional-settings)
 
 ````powershell
 # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
