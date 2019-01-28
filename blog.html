@@ -7,7 +7,7 @@ title: Blog
 
 {% for tag in site.tags %}
   <h2>Tag: {{ tag[0] }}</h2>
-  {% if site.tags contains 'SystemEngineering' %}
+  {% if (tag[0]) contains 'SystemEngineering' %}
   <ul>
     {% assign sorted = (tag[1] | sort: 'date') %}
     {% for post in sorted %}
