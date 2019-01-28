@@ -3,9 +3,10 @@ layout: default
 title: Blog
 ---
 
+<h1>PowerShell Blog</h1>
+
 {% for tag in site.tags %}
   {% if (tag[0]) contains 'PowerShell' %}
-  <h1>Tag: {{ tag[0] }}</h1>
   <ul>
     {% assign sorted = (tag[1] | sort: 'date') %}
     {% for post in sorted %}
