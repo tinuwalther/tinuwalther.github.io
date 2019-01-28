@@ -2,16 +2,15 @@
 
 OpsaC - Operating as PowerShell code, what else?
 
-## GitHub Projects
+## Welcome with PowerShell
 
-* [PsNetTools](./docs/psnettools.md)
+**PowerShell**, this is the gratest scripting language for System Engineers.
 
-## PowerShell Wiki
+![My helpful screenshot](/assets/words.png)
 
-* [Function](./docs/function.md)
-* [Class](./docs/class.md)
-* [Module](./docs/module.md)
-* [Manifest](./docs/manifest.md)
+## My GitHub Projects
+
+* [PsNetTools](/docs/psnettools.md)
 
 ## Jekyll Infos
 
