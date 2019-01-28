@@ -6,13 +6,18 @@ title: Blog
 <h1>All Posts</h1>
 
 {% for tag in site.tags %}
+  <h2>Tag: {{ tag[0] }}</h2>
+  <ul>
+    {% assign sorted = (tag[1] | sort: 'date') %}
+    {% for post in sorted %}
+      <li><a href="{{ post.url }}">{{ post.title }}</a></li>
+    {% endfor %}
+  </ul>
+{% endfor %}
+
+{% for tag in site.tags %}
   {% if site.tags contains 'PowerShell' %}
-    <h2>Tag: {{ tag[0] }}</h2>
-    <ul>
-      {% assign sorted = (tag[1] | sort: 'date') %}
-      {% for post in sorted %}
-        <li><a href="{{ post.url }}">{{ post.title }}</a></li>
-      {% endfor %}
-    </ul>
-  {% endfor %}
-{% endif %}
+    All PowerShell Posts
+    <li><a href="{{ tag.url }}">{{ tag.title }}</a></li>
+  {% endif %}
+{% endfor %}
