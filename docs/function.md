@@ -44,9 +44,11 @@ function Get-Something{
     catch [Exception]{
         Write-Verbose "-> Catch block reached"
         $obj = [PSCustomObject]@{
-            Function  = $function
-            Exception = $($_.Exception.GetType().FullName)
-            Message   = $($_.Exception.Message)
+            Activity   = $($_.CategoryInfo).Activity
+            Message    = $($_.Exception.Message)
+            Category   = $($_.CategoryInfo).Category
+            Exception  = $($_.Exception.GetType().FullName)
+            TargetName = $($_.CategoryInfo).TargetName
         }
         $ret += $obj
         $error.clear()
