@@ -5,6 +5,21 @@ author: Tinu
 tags:   SystemEngineering
 ---
 
+- [PsNetTools](#psnettools)
+  - [Usage](#usage)
+  - [PsNetDig](#psnetdig)
+    - [Get-Help PsNetDig](#get-help-psnetdig)
+    - [Example PsNetDig](#example-psnetdig)
+  - [PsNetTping](#psnettping)
+    - [Get-Help PsNetTping](#get-help-psnettping)
+    - [Example PsNetTping](#example-psnettping)
+  - [PsNetUping](#psnetuping)
+    - [Get-Help PsNetUping](#get-help-psnetuping)
+    - [Example PsNetUping](#example-psnetuping)
+  - [PsNetWping](#psnetwping)
+    - [Get-Help PsNetWping](#get-help-psnetwping)
+    - [Example PsNetWping](#example-psnetwping)
+
 # PsNetTools
 
 PsNetTools is a cross platform PowerShell module to test some network features on Windows and Mac.  
