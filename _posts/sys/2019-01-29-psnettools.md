@@ -1,3 +1,11 @@
+---
+layout: post
+title:  "PsNetTools"
+author: Tinu
+tags:   SystemEngineering
+permalink: /posts/:title:output_ext
+---
+
 # Table of Contents
 
 - [Table of Contents](#table-of-contents)
