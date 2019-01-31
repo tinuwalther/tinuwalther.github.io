@@ -1,3 +1,11 @@
+---
+layout: post
+title:  "PowerShell Network Tools"
+author: Tinu
+tags:   SystemEngineering
+permalink: /posts/:title:output_ext
+---
+
 # Table of Contents
 
 - [Table of Contents](#table-of-contents)
@@ -17,10 +25,10 @@
   - [Example Test-PsNetWping](#example-test-psnetwping)
 - [Get-PsNetAdapters](#get-psnetadapters)
   - [Get-Help Get-PsNetAdapters](#get-help-get-psnetadapters)
-  - [Example Get-PsNetAdapterConfiguration](#example-get-psnetadapterconfiguration)
+  - [Example Get-PsNetAdapters](#example-get-psnetadapters)
 - [Get-PsNetAdapterConfiguration](#get-psnetadapterconfiguration)
   - [Get-Help Get-PsNetAdapterConfiguration](#get-help-get-psnetadapterconfiguration)
-  - [Example Get-PsNetAdapterConfiguration](#example-get-psnetadapterconfiguration-1)
+  - [Example Get-PsNetAdapterConfiguration](#example-get-psnetadapterconfiguration)
 
 # PsNetTools
 
@@ -151,7 +159,7 @@ Get-PsNetAdapters -get the network interface for all adapters.
 
 Get-PsNetAdapters
 
-## Example Get-PsNetAdapterConfiguration
+## Example Get-PsNetAdapters
 
 ````powershell
 Get-PsNetAdapters | Where-Object Index -eq 11

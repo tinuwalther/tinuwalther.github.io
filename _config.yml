@@ -7,3 +7,5 @@ description: OpsaC - Operating as PowerShell code
 logo: /assets/PsEngOps.png
 
 show_downloads: false
+
+permalink: /posts/:title:output_ext
