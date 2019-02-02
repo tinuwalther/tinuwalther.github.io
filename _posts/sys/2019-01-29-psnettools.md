@@ -224,4 +224,4 @@ GatewayIpV4Addresses : {<IP Address V4>}
 GatewayIpV6Addresses : {<IP Address V6>}
 ````
 
-[Top](#table-of-contents) [Blog](../syseng.html)
+[ [Top](#table-of-contents) ] [ [Blog](../syseng.html) ]
