@@ -70,6 +70,7 @@ Test-PsNetDig -Destination
 ````powershell
 Test-PsNetDig -Destination 'sbb.ch' | Format-List
 
+Succeeded   : True
 TargetName  : sbb.ch
 IpV4Address : 194.150.245.142
 IpV6Address : 2a00:4bc0:ffff:ffff::c296:f58e
@@ -94,6 +95,7 @@ Test-PsNetTping -Destination -TcpPort -Timeout
 ````powershell
 Test-PsNetTping -Destination 'sbb.ch' -TcpPort 443 -Timeout 100
 
+Succeeded    : True
 TargetName   : sbb.ch
 TcpPort      : 443
 TcpSucceeded : True
@@ -119,6 +121,7 @@ Test-PsNetTping -Destination -UdpPort -Timeout
 ````powershell
 Test-PsNetUping -Destination 'sbb.ch' -UdpPort 53 -Timeout 100
 
+Succeeded    : True
 TargetName   : sbb.ch
 UdpPort      : 53
 UdpSucceeded : False
@@ -144,6 +147,7 @@ Test-PsNetWping -Destination -Timeout [-NoProxy]
 ````powershell
 Test-PsNetWping -Destination 'https://sbb.ch' -Timeout 1000 -NoProxy
 
+Succeeded   : True
 TargetName  : https://sbb.ch
 ResponseUri : https://www.sbb.ch/de/
 StatusCode  : OK
@@ -220,4 +224,4 @@ GatewayIpV4Addresses : {<IP Address V4>}
 GatewayIpV6Addresses : {<IP Address V6>}
 ````
 
-[Top](#table-of-contents)
+[Top](#table-of-contents) [Blog](../syseng.html)
