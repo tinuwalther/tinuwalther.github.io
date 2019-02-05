@@ -107,7 +107,7 @@ body {
   }
   
   header {
-    width:250px;
+    width:220px;
     float:left;
     position:fixed;
     -webkit-font-smoothing:subpixel-antialiased;
@@ -190,7 +190,7 @@ body {
   }
   
   footer {
-    width:250px;
+    width:220px;
     float:left;
     position:fixed;
     bottom:50px;
@@ -207,7 +207,7 @@ body {
     header, section, footer {
       float:none;
       position:static;
-      width:60%;
+      width:auto;
     }
   
     header {
