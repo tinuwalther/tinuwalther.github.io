@@ -232,7 +232,7 @@ body {
     }
   }
   
-  @media print, screen and (max-width: 680px) {
+  @media print, screen and (max-width: 720px) {
     body {
       word-wrap:break-word;
     }
@@ -245,6 +245,10 @@ body {
       position:static;
     }
   
+    header li, header ul li + li + li {
+      width:66%;
+    }
+
     pre, code {
       word-wrap:normal;
     }
