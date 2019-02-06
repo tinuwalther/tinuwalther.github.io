@@ -23,7 +23,11 @@ permalink: /posts/:title:output_ext
 
 PsNetTools is a cross platform PowerShell module to test some network features on Windows and Mac.  
 
+<<<<<<< HEAD
 ![PsNetTools](../assets/PsNetTools.png)
+=======
+![PsNetTools](./Images/PsNetTools.png)
+>>>>>>> ed26080f39bffe5a81fc0b5f06d5369d331e45e5
 
 Import Module:  
 
