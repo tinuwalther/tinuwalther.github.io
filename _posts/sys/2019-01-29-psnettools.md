@@ -18,6 +18,7 @@ permalink: /posts/:title:output_ext
 - [Get-PsNetAdapterConfiguration](#get-psnetadapterconfiguration)
 - [Get-PsNetRoutingTable](#get-psnetroutingtable)
 - [Get-PsNetHostsTable](#get-psnethoststable)
+- [How to Export settings](#how-to-export-settings)
 
 # PsNetTools
 
@@ -273,6 +274,7 @@ Export the JSON-Object from Test-PsNetDig to a file:
 Test-PsNetDig sbb.ch | ConvertTo-Json | Set-Content D:\PsNetDig.json
 ````
 
+<<<<<<< HEAD
 # Who is behind a URI
 
 Test the correct URI for http://google.com
@@ -288,4 +290,6 @@ Duration    : 204ms
 MaxTimeout  : 1000ms
 ````
 
+=======
+>>>>>>> e071b1c701de17695e75211de4f30fac7fccb74e
 [ [Top](#table-of-contents) ] [ [Blog](../syseng.html) ]
