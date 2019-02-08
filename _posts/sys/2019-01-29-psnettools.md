@@ -18,6 +18,7 @@ permalink: /posts/:title:output_ext
 - [Get-PsNetAdapterConfiguration](#get-psnetadapterconfiguration)
 - [Get-PsNetRoutingTable](#get-psnetroutingtable)
 - [Get-PsNetHostsTable](#get-psnethoststable)
+- [How to Export settings](#how-to-export-settings)
 
 # PsNetTools
 
@@ -219,6 +220,45 @@ Succeeded IpAddress    Compuername FullyQualifiedName
      True 192.168.1.27 computer1   computername1.fqdn
      True 192.168.1.28 computer2
      True 192.168.1.29 computer3   computername3.fqdn
+````
+
+# How to Export settings
+
+You can easy export all the output of the commands as a JSON-file with the following CmdLets:
+
+- ConvertTo-JSON
+- Set-Content
+
+As an example run Test-PsNetDig:
+
+````powershell
+Test-PsNetDig sbb.ch
+
+Succeeded   : True
+TargetName  : sbb.ch
+IpV4Address : 194.150.245.142
+IpV6Address :
+Duration    : 61ms
+````
+
+Convert the result from Test-PsNetDig to a JSON-Object:
+
+````powershell
+Test-PsNetDig sbb.ch | ConvertTo-Json
+
+{
+    "Succeeded":  true,
+    "TargetName":  "sbb.ch",
+    "IpV4Address":  "194.150.245.142",
+    "IpV6Address":  null,
+    "Duration":  "0ms"
+}
+````
+
+Export the JSON-Object from Test-PsNetDig to a file:
+
+````powershell
+Test-PsNetDig sbb.ch | ConvertTo-Json | Set-Content D:\PsNetDig.json
 ````
 
 [ [Top](#table-of-contents) ] [ [Blog](../syseng.html) ]
