@@ -19,6 +19,7 @@ permalink: /posts/:title:output_ext
 - [Get-PsNetRoutingTable](#get-psnetroutingtable)
 - [Get-PsNetHostsTable](#get-psnethoststable)
 - [How to Export settings](#how-to-export-settings)
+- [Who is behind an URI](#who-is-behind-an-uri)
 
 # PsNetTools
 
@@ -274,22 +275,20 @@ Export the JSON-Object from Test-PsNetDig to a file:
 Test-PsNetDig sbb.ch | ConvertTo-Json | Set-Content D:\PsNetDig.json
 ````
 
-<<<<<<< HEAD
-# Who is behind a URI
+# Who is behind an URI
 
-Test the correct URI for http://google.com
+Test the correct URI for google.com
 
 ````powershell
-Test-PsNetWping -Destination http://google.com -Timeout 1000
+Test-PsNetWping -Destination google.com -Timeout 1000
 
 Succeeded   : True
 TargetName  : http://google.com
 ResponseUri : http://www.google.com/
 StatusCode  : OK
-Duration    : 204ms
+Duration    : 245ms
+MinTimeout  : 0ms
 MaxTimeout  : 1000ms
 ````
 
-=======
->>>>>>> e071b1c701de17695e75211de4f30fac7fccb74e
 [ [Top](#table-of-contents) ] [ [Blog](../syseng.html) ]
