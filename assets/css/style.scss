@@ -107,7 +107,8 @@ body {
   }
   
   header {
-    width:250px;
+    width:270px;
+    left: 50px;
     float:left;
     position:fixed;
     -webkit-font-smoothing:subpixel-antialiased;
@@ -173,7 +174,8 @@ body {
   }
   
   section {
-    width:70%;
+    width:80%;
+    left: 350px;
     float:right;
     padding-bottom:50px;
   }
@@ -190,7 +192,8 @@ body {
   }
   
   footer {
-    width:250px;
+    width:270px;
+    left: 50px;
     float:left;
     position:fixed;
     bottom:50px;
