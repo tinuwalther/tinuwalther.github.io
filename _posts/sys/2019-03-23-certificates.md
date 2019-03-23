@@ -10,6 +10,7 @@ permalink: /posts/:title:output_ext
 
 - [Table of Contents](#table-of-contents)
 - [List certificates](#list-certificates)
+  - [List all expired certificates](#list-all-expired-certificates)
 - [Import certificates](#import-certificates)
 - [Remove certificates](#remove-certificates)
 - [See also](#see-also)
@@ -21,8 +22,25 @@ $Issuer = '*'
 Get-ChildItem Cert:\LocalMachine -Recurse | Where-Object Issuer -match "CN=$Issuer"
 ````
 
+## List all expired certificates
+
 ````powershell
-Get-ChildItem cert:\LocalMachine -Recurse | % {$_.DnsNameList}
+$ret = @()
+$Issuer = '*'
+$certs = Get-ChildItem Cert:\LocalMachine -Recurse | Where-Object Issuer -match "CN=$Issuer"
+foreach($item in $certs){
+   if($item.NotAfter.Date -le (Get-Date)){
+      $obj = [PSCustomObject]@{
+         Issuer     = $item.Issuer
+         ValidFrom  = $item.NotBefore.Date
+         ExpiresOn  = $item.NotAfter.Date
+         KeyLength  = $item.PublicKey.Key.KeySize
+         Thumbprint = $item.Thumbprint
+      }
+      $ret += $obj
+   }
+}
+$ret | Format-List
 ````
 
 # Import certificates
