@@ -2,7 +2,7 @@
 layout: post
 title:  "List installed Software"
 author: Tinu
-tags:   SystemEngineering
+tags:   PowerShell
 permalink: /posts/:title:output_ext
 ---
 
