@@ -2,6 +2,7 @@
 layout: post
 title:  "Hashtable"
 author: Tinu
+categories: "PowerShell Basic"
 tags:   PowerShell
 permalink: /posts/:title:output_ext
 ---

@@ -2,6 +2,7 @@
 layout: post
 title:  "PowerShell Network Tools"
 author: Tinu
+categories: "PowerShell Class"
 tags:   PowerShell
 permalink: /posts/:title:output_ext
 ---

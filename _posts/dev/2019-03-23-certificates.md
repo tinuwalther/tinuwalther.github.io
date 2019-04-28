@@ -2,6 +2,7 @@
 layout: post
 title:  "Certificates"
 author: Tinu
+categories: "System Engineering"
 tags:   PowerShell
 permalink: /posts/:title:output_ext
 ---
