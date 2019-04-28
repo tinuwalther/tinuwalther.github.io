@@ -68,4 +68,4 @@ Output:
 Source W:\WebSites, Target Z:\Backup\WebSites
 ````
 
-[ [Top](#table-of-contents) ] [ [Blog](../devops.html) ]
+[ [Top](#table-of-contents) ] [ [Blog](../categories.html) ]

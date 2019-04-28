@@ -68,4 +68,4 @@ foreach($item in $certs){
 
 [Certificate Provider](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.security/about/about_certificate_provider?view=powershell-6) on Microsoft Docs.
 
-[ [Top](#table-of-contents) ] [ [Blog](../devops.html) ]
+[ [Top](#table-of-contents) ] [ [Blog](../categories.html) ]

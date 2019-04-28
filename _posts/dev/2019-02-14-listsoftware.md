@@ -80,4 +80,4 @@ Adobe Acrobat Reader DC - Deutsch   19.010.20091    MsiExec.exe /I{AC76BA86-7AD7
 PowerShell 6-x64                    6.1.2.0         MsiExec.exe /X{65276649-728D-4AB9-AAEC-6EFF860B11EC}
 ````
 
-[ [Top](#table-of-contents) ] [ [Blog](../devops.html) ]
+[ [Top](#table-of-contents) ] [ [Blog](../categories.html) ]
