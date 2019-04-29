@@ -5,8 +5,9 @@ title: Blog
 
 <h1>PowerShell Blog</h1>
 
-{% for category in site.categories %}
-  <h3>{{ category[0] - category[1] }}</h3>
+{% assign sorted_cats = site.categories | sort %}
+{% for category in sorted_cats %}
+  <h3>{{ category[0] }}</h3>
   <ul>
     {% assign sorted = (category[1] | sort: 'title') %}
     {% for post in sorted %}
