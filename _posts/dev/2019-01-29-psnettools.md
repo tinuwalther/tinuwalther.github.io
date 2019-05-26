@@ -12,7 +12,9 @@ permalink: /posts/:title:output_ext
 - [Table of Contents](#table-of-contents)
 - [PsNetTools](#psnettools)
 - [Test-PsNetDig](#test-psnetdig)
+- [Test-PsNetPing](#test-psnetping)
 - [Test-PsNetTping](#test-psnettping)
+- [Test-PsNetTracert](#test-psnettracert)
 - [Test-PsNetUping](#test-psnetuping)
 - [Test-PsNetWping](#test-psnetwping)
 - [Get-PsNetAdapters](#get-psnetadapters)
@@ -45,17 +47,19 @@ Get-Command -Module PsNetTools
 
 CommandType     Name                                               Version    Source
 -----------     ----                                               -------    ------
-Function        Add-PsNetHostsEntry                                0.5.0      PsNetTools
-Function        Get-PsNetAdapterConfiguration                      0.5.0      PsNetTools
-Function        Get-PsNetAdapters                                  0.5.0      PsNetTools
-Function        Get-PsNetHostsTable                                0.5.0      PsNetTools
-Function        Get-PsNetRoutingTable                              0.5.0      PsNetTools
-Function        Remove-PsNetHostsEntry                             0.5.0      PsNetTools
-Function        Start-PsNetPortListener                            0.5.0      PsNetTools
-Function        Test-PsNetDig                                      0.5.0      PsNetTools
-Function        Test-PsNetTping                                    0.5.0      PsNetTools
-Function        Test-PsNetUping                                    0.5.0      PsNetTools
-Function        Test-PsNetWping                                    0.5.0      PsNetTools
+Function        Add-PsNetHostsEntry                                0.7.4      PsNetTools
+Function        Get-PsNetAdapterConfiguration                      0.7.4      PsNetTools
+Function        Get-PsNetAdapters                                  0.7.4      PsNetTools
+Function        Get-PsNetHostsTable                                0.7.4      PsNetTools
+Function        Get-PsNetRoutingTable                              0.7.4      PsNetTools
+Function        Remove-PsNetHostsEntry                             0.7.4      PsNetTools
+Function        Start-PsNetPortListener                            0.7.4      PsNetTools
+Function        Test-PsNetDig                                      0.7.4      PsNetTools
+Function        Test-PsNetPing                                     0.7.4      PsNetTools
+Function        Test-PsNetTping                                    0.7.4      PsNetTools
+Function        Test-PsNetTracert                                  0.7.4      PsNetTools
+Function        Test-PsNetUping                                    0.7.4      PsNetTools
+Function        Test-PsNetWping                                    0.7.4      PsNetTools
 ````
 
 # Test-PsNetDig
@@ -101,6 +105,69 @@ Succeeded InputString Destination IpV4Address     IpV6Address                   
      True google.com  google.com  216.58.215.238  2a00:1450:400a:801::200e           26
 ````
 
+# Test-PsNetPing
+
+Attempts to send an ICMP echo message to a remote computer and receive a corresponding ICMP echo reply message from the remote computer.
+
+````powershell
+Test-PsNetPing [-Destination] <String[]> [[-try] <Int32>] [<CommonParameters>]
+````
+
+- Destination: Hostname or IP Address or Alias as String or String-Array
+- try: Number of attempts to send ICMP echo message
+
+**Example 1:**
+
+````powershell
+Test-PsNetPing -Destination sbb.ch
+
+IcmpSucceeded     : True
+IPAddress         : 2a00:4bc0:ffff:ffff::c296:f58e
+BytesSend         : 32
+BytesReceived     : 0
+TimeStamp         : 2019-05-26 09:34:48.388
+Destination       : sbb.ch
+StatusDescription : ICMP Success
+MinTimeout        : 0
+MaxTimeout        : 1000
+TimeMs            : 19
+````
+
+**Example 2:**
+
+````powershell
+Test-PsNetPing -Destination sbb.ch -try 5
+
+2019-05-26 09:37:14.577 ICMP ping sbb.ch, IPAddress: 2a00:4bc0:ffff:ffff::c296:f58e, time: 19, send: 32, received: 32, ICMP Success
+2019-05-26 09:37:14.577 ICMP ping sbb.ch, IPAddress: 2a00:4bc0:ffff:ffff::c296:f58e, time: 19, send: 32, received: 32, ICMP Success
+2019-05-26 09:37:14.577 ICMP ping sbb.ch, IPAddress: 2a00:4bc0:ffff:ffff::c296:f58e, time: 19, send: 32, received: 32, ICMP Success
+2019-05-26 09:37:14.577 ICMP ping sbb.ch, IPAddress: 2a00:4bc0:ffff:ffff::c296:f58e, time: 19, send: 32, received: 32, ICMP Success
+2019-05-26 09:37:14.577 ICMP ping sbb.ch, IPAddress: 2a00:4bc0:ffff:ffff::c296:f58e, time: 19, send: 32, received: 32, ICMP Success
+````
+
+**Example 3:**
+
+````powershell
+Test-PsNetPing -Destination sbb.ch, microsoft.com, google.com | Format-Table
+
+IcmpSucceeded IPAddress                      BytesSend BytesReceived Destination   StatusDescription MinTimeout MaxTimeout TimeMs
+------------- ---------                      --------- ------------- -----------   ----------------- ---------- ---------- ------
+         True 2a00:4bc0:ffff:ffff::c296:f58e        32             0 sbb.ch        ICMP Success               0       1000     18
+        False 0.0.0.0                               32             0 microsoft.com ICMP TimedOut              0       1000      0
+         True 2a00:1450:400a:802::200e              32             0 google.com    ICMP Success               0       1000     18
+````
+
+**Example 4:**
+
+````powershell
+Test-PsNetPing -Destination sbb.ch, microsoft.com, google.com -try 2
+
+2019-05-26 09:41:06.319 ICMP ping sbb.ch, IPAddress: 2a00:4bc0:ffff:ffff::c296:f58e, time: 23, send: 32, received: 32, ICMP Success2019-05-26 09:41:07.350 ICMP ping sbb.ch, IPAddress: 2a00:4bc0:ffff:ffff::c296:f58e, time: 22, send: 32, received: 32, ICMP Success
+2019-05-26 09:41:09.056 ICMP ping microsoft.com, IPAddress: 0.0.0.0, time: 0, send: 32, received: 0, ICMP TimedOut2019-05-26 09:41:11.056 ICMP ping microsoft.com, IPAddress: 0.0.0.0, time: 0, send: 32, received: 0, ICMP TimedOut
+2019-05-26 09:41:12.084 ICMP ping google.com, IPAddress: 2a00:1450:400a:800::200e, time: 19, send: 32, received: 32, ICMP Success
+2019-05-26 09:41:13.110 ICMP ping google.com, IPAddress: 2a00:1450:400a:800::200e, time: 19, send: 32, received: 32, ICMP Success
+````
+
 # Test-PsNetTping
 
 Test connectivity to an endpoint over the specified Tcp port.  
@@ -126,6 +193,7 @@ Test-PsNetTping -Destination sbb.ch -TcpPort 443 -MaxTimeout 100
 
 TcpSucceeded      : True
 TcpPort           : 443
+TimeStamp         : 2019-05-26 09:41:44.322
 Destination       : sbb.ch
 StatusDescription : TCP Test success
 MinTimeout        : 0
@@ -140,6 +208,7 @@ Test-PsNetTping -Destination sbb.ch -CommonTcpPort HTTPS -MaxTimeout 100
 
 TcpSucceeded      : True
 TcpPort           : 443
+TimeStamp         : 2019-05-26 09:41:44.322
 Destination       : sbb.ch
 StatusDescription : TCP Test success
 MinTimeout        : 0
@@ -171,6 +240,67 @@ TcpSucceeded TcpPort Destination StatusDescription MinTimeout MaxTimeout TimeMs
         True     443 google.com  TCP Test success           0        100      2
 ````
 
+# Test-PsNetTracert
+
+Test Trace Route to a destination
+
+````powershell
+Test-PsNetTracert [-Destination] <String[]> [[-MaxHops] <Int32>] [[-MaxTimeout] <Int32>] [-Show]
+````
+
+- Destination: Hostname or IP Address or Alias as String or String-Array
+- MaxHops:     Count of gateways or router (optional, default is 30)
+- MaxTimeout:  Timeout in ms (optional, default is 1000ms)
+- Show:        Switch, show the output as line per router instead as Object
+  
+**Example 1:**
+
+````powershell
+Test-PsNetTracert -Destination 'www.microsoft.com' | Format-Table -AutoSize
+
+Hops Time RTT Send Received Destination       Hostname                                 IPAddress                               Status     Message
+---- ---- --- ---- -------- -----------       --------                                 ---------                               ------     -------
+   1   24   0   32        0 www.microsoft.com *                                        *                                       TtlExpired Go to next address
+   2   33   0   32        0 www.microsoft.com ae60-60.ipc-lss690-m-pe-48.bluewin.ch    2001:4d98:bffd:1e::2                    TtlExpired Go to next address
+   3   18   0   32        0 www.microsoft.com ae60-60.ipc-lss690-m-pe-48.bluewin.ch    2001:4d98:bffd:1e::2                    TtlExpired Go to next address
+   4   21   0   32        0 www.microsoft.com be11-v6.i68geb-025.bb.ip-plus.bluewin.ch 2001:4d98:bffd:1b::3                    TtlExpired Go to next address
+   5   17   0   32        0 www.microsoft.com lss-005-lo0-0.ip6.ip-plus.net            2001:918:100:f::1                       TtlExpired Go to next address
+   6   18   0   32        0 www.microsoft.com lss-070-loo6.ip6.ip-plus.net             2001:918:100:2e::1                      TtlExpired Go to next address
+   7   18  14   32       32 www.microsoft.com Could not resolve                        2001:918:ffc8:fe87::356e                Success    Trace route completed
+````
+
+**Example 2:**
+
+````powershell
+Test-PsNetTracert -Destination 'www.google.com' -MaxHops 5 -MaxTimeout 1000 | Format-Table -AutoSize
+
+Hops Time RTT Send Received Destination    Hostname                                 IPAddress                               Status     Message
+---- ---- --- ---- -------- -----------    --------                                 ---------                               ------     -------
+   1   24   0   32        0 www.google.com *                                        *                                       TtlExpired Go to next address
+   2   16   0   32        0 www.google.com ae60-60.ipc-lss690-m-pe-48.bluewin.ch    2001:4d98:bffd:1e::2                    TtlExpired Go to next address
+   3   15   0   32        0 www.google.com ae60-60.ipc-lss690-m-pe-48.bluewin.ch    2001:4d98:bffd:1e::2                    TtlExpired Go to next address
+   4   34   0   32        0 www.google.com be11-v6.i68geb-025.bb.ip-plus.bluewin.ch 2001:4d98:bffd:1b::3                    TtlExpired Go to next address
+   5   19   0   32        0 www.google.com zhb-005-loo646.ip6.ip-plus.net           2001:918:100:646::130                   TtlExpired Go to next address
+````
+
+**Example 3:**
+
+````powershell
+Test-PsNetTracert -Destination 'www.google.com' -MaxHops 15 -MaxTimeout 1000 -Show
+
+Trace route www.google.com over 15 Hops:
+
+Hops, RTT, Send, Received, Destination, Hostname, IPAddress, Status, Messages
+2, 0, 32, 0, www.google.com, ae60-60.ipc-lss690-m-pe-48.bluewin.ch, 2001:4d98:bffd:1e::2, TtlExpired, Go to next address
+3, 0, 32, 0, www.google.com, ae60-60.ipc-lss690-m-pe-48.bluewin.ch, 2001:4d98:bffd:1e::2, TtlExpired, Go to next address
+4, 0, 32, 0, www.google.com, be11-v6.i68geb-025.bb.ip-plus.bluewin.ch, 2001:4d98:bffd:1b::3, TtlExpired, Go to next address
+5, 0, 32, 0, www.google.com, zhb-005-loo646.ip6.ip-plus.net, 2001:918:100:646::130, TtlExpired, Go to next address
+6, 0, 32, 0, www.google.com, Could not resolve, 2001:4860:1:1::c5a, TtlExpired, Go to next address
+7, 0, 32, 0, www.google.com, Could not resolve, 2001:4860:0:9f::1, TtlExpired, Go to next address
+8, 0, 32, 0, www.google.com, Could not resolve, 2001:4860:0:1::156d, TtlExpired, Go to next address
+9, 18, 32, 32, www.google.com, zrh04s14-in-x04.1e100.net, 2a00:1450:400a:802::2004, Success, Trace route completed
+````
+
 # Test-PsNetUping
 
 Test connectivity to an endpoint over the specified Udp port.  
@@ -192,6 +322,7 @@ Test-PsNetUping -Destination sbb.ch -UdpPort 53
 
 UdpSucceeded      : False
 UdpPort           : 53
+TimeStamp         : 2019-05-26 09:41:44.322
 Destination       : sbb.ch
 StatusDescription : "A connection attempt failed because the connected party did not properly respond after a period
                     of time, or established connection failed because connected host has failed to respond"
@@ -245,6 +376,7 @@ Test-PsNetWping -Destination 'https://sbb.ch'
 HttpSucceeded     : True
 ResponsedUrl      : https://www.sbb.ch/de/
 NoProxy           : False
+TimeStamp         : 2019-05-26 09:43:20.599
 Destination       : https://sbb.ch
 StatusDescription : OK
 MinTimeout        : 0
