@@ -4,15 +4,17 @@ layout: default
 
 <h1>PowerShell Search</h1>
 
+Find on my page, what you search (maybe)
+
 <form action="/search.html" method="get">
-  <label for="search-box">Search</label>
+  <label for="search-box"></label>
   <input type="text" id="search-box" name="query">
   <input type="submit" value="search">
 </form>
 
-<div class="container">
-
+<p>
 <ul id="search-results"></ul>
+</p>
 
 <script>
   window.store = {
@@ -30,5 +32,3 @@ layout: default
 </script>
 <script src="/js/lunr.min.js"></script>
 <script src="/js/search.js"></script>
-
-</div>
