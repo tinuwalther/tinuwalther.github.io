@@ -4,7 +4,9 @@ layout: default
 
 <h1>PowerShell Search</h1>
 
-Find on my page, what you search (maybe)
+<p><a>
+Find on my page, what you search maybe.
+</a></p>
 
 <form action="/search.html" method="get">
   <label for="search-box"></label>
@@ -12,9 +14,9 @@ Find on my page, what you search (maybe)
   <input type="submit" value="search">
 </form>
 
-<p>
+<p><a>
 <ul id="search-results"></ul>
-</p>
+</a></p>
 
 <script>
   window.store = {
@@ -32,3 +34,7 @@ Find on my page, what you search (maybe)
 </script>
 <script src="/js/lunr.min.js"></script>
 <script src="/js/search.js"></script>
+
+<p>
+With help from <a href="https://learn.cloudcannon.com/jekyll/jekyll-search-using-lunr-js/">Jekyll search using lunr.js</a>
+</p>
