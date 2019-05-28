@@ -5,10 +5,12 @@ layout: default
 <h1>PowerShell Search</h1>
 
 <form action="/search.html" method="get">
-  <label for="search-box">PowerShell Search</label>
+  <label for="search-box">Search</label>
   <input type="text" id="search-box" name="query">
   <input type="submit" value="search">
 </form>
+
+<div class="container">
 
 <ul id="search-results"></ul>
 
@@ -28,3 +30,5 @@ layout: default
 </script>
 <script src="/js/lunr.min.js"></script>
 <script src="/js/search.js"></script>
+
+</div>
