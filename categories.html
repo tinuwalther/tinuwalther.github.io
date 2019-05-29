@@ -7,7 +7,7 @@ title: Blog
 
 {% assign sorted_cats = site.categories | sort %}
 {% for category in sorted_cats %}
-  <h3>{{ category[0] }}</h3>
+  <h2>{{ category[0] }}</h2>
   <ul>
     {% assign sorted = (category[1] | sort: 'title') %}
     {% for post in sorted %}
