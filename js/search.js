@@ -3,7 +3,7 @@
       var searchResults = document.getElementById('search-results');
   
       if (results.length) { // Are there any results?
-        var appendString = '<h2>What I found for you:</h2>';
+        var appendString = '<p><h2>What I found for you:</h2></p>';
   
         for (var i = 0; i < results.length; i++) {  // Iterate over the results
           var item = store[results[i].ref];
