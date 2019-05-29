@@ -3,18 +3,18 @@
       var searchResults = document.getElementById('search-results');
   
       if (results.length) { // Are there any results?
-        var appendString = '';
+        var appendString = '<h2>What I found for you:</h2>';
   
         for (var i = 0; i < results.length; i++) {  // Iterate over the results
           var item = store[results[i].ref];
-          appendString += '<p><a href="' + item.url + '"><h3>' + item.title + '</h3></a></p>';
-          appendString += '<a>' + item.content.substring(37, 300) + '...</a>';
-          appendString += '<a><b>' + item.category + '</b></a>';
+          appendString += '<a href="' + item.url + '"><h3>' + item.title + '</h3></a>';
+          appendString += '<p>' + item.content.substring(37, 300) + '...</p>';
+          appendString += '<p><b>' + item.category + '</b></p>';
         }
   
         searchResults.innerHTML = appendString;
       } else {
-        searchResults.innerHTML = '<a>No results found</a>';
+        searchResults.innerHTML = '<p>No results found</p>';
       }
     }
   
