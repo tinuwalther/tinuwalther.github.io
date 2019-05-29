@@ -3,13 +3,13 @@
       var searchResults = document.getElementById('search-results');
   
       if (results.length) { // Are there any results?
-        var appendString = '<p><h2>What I found for you:</h2></p>';
+        var appendString = '<h2>What I found for you:</h2>';
   
         for (var i = 0; i < results.length; i++) {  // Iterate over the results
           var item = store[results[i].ref];
           appendString += '<a href="' + item.url + '"><h3>' + item.title + '</h3></a>';
-          appendString += '<p>' + item.content.substring(37, 300) + '...</p>';
-          appendString += '<p><b>' + item.category + '</b></p>';
+          appendString += '<p>' + item.content.substring(37, 250) + '... ';
+          appendString += '<b>' + item.category + '</b></p>';
         }
   
         searchResults.innerHTML = appendString;
