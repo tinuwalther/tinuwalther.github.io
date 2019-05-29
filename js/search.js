@@ -9,7 +9,7 @@
           var item = store[results[i].ref];
           appendString += '<li><a href="' + item.url + '"><h3>' + item.title + '</h3></a>';
           appendString += '<p>' + item.content.substring(37, 250) + '...</p></li>';
-          appendString += '<p>Category:' + item.categories[0] + '</p></li>';
+          appendString += '<p>Category:' + item.category + '</p></li>';
         }
   
         searchResults.innerHTML = appendString;
@@ -42,7 +42,7 @@
         this.field('id');
         this.field('title', { boost: 10 });
         this.field('author');
-        this.field('categories');
+        this.field('category');
         this.field('content');
       });
   
@@ -51,7 +51,7 @@
           'id': key,
           'title': window.store[key].title,
           'author': window.store[key].author,
-          'categories': window.store[key].categories,
+          'category': window.store[key].category,
           'content': window.store[key].content
         });
   

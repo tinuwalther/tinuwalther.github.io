@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: post
 ---
 
 <h1>PowerShell Search</h1>
@@ -24,7 +24,7 @@ Find on my page, what you search maybe.
       "{{ post.url | slugify }}": {
         "title": "{{ post.title | xml_escape }}",
         "author": "{{ post.author | xml_escape }}",
-        "category": "{{ post.category | xml_escape }}",
+        "category": "{{ post.categories | xml_escape }}",
         "content": {{ post.content | strip_html | strip_newlines | jsonify }},
         "url": "{{ post.url | xml_escape }}"
       }
