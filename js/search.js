@@ -8,13 +8,13 @@
         for (var i = 0; i < results.length; i++) {  // Iterate over the results
           var item = store[results[i].ref];
           appendString += '<a href="' + item.url + '"><h3>' + item.title + '</h3></a>';
-          appendString += '<p>' + item.content.substring(37, 300) + '...</p>';
-          appendString += '<p><b>' + item.category + '</b></p>';
+          appendString += '<a>' + item.content.substring(37, 300) + '...</a>';
+          appendString += '<a><b>' + item.category + '</b></a>';
         }
   
         searchResults.innerHTML = appendString;
       } else {
-        searchResults.innerHTML = '<li>No results found</li>';
+        searchResults.innerHTML = '<a>No results found</a>';
       }
     }
   
