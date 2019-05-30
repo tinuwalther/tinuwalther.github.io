@@ -4,13 +4,13 @@ layout: default
 
 <h1>{{ page.title }}</h1>
 
-<p><hr />
+<hr />
 {% if page.tags %}
   <small><b>tags:</b> <em>{{ page.tags | join: "</em> - <em>" }}</em></small>
 {% endif %}
 {% if page.categories %}
   <small><b>categories:</b> <em>{{ page.categories | join: "</em> - <em>" }}</em></small>
 {% endif %}
-<hr /></p>
+<p><hr /></p>
 
 <p>{{content}}</p>
