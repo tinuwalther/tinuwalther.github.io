@@ -26,19 +26,17 @@ Get-ChildItem Cert:\LocalMachine -Recurse | Where-Object Issuer -match "CN=$Issu
 ## List all expired certificates
 
 ````powershell
-$ret = @()
 $Issuer = '*'
 $certs = Get-ChildItem Cert:\LocalMachine -Recurse | Where-Object Issuer -match "CN=$Issuer"
-foreach($item in $certs){
+$ret = foreach($item in $certs){
    if($item.NotAfter.Date -le (Get-Date)){
-      $obj = [PSCustomObject]@{
+      [PSCustomObject]@{
          Issuer     = $item.Issuer
          ValidFrom  = $item.NotBefore.Date
          ExpiresOn  = $item.NotAfter.Date
          KeyLength  = $item.PublicKey.Key.KeySize
          Thumbprint = $item.Thumbprint
       }
-      $ret += $obj
    }
 }
 $ret | Format-List

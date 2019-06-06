@@ -18,11 +18,11 @@ permalink: /posts/:title:output_ext
 Loop through the Win32_Product class and get all installed software.
 
 ````powershell
-$collection = Get-WmiObject -Class Win32_Product -ErrorAction SilentlyContinue | Where-Object {-not([string]::IsNullOrEmpty($_.Name))}
+$collection = Get-CimInstance -Class Win32_Product -ErrorAction SilentlyContinue | Where-Object {-not([string]::IsNullOrEmpty($_.Name))}
 
-$resultset = @()
-foreach($item in $collection){
-   $obj = [PSCustomObject]@{
+$resultset = foreach($item in $collection){
+   # Add names and values to an PSCustomObject
+   [PSCustomObject]@{
       InstallDate = $item.InstallDate
       Vendor      = $item.Vendor
       Name        = $item.Name
@@ -30,7 +30,6 @@ foreach($item in $collection){
       Description = $item.Description
       Version     = $item.Version
    }
-   $resultset += $obj
 }
 $resultset | Sort-Object Name | Format-Table -AutoSize
 ````
@@ -59,14 +58,12 @@ $collection += Get-ChildItem 'HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\Curre
 | Get-ItemProperty | Where-Object {-not([string]::IsNullOrEmpty($_.DisplayName))} `
 | Select-Object DisplayName,DisplayVersion,UninstallString
 
-$resultset = @()
-foreach($item in $collection){
-    $obj = [PSCustomObject] @{
+$resultset = foreach($item in $collection){
+    [PSCustomObject] @{
         Name            = $item.DisplayName
         Version         = $item.DisplayVersion
         UninstallString = $item.UninstallString
     }
-    $resultset += $obj
 }
 $resultset | Sort-Object Name | Format-Table -AutoSize
 ````
