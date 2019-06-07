@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "PowerShell Network Tools"
+title:  "PsNetTools"
 author: Tinu
 categories: "PowerShell-Module"
 tags:   PowerShell
