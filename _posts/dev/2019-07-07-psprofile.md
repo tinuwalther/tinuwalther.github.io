@@ -43,8 +43,7 @@ function prompt
         $color = 'Green'
     }
 
-    $history = Get-History -ErrorAction Ignore
-    Write-Host "[$($history.count[-1])] " -NoNewline
+    Write-Host "[$((Get-History).count + 1)] " -NoNewline
     Write-Host ("I ") -nonewline
     Write-Host (([char]9829) ) -ForegroundColor $color -nonewline
     Write-Host (" PS ") -nonewline
