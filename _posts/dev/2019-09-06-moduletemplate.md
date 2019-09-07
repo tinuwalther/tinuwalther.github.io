@@ -23,10 +23,7 @@ permalink: /posts/:title:output_ext
     - [Module-File](#module-file)
   - [Tests](#tests)
     - [Functions.Tests.ps1](#functionstestsps1)
-<<<<<<< HEAD
     - [Functions.Tests.json](#functionstestsjson)
-=======
->>>>>>> 43566e46c371343961a2227bf46cedfaf87e15de
 
 # PowerShell Module Template
 
@@ -37,12 +34,7 @@ How to create a new PowerShell-Module with PSModuleTemplate?
 3. Copy the content from PSModuleTemplate into your new project
 4. Update the README.md and CHANGELOG.md with your information
 5. Save your function-files in the folder Code
-<<<<<<< HEAD
 6. Build your Module with Build-Module.ps1
-=======
-6. Test your functions with the Functions.Tests.ps1
-7. Build your Module with Build-Module.ps1
->>>>>>> 43566e46c371343961a2227bf46cedfaf87e15de
 
 ## README
 
@@ -59,7 +51,6 @@ This is the folder for all Continous Integration scripts like a script to automa
 ### Build-Module.ps1
 
 This script builds your module automatically.  
-<<<<<<< HEAD
 
 Build-Module.ps1 running the Functions.Tests.ps1, if no errors occured it delete the existent Module-File (PSM1) and create a new Module-File (PSM1) with all of your functions.
 The script also updates the Manifest-File (PSD1) with the functions to export. If the Manifest-File doesn't exists, it will be created.
@@ -70,18 +61,6 @@ Finally Build-Module.ps1 tests if your Module can be imported and removed withou
 
 The settings-file will be created, if you build the module at the first time and contains the following properties:
 
-=======
-
-Build-Module.ps1 delete the existent Module-File (PSM1) and create a new Module-File (PSM1) with all of your functions.  
-The script also update the Manifest-File (PSD1) with the functions to export. If the Manifest-File doesn't exists, it will be created.
-
-Finally Build-Module.ps1 tests if your Module can be imported and removed without any errors. It tests also if the Module contains all of your exported functions.
-
-### Module-Settings.json
-
-The settings-file will be created, if you build the module at the first time and contains the following properties:
-
->>>>>>> 43566e46c371343961a2227bf46cedfaf87e15de
     ModuleName
     ModuleVersion
     ModuleDescription
@@ -115,11 +94,7 @@ This folder contains all the Pester-Test-scripts.
 ### Functions.Tests.ps1
 
 Functions.Tests.ps1 tests all of your scripts/functions in the folder Code.  
-<<<<<<< HEAD
 
 ### Functions.Tests.json
 
 This file will be created, if there were some errors in the Build-Module.
-=======
-Before you run Build-Module.ps1, please make sure that Tests\Functions.Tests.ps1 was executed without any errors.
->>>>>>> 43566e46c371343961a2227bf46cedfaf87e15de
