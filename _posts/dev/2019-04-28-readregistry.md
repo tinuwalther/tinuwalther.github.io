@@ -10,12 +10,13 @@ permalink: /posts/:title:output_ext
 # Table of Contents
 
 - [Table of Contents](#table-of-contents)
-- [Read-Value from Registry](#read-value-from-registry)
+- [Read Single-Value from Registry](#read-single-value-from-registry)
+- [Read Values from all Users](#read-values-from-all-users)
 - [See also](#see-also)
 
 Copy items from a local to a remote computer using a psremote-session.
 
-# Read-Value from Registry
+# Read Single-Value from Registry
 
 ````powershell
 function Get-RegistryValue {
@@ -43,6 +44,27 @@ $params = @{
 }
 
 return (Get-RegistryValue -args $params)
+````
+
+# Read Values from all Users
+
+````powershell
+$ErrorActionPreference = 'SilentlyContinue'
+
+if(-not(Get-PSDrive -Name 'HKU')){
+    New-PSDrive HKU Registry HKEY_USERS
+}
+
+$path = '\Control Panel\International'
+
+Get-ChildItem "HKU:\" | ForEach {
+    if (Test-Path "HKU:\$($_.Name)\$($path)"){
+        @{"$($_.Name)" = "$(Get-ItemPropertyValue "HKU:\$($_.Name)\$($path)" -Name "LocaleName")"}
+        if($error){
+            $error.Clear()
+        }
+    }
+}
 ````
 
 # See also
