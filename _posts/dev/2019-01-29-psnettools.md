@@ -13,6 +13,9 @@ permalink: /posts/:title:output_ext
 - [PsNetTools](#psnettools)
   - [Why do I need PsNetTools](#why-do-i-need-psnettools)
 - [Use PsNetTools](#use-psnettools)
+  - [Download Module](#download-module)
+  - [Import Module](#import-module)
+  - [List all Commands](#list-all-commands)
   - [Test-PsNetDig](#test-psnetdig)
   - [Test-PsNetPing](#test-psnetping)
   - [Test-PsNetTping](#test-psnettping)
@@ -121,40 +124,50 @@ My goal was to use the same commands on Windows, Mac and Linux and they should h
 
 # Use PsNetTools
 
-Download Module:
+## Download Module
 
-Got to https://github.com/tinuwalther/PsNetTools/releases/, download the latest Version of PsNetTools.zip and extract it. Or you can clone the code from github.
+You can use one of the following methods to download my module:  
+
+Go to [https://github.com/tinuwalther/PsNetTools/releases](https://github.com/tinuwalther/PsNetTools/releases/), download the latest Version of PsNetTools.zip and extract it.
+
+Or download the latest version with PowerShell:
+
+````powershell
+Invoke-WebRequest -Uri 'https://github.com/tinuwalther/PsNetTools/releases/download/v0.7.5/PsNetTools.zip'
+````
+
+Or clone the code from github:
 
 ````powershell
 git clone https://github.com/tinuwalther/PsNetTools.git
 ````
 
-Import Module:  
+## Import Module
 
 ````powershell
 Import-Module .\PsNetTools.psd1 -Force
 ````
 
-List all ExportedCommands:  
+## List all Commands
 
 ````powershell
 Get-Command -Module PsNetTools
 
-CommandType     Name                                               Version     Source
------------     ----                                               -------     ------
-Function        Add-PsNetHostsEntry                                0.7.65      PsNetTools
-Function        Get-PsNetAdapterConfiguration                      0.7.65      PsNetTools
-Function        Get-PsNetAdapters                                  0.7.65      PsNetTools
-Function        Get-PsNetHostsTable                                0.7.65      PsNetTools
-Function        Get-PsNetRoutingTable                              0.7.65      PsNetTools
-Function        Remove-PsNetHostsEntry                             0.7.65      PsNetTools
-Function        Start-PsNetPortListener                            0.7.65      PsNetTools
-Function        Test-PsNetDig                                      0.7.65      PsNetTools
-Function        Test-PsNetPing                                     0.7.65      PsNetTools
-Function        Test-PsNetTping                                    0.7.65      PsNetTools
-Function        Test-PsNetTracert                                  0.7.65      PsNetTools
-Function        Test-PsNetUping                                    0.7.65      PsNetTools
-Function        Test-PsNetWping                                    0.7.65      PsNetTools
+CommandType     Name                                               Version    Source
+-----------     ----                                               -------    ------
+Function        Add-PsNetHostsEntry                                0.7.5      PsNetTools
+Function        Get-PsNetAdapterConfiguration                      0.7.5      PsNetTools
+Function        Get-PsNetAdapters                                  0.7.5      PsNetTools
+Function        Get-PsNetHostsTable                                0.7.5      PsNetTools
+Function        Get-PsNetRoutingTable                              0.7.5      PsNetTools
+Function        Remove-PsNetHostsEntry                             0.7.5      PsNetTools
+Function        Start-PsNetPortListener                            0.7.5      PsNetTools
+Function        Test-PsNetDig                                      0.7.5      PsNetTools
+Function        Test-PsNetPing                                     0.7.5      PsNetTools
+Function        Test-PsNetTping                                    0.7.5      PsNetTools
+Function        Test-PsNetTracert                                  0.7.5      PsNetTools
+Function        Test-PsNetUping                                    0.7.5      PsNetTools
+Function        Test-PsNetWping                                    0.7.5      PsNetTools
 ````
 
 ## Test-PsNetDig
