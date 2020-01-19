@@ -11,28 +11,123 @@ permalink: /posts/:title:output_ext
 
 - [Table of Contents](#table-of-contents)
 - [PsNetTools](#psnettools)
-- [Test-PsNetDig](#test-psnetdig)
-- [Test-PsNetPing](#test-psnetping)
-- [Test-PsNetTping](#test-psnettping)
-- [Test-PsNetTracert](#test-psnettracert)
-- [Test-PsNetUping](#test-psnetuping)
-- [Test-PsNetWping](#test-psnetwping)
-- [Get-PsNetAdapters](#get-psnetadapters)
-- [Get-PsNetAdapterConfiguration](#get-psnetadapterconfiguration)
-- [Get-PsNetRoutingTable](#get-psnetroutingtable)
-- [Get-PsNetHostsTable](#get-psnethoststable)
-- [Add-PsNetHostsEntry](#add-psnethostsentry)
-- [Remove-PsNetHostsEntry](#remove-psnethostsentry)
-- [How to Export settings](#how-to-export-settings)
-- [Start-PsNetPortListener](#start-psnetportlistener)
+  - [Why do I need PsNetTools](#why-do-i-need-psnettools)
+- [Use PsNetTools](#use-psnettools)
+  - [Test-PsNetDig](#test-psnetdig)
+  - [Test-PsNetPing](#test-psnetping)
+  - [Test-PsNetTping](#test-psnettping)
+  - [Test-PsNetTracert](#test-psnettracert)
+  - [Test-PsNetUping](#test-psnetuping)
+  - [Test-PsNetWping](#test-psnetwping)
+  - [Get-PsNetAdapters](#get-psnetadapters)
+  - [Get-PsNetAdapterConfiguration](#get-psnetadapterconfiguration)
+  - [Get-PsNetRoutingTable](#get-psnetroutingtable)
+  - [Get-PsNetHostsTable](#get-psnethoststable)
+  - [Add-PsNetHostsEntry](#add-psnethostsentry)
+  - [Remove-PsNetHostsEntry](#remove-psnethostsentry)
+  - [How to Export settings](#how-to-export-settings)
+  - [Start-PsNetPortListener](#start-psnetportlistener)
 
 # PsNetTools
 
-PsNetTools is a cross platform PowerShell module to test some network features on Windows and Mac.  
+PsNetTools is a cross platform PowerShell module to test some network features on Windows, Mac and Linux.  
 
 ![PsNetTools](../assets/NewPsNetTools.png)
 
 Image generated with [PSWordCloud](https://github.com/vexx32/PSWordCloud) by Joel Sallow.
+
+## Why do I need PsNetTools
+
+On Windows I often use commands like ping, tracert, route, ipconfig and other network-commands like this. When I work on a Mac, most of these tools have output differently than on Windows or they have a different syntax.  
+
+Windows|Mac|Linux
+-|-|-
+tracert|traceroute|traceroute
+ipconfig|ifconfig|ifconfig
+route print|netstat -rn|route -n
+
+traceroute on Mac
+
+````bash
+traceroute sbb.ch
+traceroute to sbb.ch (194.150.245.142), 64 hops max, 52 byte packets
+ 1  fritzbox (192.x.y.z)  1.945 ms  1.960 ms  1.695 ms
+ 2  1.128.203.62.dynamic.wline.res.cust.swisscom.ch (62.x.y.z)  9.980 ms  9.825 ms  9.697 ms
+ 3  193.134.95.71 (193.134.95.71)  10.124 ms  10.143 ms  10.392 ms
+ 4  i79zhh-015-ae11.bb.ip-plus.net (193.134.95.72)  10.694 ms  10.804 ms  10.678 ms
+ ````
+
+ifconfig on Mac
+
+````bash
+ifconfig
+lo0: flags=8049<UP,LOOPBACK,RUNNING,MULTICAST> mtu 16384
+        options=1203<RXCSUM,TXCSUM,TXSTATUS,SW_TIMESTAMP>
+        inet 127.0.0.1 netmask 0xff000000  
+        inet6 ::1 prefixlen 128  
+        inet6 fe80::1%lo0 prefixlen 64 scopeid 0x1  
+        nd6 options=201<PERFORMNUD,DAD>
+gif0: flags=8010<POINTOPOINT,MULTICAST> mtu 1280
+stf0: flags=0<> mtu 1280
+en0: flags=8863<UP,BROADCAST,SMART,RUNNING,SIMPLEX,MULTICAST> mtu 1500
+        options=50b<RXCSUM,TXCSUM,VLAN_HWTAGGING,AV,CHANNEL_IO>
+        ether 68:fe:f7:09:82:89
+````
+
+netstat -rn on Mac
+
+````bash
+netstat -rn
+Routing tables
+
+Internet:
+Destination        Gateway            Flags        Netif Expire
+default            192.x.y.x          UGSc           en1  
+127                127.0.0.1          UCS            lo0  
+127.0.0.1          127.0.0.1          UH             lo0
+
+Internet6:
+Destination                             Gateway                         Flags         Netif Expire
+default                                 fe80::1e24:cdff:fe33:bcc0%en1   UGc             en1  
+default                                 fe80::%utun0                    UGcI          utun0  
+default                                 fe80::%utun1                    UGcI          utun1  
+::1                                     ::1                             UHL             lo0
+````
+
+When I use PowerShell, I have the command Test-NetConnection on Windows and Test-Connection on Mac and Linux. Both commands have different parameters and a different output format.  
+
+Test-NetConnection on Windows
+
+````powershell
+Test-NetConnection sbb.ch -Port 443
+
+ComputerName     : sbb.ch
+RemoteAddress    : 194.150.245.142
+RemotePort       : 443
+InterfaceAlias   : MyInterfaceAlias
+SourceAddress    : 192.x.y.z
+TcpTestSucceeded : True
+````
+
+Test-Connection on Mac
+
+````powershell
+Test-Connection sbb.ch -Tcpport 443 -IPv4
+
+True
+````
+
+My goal was to use the same commands on Windows, Mac and Linux and they should have the same output format.
+
+# Use PsNetTools
+
+Download Module:
+
+Got to https://github.com/tinuwalther/PsNetTools/releases/, download the latest Version of PsNetTools.zip and extract it. Or you can clone the code from github.
+
+````powershell
+git clone https://github.com/tinuwalther/PsNetTools.git
+````
 
 Import Module:  
 
@@ -45,24 +140,24 @@ List all ExportedCommands:
 ````powershell
 Get-Command -Module PsNetTools
 
-CommandType     Name                                               Version    Source
------------     ----                                               -------    ------
-Function        Add-PsNetHostsEntry                                0.7.4      PsNetTools
-Function        Get-PsNetAdapterConfiguration                      0.7.4      PsNetTools
-Function        Get-PsNetAdapters                                  0.7.4      PsNetTools
-Function        Get-PsNetHostsTable                                0.7.4      PsNetTools
-Function        Get-PsNetRoutingTable                              0.7.4      PsNetTools
-Function        Remove-PsNetHostsEntry                             0.7.4      PsNetTools
-Function        Start-PsNetPortListener                            0.7.4      PsNetTools
-Function        Test-PsNetDig                                      0.7.4      PsNetTools
-Function        Test-PsNetPing                                     0.7.4      PsNetTools
-Function        Test-PsNetTping                                    0.7.4      PsNetTools
-Function        Test-PsNetTracert                                  0.7.4      PsNetTools
-Function        Test-PsNetUping                                    0.7.4      PsNetTools
-Function        Test-PsNetWping                                    0.7.4      PsNetTools
+CommandType     Name                                               Version     Source
+-----------     ----                                               -------     ------
+Function        Add-PsNetHostsEntry                                0.7.65      PsNetTools
+Function        Get-PsNetAdapterConfiguration                      0.7.65      PsNetTools
+Function        Get-PsNetAdapters                                  0.7.65      PsNetTools
+Function        Get-PsNetHostsTable                                0.7.65      PsNetTools
+Function        Get-PsNetRoutingTable                              0.7.65      PsNetTools
+Function        Remove-PsNetHostsEntry                             0.7.65      PsNetTools
+Function        Start-PsNetPortListener                            0.7.65      PsNetTools
+Function        Test-PsNetDig                                      0.7.65      PsNetTools
+Function        Test-PsNetPing                                     0.7.65      PsNetTools
+Function        Test-PsNetTping                                    0.7.65      PsNetTools
+Function        Test-PsNetTracert                                  0.7.65      PsNetTools
+Function        Test-PsNetUping                                    0.7.65      PsNetTools
+Function        Test-PsNetWping                                    0.7.65      PsNetTools
 ````
 
-# Test-PsNetDig
+## Test-PsNetDig
 
 Resolves a hostname to the IP addresses or an IP Address to the hostname.  
 
@@ -105,7 +200,7 @@ Succeeded InputString Destination IpV4Address     IpV6Address                   
      True google.com  google.com  216.58.215.238  2a00:1450:400a:801::200e           26
 ````
 
-# Test-PsNetPing
+## Test-PsNetPing
 
 Attempts to send an ICMP echo message to a remote computer and receive a corresponding ICMP echo reply message from the remote computer.
 
@@ -168,7 +263,7 @@ Test-PsNetPing -Destination sbb.ch, microsoft.com, google.com -try 2
 2019-05-26 09:41:13.110 ICMP ping google.com, IPAddress: 2a00:1450:400a:800::200e, time: 19, send: 32, received: 32, ICMP Success
 ````
 
-# Test-PsNetTping
+## Test-PsNetTping
 
 Test connectivity to an endpoint over the specified Tcp port.  
 It's like the cmdlet Test-NetConnection, but with the ability to specify a timeout in ms.  
@@ -240,7 +335,7 @@ TcpSucceeded TcpPort Destination StatusDescription MinTimeout MaxTimeout TimeMs
         True     443 google.com  TCP Test success           0        100      2
 ````
 
-# Test-PsNetTracert
+## Test-PsNetTracert
 
 Test Trace Route to a destination
 
@@ -301,7 +396,7 @@ Hops, RTT, Send, Received, Destination, Hostname, IPAddress, Status, Messages
 9, 18, 32, 32, www.google.com, zrh04s14-in-x04.1e100.net, 2a00:1450:400a:802::2004, Success, Trace route completed
 ````
 
-# Test-PsNetUping
+## Test-PsNetUping
 
 Test connectivity to an endpoint over the specified Udp port.  
 It's like the cmdlet Test-NetConnection, but with the ability to specify a timeout in ms and query for udp.  
@@ -355,7 +450,7 @@ Succeeded TargetName UdpPort UdpSucceeded Duration MinTimeout MaxTimeout
      True google.com     139        False 1025ms   0ms        1000ms
 ````
 
-# Test-PsNetWping
+## Test-PsNetWping
 
 It's like the cmdlet Invoke-WebRequest, but with the ability to specify 'noproxy' with PowerShell 5.1.  
 
@@ -406,7 +501,7 @@ HttpSucceeded ResponsedUrl            NoProxy Destination        StatusDescripti
          True https://www.google.com/    True https://google.com OK                         0       1000    307
 ````
 
-# Get-PsNetAdapters
+## Get-PsNetAdapters
 
 List all network adapters.
 
@@ -426,7 +521,7 @@ IpV4Addresses        : {169.254.68.121}
 IpV6Addresses        : {}
 ````
 
-# Get-PsNetAdapterConfiguration
+## Get-PsNetAdapterConfiguration
 
 Get-PsNetAdapterConfiguration - get the network interface configuration for all adapters.  
 
@@ -463,7 +558,7 @@ GatewayIpV4Addresses : {<IP Address V4>}
 GatewayIpV6Addresses : {<IP Address V6>}
 ````
 
-# Get-PsNetRoutingTable
+## Get-PsNetRoutingTable
 
 Get-PsNetRoutingTable - Get Routing Table
 Format the Routing Table to an object.
@@ -488,7 +583,7 @@ Succeeded AddressFamily Destination     Netmask         Gateway     Interface   
      True IPv4          255.255.255.255 255.255.255.255 On-link     10.29.191.zzz 301
 ````
 
-# Get-PsNetHostsTable
+## Get-PsNetHostsTable
 
 Get-PsNetHostsTable - Get hostsfile
 Format the hostsfile to an object.
@@ -505,7 +600,7 @@ Succeeded IpAddress    Compuername FullyQualifiedName
      True 192.168.1.29 computer3   computername3.fqdn
 ````
 
-# Add-PsNetHostsEntry
+## Add-PsNetHostsEntry
 
 **WARNING:** Running this command with elevated privilege.
 
@@ -530,7 +625,7 @@ Succeeded HostsEntry                     BackupPath                   Message
      True 127.0.0.1 tinu tinu.walther.ch D:\hosts_20190301-185838.txt Entry added
 ````
 
-# Remove-PsNetHostsEntry
+## Remove-PsNetHostsEntry
 
 **WARNING:** Running this command with elevated privilege.
 
@@ -553,7 +648,7 @@ Succeeded HostsEntry                     BackupPath                   Message
      True 127.0.0.1 tinu tinu.walther.ch D:\hosts_20190301-190104.txt Entry removed
 ````
 
-# How to Export settings
+## How to Export settings
 
 You can easy export all the output of the commands as a JSON-file with the following CmdLets:
 
@@ -612,7 +707,7 @@ Export the JSON-Object from Test-PsNetDig to a file:
 Test-PsNetDig sbb.ch | ConvertTo-Json | Set-Content D:\PsNetDig.json
 ````
 
-# Start-PsNetPortListener
+## Start-PsNetPortListener
 
 Temporarily listen on a given TCP port for connections dumps connections to the screen
 
