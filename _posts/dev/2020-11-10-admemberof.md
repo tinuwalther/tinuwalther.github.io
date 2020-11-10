@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Active Directory"
+title:  "Group Membership"
 author: Tinu
 categories: "PowerShell-Active-Directory"
 tags:   PowerShell
@@ -10,17 +10,10 @@ permalink: /posts/:title:output_ext
 # Table of Contents
 
 - [Table of Contents](#table-of-contents)
-- [Active Directory Cmdlets](#active-directory-cmdlets)
-  - [GroupMembership](#groupmembership)
-  - [Reset the password](#reset-the-password)
-  - [Change user's password](#change-users-password)
+- [GroupMembership](#groupmembership)
 - [See also](#see-also)
 
-# Active Directory Cmdlets
-
-A short intruduction in some AD-Cmdlets.
-
-## GroupMembership
+# GroupMembership
 
 The Get-ADPrincipalGroupMembership cmdlet gets the Active Directory groups that have a specified user, computer, group, or service account as a member. This cmdlet requires a global catalog to perform the group search. If the forest that contains the user, computer, or group does not have a global catalog, the cmdlet returns a non-terminating error.
 
@@ -32,22 +25,8 @@ Name            Value
 MyAccount       {Domain Users, Remote Desktop Users}
 ````
 
-## Reset the password
-
-````powershell
-Set-ADAccountPassword -Identity $env:USERNAME -NewPassword (Read-Host "Provide a new password for $($env:USERNAME)" -AsSecureString) -Reset -PassThru
-````
-
-## Change user's password
-
-````powershell
-Set-ADAccountPassword -Identity $env:USERNAME -OldPassword (Read-Host "enter the current password for $($env:USERNAME)" -AsSecureString) -NewPassword (Read-Host "provide a new password for $($env:USERNAME)" -AsSecureString) -PassThru
-````
-
 # See also
 
 [Get-ADPrincipalGroupMembership](https://docs.microsoft.com/en-us/powershell/module/addsadministration/get-adprincipalgroupmembership?view=win10-ps) on Microsoft Docs.
-
-[Set-ADAccountPassword](https://docs.microsoft.com/en-us/powershell/module/addsadministration/Set-ADAccountPassword?view=win10-ps) on Microsoft Docs.
 
 [ [Top](#table-of-contents) ] [ [Blog](../categories.html) ]
