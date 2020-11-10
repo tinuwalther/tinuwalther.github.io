@@ -130,10 +130,16 @@ You can use one of the following methods to download my module:
 
 Go to [https://github.com/tinuwalther/PsNetTools/releases](https://github.com/tinuwalther/PsNetTools/releases/), download the latest Version of PsNetTools.zip and extract it.
 
-Or download the latest version with PowerShell:
+Or install the latest version with PowerShell:
 
 ````powershell
-Invoke-WebRequest -Uri 'https://github.com/tinuwalther/PsNetTools/releases/download/v0.7.5/PsNetTools.zip'
+$ZipFile = "https://github.com/tinuwalther/PsNetTools/releases/download/v0.7.5/PsNetTools.zip"
+$OutFile = "$($env:USERPROFILE)\Downloads\PsNetTools-v0.7.5.zip"
+Invoke-WebRequest -Uri $ZipFile -OutFile $OutFile
+$ExpandFolder = "$($env:USERPROFILE)\Downloads\PsNetTools"
+if(-not(Test-Path $ExpandFolder)){$null = mkdir $ExpandFolder}
+Expand-Archive -Path $OutFile -OutputPath $ExpandFolder -Force
+Copy-Item -Path $ExpandFolder -Destination "C:\Program Files\WindowsPowerShell\Modules" -Recurse -Force -PassThru
 ````
 
 Or clone the code from github:
