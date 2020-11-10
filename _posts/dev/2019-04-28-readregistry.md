@@ -12,7 +12,6 @@ permalink: /posts/:title:output_ext
 - [Table of Contents](#table-of-contents)
 - [Read Single-Value from Registry](#read-single-value-from-registry)
 - [Read Values from all Users](#read-values-from-all-users)
-  - [Volatile registry key](#volatile-registry-key)
 - [See also](#see-also)
 
 Copy items from a local to a remote computer using a psremote-session.
@@ -67,18 +66,6 @@ Get-ChildItem "HKU:\" | ForEach {
     }
 }
 ````
-
-## Volatile registry key
-
-If you use the New-Item-Cmdlet, the subkey is created as stable key. Sometimes you need a subkey that will be deleted after a reboot, you can create a volatile subkey.
-
-````powershell
-$HKLM   =[Microsoft.Win32.RegistryKey]::OpenBaseKey('LocalMachine','default')
-$SubKey = $HKLM.OpenSubKey('SOFTWARE\Company\Settings', $true)
-$SubKey.CreateSubKey('Volatile', $true , [Microsoft.Win32.RegistryOptions]::Volatile)
-$SubKey.CreateSubKey('Non-Volatile', $true , [Microsoft.Win32.RegistryOptions]::None)
-````
-
 
 # See also
 
