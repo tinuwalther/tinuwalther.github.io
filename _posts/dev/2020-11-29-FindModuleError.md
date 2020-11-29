@@ -14,16 +14,19 @@ permalink: /posts/:title:output_ext
   - [Problem](#problem)
   - [Cause](#cause)
   - [Solution](#solution)
-  - [Set strong cryptography on .Net Framework (version 4 and above)](#set-strong-cryptography-on-net-framework-version-4-and-above)
   - [See also](#see-also)
 
 # No match was found for the specified search criteria and module name
 
+Find-Module could not connect to the specified uri in the registered repositories.
+
 ## Problem
 
 ````powershell
-[1] I ♥ PS U:\ > Find-Module -Name PSWriteHTML
-PackageManagement\Find-Package : No match was found for the specified search criteria and module name 'PSWriteHTML'. Try Get-PSRepository to see all available registered module repositories.
+Find-Module -Name PSWriteHTML
+
+PackageManagement\Find-Package : No match was found for the specified search criteria and module name 'PSWriteHTML'.
+Try Get-PSRepository to see all available registered module repositories.
 At C:\Program Files\WindowsPowerShell\Modules\PowerShellGet\2.2\PSModule.psm1:8871 char:9
 + PackageManagement\Find-Package @PSBoundParameters | Microsoft ...
 + CategoryInfo          : ObjectNotFound: (Microsoft.Power...ets.FindPackage:FindPackage) [Find-Package], Exception
@@ -32,28 +35,44 @@ At C:\Program Files\WindowsPowerShell\Modules\PowerShellGet\2.2\PSModule.psm1:88
 
 ## Cause
 
-This is a TLS Issue. As of April 2020, TLS 1.2 is set to be the default for the PowerShell Gallery.
+TLS 1.2 is set to be the default for the PowerShell Gallery since April 2020, but this is not set on the computer.
 
 ## Solution
 
-To Fix TLS issue: run below command
+To Fix TLS issue on the current session, run below command:
 
 ````powershell
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+````
 
+````powershell
 [4] I ♥ PS U:\ > Find-Module -Name PSWriteHTML
 
 Version              Name                                Repository           Description
 -------              ----                                ----------           -----------
-0.0.122              PSWriteHTML                         PSGallery            Module that allows creating HTML content/reports in a easy way.
+0.0.122              PSWriteHTML                         PSGallery            Module that allows creating HTML content/reports ...
 ````
 
-## Set strong cryptography on .Net Framework (version 4 and above)
+or set strong cryptography on .Net Framework (version 4 and above) for all sessions in the future:
 
 ````powershell
-Set-ItemProperty -Path 'HKLM:\SOFTWARE\Wow6432Node\Microsoft\.NetFramework\v4.0.30319' -Name 'SchUseStrongCrypto' -Value '1' -Type DWord
+try{
+    $value = Get-ItemPropertyValue -Path 'HKLM:\SOFTWARE\Wow6432Node\Microsoft\.NetFramework\v4.0.30319' -Name 'SchUseStrongCrypto'
+}catch{
+    $value = 0
+}
+if($value -ne 1){
+    Set-ItemProperty -Path 'HKLM:\SOFTWARE\Wow6432Node\Microsoft\.NetFramework\v4.0.30319' -Name 'SchUseStrongCrypto' -Value '1' -Type DWord
+}
 
-Set-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\.NetFramework\v4.0.30319' -Name 'SchUseStrongCrypto' -Value '1' -Type DWord
+try{
+    $value = Get-ItemPropertyValue -Path 'HKLM:\SOFTWARE\Microsoft\.NetFramework\v4.0.30319' -ErrorAction SilentlyContinue
+}catch{
+    $value = 0
+}
+if($value -ne 1){
+    Set-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\.NetFramework\v4.0.30319' -Name 'SchUseStrongCrypto' -Value '1' -Type DWord
+}
 ````
 
 ## See also

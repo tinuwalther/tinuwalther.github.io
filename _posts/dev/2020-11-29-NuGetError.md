@@ -17,14 +17,22 @@ permalink: /posts/:title:output_ext
 
 # Unable to resolve package source https://www.powershellgallery.com/api/v2
 
+Find-Module will result in a meaningless warning if you search for a known module in the Powershell gallery.
+
 ## Problem
 
 ````powershell
-[1] I ♥ PS U:\ > Find-Module -Name PSWriteHTML
+Find-Module -Name PSWriteHTML
 WARNING: Unable to resolve package source 'https://www.powershellgallery.com/api/v2'.
-PackageManagement\Find-Package : No match was found for the specified search criteria and module name 'PSWriteHTML'. Try Get-PSRepository to see all available registered module repositories.
+````
+
+and the following Error is from a [TLS](./FindModuleError.html) issue:
+
+````powershell
+PackageManagement\Find-Package : No match was found for the specified search criteria and module name 'PSWriteHTML'. 
+Try Get-PSRepository to see all available registered module repositories.
 At C:\Program Files\WindowsPowerShell\Modules\PowerShellGet\2.2\PSModule.psm1:8871 char:9
-+         PackageManagement\Find-Package @PSBoundParameters | Microsoft ...
++ PackageManagement\Find-Package @PSBoundParameters | Microsoft ...
 + CategoryInfo          : ObjectNotFound: (Microsoft.Power...ets.FindPackage:FindPackage) [Find-Package], Exception
 + FullyQualifiedErrorId : NoMatchFoundForCriteria,Microsoft.PowerShell.PackageManagement.Cmdlets.FindPackage
 ````
