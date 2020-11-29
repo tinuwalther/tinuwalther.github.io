@@ -25,10 +25,9 @@ permalink: /posts/:title:output_ext
 [1] I ♥ PS U:\ > Find-Module -Name PSWriteHTML
 PackageManagement\Find-Package : No match was found for the specified search criteria and module name 'PSWriteHTML'. Try Get-PSRepository to see all available registered module repositories.
 At C:\Program Files\WindowsPowerShell\Modules\PowerShellGet\2.2\PSModule.psm1:8871 char:9
-+         PackageManagement\Find-Package @PSBoundParameters | Microsoft ...
-+         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    + CategoryInfo          : ObjectNotFound: (Microsoft.Power...ets.FindPackage:FindPackage) [Find-Package], Exception
-    + FullyQualifiedErrorId : NoMatchFoundForCriteria,Microsoft.PowerShell.PackageManagement.Cmdlets.FindPackage
++ PackageManagement\Find-Package @PSBoundParameters | Microsoft ...
++ CategoryInfo          : ObjectNotFound: (Microsoft.Power...ets.FindPackage:FindPackage) [Find-Package], Exception
++ FullyQualifiedErrorId : NoMatchFoundForCriteria,Microsoft.PowerShell.PackageManagement.Cmdlets.FindPackage
 ````
 
 ## Cause
