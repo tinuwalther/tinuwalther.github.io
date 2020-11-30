@@ -66,13 +66,14 @@ if($value -ne 1){
 }
 
 try{
-    $value = Get-ItemPropertyValue -Path 'HKLM:\SOFTWARE\Microsoft\.NetFramework\v4.0.30319' -ErrorAction SilentlyContinue
+    $value = Get-ItemPropertyValue -Path 'HKLM:\SOFTWARE\Microsoft\.NetFramework\v4.0.30319' -Name 'SchUseStrongCrypto'
 }catch{
     $value = 0
 }
 if($value -ne 1){
     Set-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\.NetFramework\v4.0.30319' -Name 'SchUseStrongCrypto' -Value '1' -Type DWord
 }
+Restart-Computer
 ````
 
 ## See also
