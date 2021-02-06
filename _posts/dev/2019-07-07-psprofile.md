@@ -9,14 +9,36 @@ permalink: /posts/:title:output_ext
 
 # Table of Contents
 
-- [Table of Contents](#Table-of-Contents)
-- [Create your own PowerShell Profile](#Create-your-own-PowerShell-Profile)
-- [Functions in your Profile](#Functions-in-your-Profile)
-- [See also](#See-also)
+- [Table of Contents](#table-of-contents)
+- [Create your own PowerShell Profile](#create-your-own-powershell-profile)
+  - [Scope](#scope)
+  - [Profile](#profile)
+- [Functions in your Profile](#functions-in-your-profile)
+- [See also](#see-also)
 
 # Create your own PowerShell Profile
 
-To create your own Profile for WindowsPowerShell:
+## Scope
+
+You can create a profile for the following scope:
+
+Description | Path
+- | -
+All Users, All Hosts | $PSHOME\Profile.ps1
+All Users, Current Host | $PSHOME\Microsoft.PowerShell_profile.ps1
+Current User, All Hosts | $Home\[My ]Documents\PowerShell\Profile.ps1
+Current user, Current Host | $Home\[My ]Documents\PowerShell\Microsoft.PowerShell_profile.ps1
+
+## Profile
+
+To create your own Profile for WindowsPowerShell start a Windows PowerShell:
+
+````powershell
+New-Item $PsHome\Profile.ps1
+ise $PsHome\Profile.ps1
+````
+
+To create your own Profile for PowerShell start a PowerShell:
 
 ````powershell
 New-Item $PsHome\Profile.ps1
@@ -42,11 +64,13 @@ function prompt
     else{
         $color = 'Green'
     }
-
-    Write-Host "[$((Get-History).count + 1)] " -NoNewline
+    
+    $history = Get-History -ErrorAction Ignore
+    $Version = "$($PSVersionTable.PSVersion.Major).$($PSVersionTable.PSVersion.Minor)"
+    Write-Host "[$($history.count[-1])] " -NoNewline
     Write-Host ("I ") -nonewline
     Write-Host (([char]9829) ) -ForegroundColor $color -nonewline
-    Write-Host (" PS ") -nonewline
+    Write-Host (" PS $Version ") -nonewline
     Write-Host ("$(get-location) ") -foregroundcolor $color -nonewline
     Write-Host (">") -nonewline -foregroundcolor $color
     return " "
@@ -54,16 +78,16 @@ function prompt
 }
 ````
 
+Output, if you start WindowsPowerShell:
+
+````powershell
+[0] I ♥ PS 5.1 C:\Users\Admin >
+````
+
 Output, if you start PowerShell:
 
 ````powershell
-[0] I ♥ PS C:\Users\Admin > Get-History -Count 1
-[1] I ♥ PS C:\Users\Admin > Invoke-History 1
-Get-History -Count 1
-
-  Id CommandLine
-  -- -----------
-   1 Get-History -Count 1
+[0] I ♥ PS 7.1 C:\Users\Admin >
 ````
 
 # See also
