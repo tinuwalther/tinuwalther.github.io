@@ -11,6 +11,12 @@ permalink: /posts/:title:output_ext
 
 - [Table of Contents](#table-of-contents)
 - [Task Scheduler](#task-scheduler)
+  - [Create a Scheduled Task](#create-a-scheduled-task)
+- [Create the script](#create-the-script)
+- [Create a new task action](#create-a-new-task-action)
+- [Create a new trigger (Daily at 3 AM -> 02:00 local time)](#create-a-new-trigger-daily-at-3-am---0200-local-time)
+- [Register the new PowerShell scheduled task](#register-the-new-powershell-scheduled-task)
+- [Register the scheduled task](#register-the-scheduled-task)
   - [Task Actions](#task-actions)
   - [Task Information](#task-information)
 - [Troubleshooting](#troubleshooting)
@@ -18,6 +24,44 @@ permalink: /posts/:title:output_ext
 - [See also](#see-also)
 
 # Task Scheduler
+
+## Create a Scheduled Task
+
+````powershell
+# Create the script
+$Content = @"
+Restart-Computer -WhatIf
+"@
+Set-Content -Path 'D:\Temp\Restart.ps1' -Value $Content
+
+# Create a new task action
+$taskAction = @{
+    Execute  = '%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe'
+    Argument = '-NoProfile -NoLogo -NonInteractive -ExecutionPolicy Bypass -File "D:\Temp\Restart.ps1"'
+}
+$ScheduledTaskAction = New-ScheduledTaskAction @taskAction
+
+# Create a new trigger (Daily at 3 AM -> 02:00 local time)
+$taskTrigger = @{
+    Daily = $true
+    At    = '3AM'
+}
+$ScheduledTaskTrigger = New-ScheduledTaskTrigger @taskTrigger
+
+# Register the new PowerShell scheduled task
+$ScheduledTask = @{
+    TaskName    = "Restart computer"
+    Description = "Restart the computer daily"
+    Action      = $ScheduledTaskAction
+    Trigger     = $ScheduledTaskTrigger
+    User        = 'SYSTEM'
+}
+
+# Register the scheduled task
+Register-ScheduledTask @ScheduledTask
+
+Get-ScheduledTaskInfo -TaskName "Restart computer"
+````
 
 ## Task Actions
 
