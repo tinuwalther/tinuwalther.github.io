@@ -14,9 +14,12 @@ permalink: /posts/:title:output_ext
   - [Create a Scheduled Task](#create-a-scheduled-task)
 - [Create the script](#create-the-script)
 - [Create a new task action](#create-a-new-task-action)
-- [Create a new trigger (Daily at 3 AM -> 02:00 local time)](#create-a-new-trigger-daily-at-3-am---0200-local-time)
+- [Create a new trigger](#create-a-new-trigger)
+- [Create new task principal](#create-new-task-principal)
+- [Create new task settings](#create-new-task-settings)
 - [Register the new PowerShell scheduled task](#register-the-new-powershell-scheduled-task)
-- [Register the scheduled task](#register-the-scheduled-task)
+  - [Delete a Scheduled Task](#delete-a-scheduled-task)
+- [Delete the new PowerShell scheduled task](#delete-the-new-powershell-scheduled-task)
   - [Task Actions](#task-actions)
   - [Task Information](#task-information)
 - [Troubleshooting](#troubleshooting)
@@ -29,38 +32,64 @@ permalink: /posts/:title:output_ext
 
 ````powershell
 # Create the script
+$ScriptFullname = 'C:\Admin\Scripts\Maintenace\RebootOnce.ps1'
+if(-not(Test-Path $ScriptFullname)){$null = New-Item -Path $ScriptFullname -ItemType File -Force}
+
 $Content = @"
-Restart-Computer -WhatIf
+Restart-Computer -Force
 "@
-Set-Content -Path 'D:\Temp\Restart.ps1' -Value $Content
+$Content | Out-File -FilePath $ScriptFullname -Encoding utf8 -Force
 
 # Create a new task action
 $taskAction = @{
     Execute  = '%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe'
-    Argument = '-NoProfile -NoLogo -NonInteractive -ExecutionPolicy Bypass -File "D:\Temp\Restart.ps1"'
+    Argument = "-NoProfile -NoLogo -NonInteractive -ExecutionPolicy Bypass -File $($ScriptFullname)"
 }
 $ScheduledTaskAction = New-ScheduledTaskAction @taskAction
 
-# Create a new trigger (Daily at 3 AM -> 02:00 local time)
+# Create a new trigger
 $taskTrigger = @{
-    Daily = $true
-    At    = '3AM'
+    Once = $true
+    At   = '2021/02/20 03:00:00'
 }
 $ScheduledTaskTrigger = New-ScheduledTaskTrigger @taskTrigger
 
+# Create new task principal
+$taskPrincipal = @{
+    UserID    = 'NT AUTHORITY\SYSTEM'
+    LogonType = 'ServiceAccount'
+    RunLevel  = 'Highest'
+}
+$ScheduledTaskPrincipal = New-ScheduledTaskPrincipal @taskPrincipal
+
+# Create new task settings
+$taskSettings = @{
+    ExecutionTimeLimit = (New-TimeSpan -Hours 1)
+}
+$ScheduledTaskSettingsSet = New-ScheduledTaskSettingsSet @taskSettings
+
 # Register the new PowerShell scheduled task
-$ScheduledTask = @{
-    TaskName    = "Restart computer"
-    Description = "Restart the computer daily"
+$registerTask = @{
+    TaskName    = "RestartOnce"
+    Description = "Restart the computer one time"
     Action      = $ScheduledTaskAction
     Trigger     = $ScheduledTaskTrigger
-    User        = 'SYSTEM'
+    Principal   = $ScheduledTaskPrincipal
+    TaskPath    = '\Maintenace'
+    Settings    = $ScheduledTaskSettingsSet
 }
+Register-ScheduledTask @registerTask
 
-# Register the scheduled task
-Register-ScheduledTask @ScheduledTask
+Get-ScheduledTask -TaskName "RestartOnce" | Select *
 
-Get-ScheduledTaskInfo -TaskName "Restart computer"
+Get-ScheduledTask "RestartOnce" | Get-ScheduledTaskInfo | Select *
+````
+
+## Delete a Scheduled Task
+
+````powershell
+# Delete the new PowerShell scheduled task
+Unregister-ScheduledTask -TaskName "RestartOnce" -Confirm:$false
 ````
 
 ## Task Actions
