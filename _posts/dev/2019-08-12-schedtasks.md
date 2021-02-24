@@ -153,7 +153,7 @@ echo %log%
 echo %script%
 
 echo Start %script% %date%%time% > %log%
-%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe -ExecutionPolicy Bypass %script% >> %log%
+%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe -NoProfile -NoLogo -NonInteractive -ExecutionPolicy Bypass %script% >> %log%
 echo End %script% %date%%time% >> %log%
 ````
 
@@ -163,6 +163,7 @@ In the Logfile, you can find any Errors- or Output from the PowerShell-Script.
 
 Error | Problem | Solution
 -|-|-
+0x1 | Path to the program does not exists | Correct the Path to the program e.g. change powershell.exe to C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
 0xFFFD0000 | Path to the script does not exists | Correct the Path to the script
 
 # See also
