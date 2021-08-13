@@ -20,14 +20,15 @@ permalink: /posts/:title:output_ext
 
 ## Scope
 
-You can create a profile for the following scope:
+You can create a profile for the following scopes:
 
 Description | Path
 - | -
-All Users, All Hosts | $PSHOME\Profile.ps1
-All Users, Current Host | $PSHOME\Microsoft.PowerShell_profile.ps1
-Current User, All Hosts | $Home\[My ]Documents\PowerShell\Profile.ps1
-Current user, Current Host | $Home\[My ]Documents\PowerShell\Microsoft.PowerShell_profile.ps1
+Current User, Current Host | $PROFILE
+Current User, Current Host | $PROFILE.CurrentUserCurrentHost
+Current User, All Hosts | $PROFILE.CurrentUserAllHosts
+All Users, Current Host | $PROFILE.AllUsersCurrentHost
+All Users, All Hosts | $PROFILE.AllUsersAllHosts
 
 ## Profile
 
@@ -43,6 +44,10 @@ To create your own Profile for PowerShell start a PowerShell:
 ````powershell
 New-Item $PsHome\Profile.ps1
 ise $PsHome\Profile.ps1
+````
+
+````powershell
+code $PROFILE.CurrentUserAllHosts
 ````
 
 # Functions in your Profile
@@ -68,6 +73,7 @@ function prompt
     $history = Get-History -ErrorAction Ignore
     $Version = "$($PSVersionTable.PSVersion.Major).$($PSVersionTable.PSVersion.Minor)"
     Write-Host "[$($history.count[-1])] " -NoNewline
+    Write-Host "[$($env:ComputerName)] " -ForegroundColor $color -NoNewline
     Write-Host ("I ") -nonewline
     Write-Host (([char]9829) ) -ForegroundColor $color -nonewline
     Write-Host (" PS $Version ") -nonewline
