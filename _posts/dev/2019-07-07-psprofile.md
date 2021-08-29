@@ -14,6 +14,8 @@ permalink: /posts/:title:output_ext
   - [Scope](#scope)
   - [Profile](#profile)
 - [Functions in your Profile](#functions-in-your-profile)
+  - [Windows](#windows)
+  - [Mac OS](#mac-os)
 - [See also](#see-also)
 
 # Create your own PowerShell Profile
@@ -32,19 +34,11 @@ All Users, All Hosts | $PROFILE.AllUsersAllHosts
 
 ## Profile
 
-To create your own Profile for WindowsPowerShell start a Windows PowerShell:
+To create your own Profile for WindowsPowerShell start Visual Studio Code and edit each of the following profile.ps1:
 
-````powershell
-New-Item $PsHome\Profile.ps1
-ise $PsHome\Profile.ps1
-````
-
-To create your own Profile for PowerShell start a PowerShell:
-
-````powershell
-New-Item $PsHome\Profile.ps1
-ise $PsHome\Profile.ps1
-````
+- Microsoft.PowerShell_profile.ps1
+- Microsoft.VSCode_profile.ps1
+- profile.ps1
 
 ````powershell
 code $PROFILE.CurrentUserAllHosts
@@ -52,7 +46,9 @@ code $PROFILE.CurrentUserAllHosts
 
 # Functions in your Profile
 
-My prefered functions in my own profile.ps1:
+My prefered functions in my own profile.ps1
+
+## Windows
 
 ````powershell
 function Test-IsAdministrator {
@@ -60,8 +56,7 @@ function Test-IsAdministrator {
     (New-Object Security.Principal.WindowsPrincipal $user).IsInRole([Security.Principal.WindowsBuiltinRole]::Administrator)
 }
 
-function prompt
-{
+function prompt{
 
     if (Test-IsAdministrator) {
         $color = 'Red'
@@ -71,10 +66,10 @@ function prompt
     }
     
     $history = Get-History -ErrorAction Ignore
-    $Version = "$($PSVersionTable.PSVersion.Major).$($PSVersionTable.PSVersion.Minor)"
+    $Version = "$($PSVersionTable.PSVersion.ToString())"
     Write-Host "[$($history.count[-1])] " -NoNewline
-    Write-Host "[$($env:ComputerName)] " -ForegroundColor $color -NoNewline
-    Write-Host ("I ") -nonewline
+    Write-Host ("$(($env:UserName).ToLower())@$(($env:ComputerName).ToLower())") -nonewline -foregroundcolor $color
+    Write-Host (" I ") -nonewline
     Write-Host (([char]9829) ) -ForegroundColor $color -nonewline
     Write-Host (" PS $Version ") -nonewline
     Write-Host ("$(get-location) ") -foregroundcolor $color -nonewline
@@ -84,16 +79,37 @@ function prompt
 }
 ````
 
+## Mac OS
+
+````powershell
+function prompt{
+
+    $color = 'Green'
+
+    $history = Get-History -ErrorAction Ignore
+    $Version = "$($PSVersionTable.PSVersion.ToString())"
+    Write-Host "[$($history.count[-1])] " -NoNewline
+    Write-Host ("$((id -un).ToLower())@$((hostname).ToLower())") -nonewline -foregroundcolor $color
+    Write-Host (" I ") -nonewline
+    Write-Host (([char]9829) ) -ForegroundColor $color -nonewline
+    Write-Host (" PS $Version ") -nonewline
+    Write-Host ("$(get-location) ") -foregroundcolor $color -nonewline
+    Write-Host (">") -nonewline
+    return " "
+
+}
+````
+
 Output, if you start WindowsPowerShell:
 
 ````powershell
-[0] I ♥ PS 5.1 C:\Users\Admin >
+[0] [user@computer] I ♥ PS 5.1.1 C:\Users\Admin >
 ````
 
 Output, if you start PowerShell:
 
 ````powershell
-[0] I ♥ PS 7.1 C:\Users\Admin >
+[0] [user@computer] I ♥ PS 7.1.4 C:\Users\Admin >
 ````
 
 # See also
