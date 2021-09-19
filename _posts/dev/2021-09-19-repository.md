@@ -14,8 +14,10 @@ permalink: /posts/:title:output_ext
     - [Creating a local repository](#creating-a-local-repository)
     - [Registering a local repository](#registering-a-local-repository)
     - [Publish a Module to the local repository](#publish-a-module-to-the-local-repository)
+    - [Use the Module](#use-the-module)
     - [Prepare a Script to publish](#prepare-a-script-to-publish)
     - [Publish a Script to the local repository](#publish-a-script-to-the-local-repository)
+    - [Use the script](#use-the-script)
 - [See also](#see-also)
 
 
@@ -26,8 +28,8 @@ It's possible to work with local, private PowerShellGet Repositories! The File S
 ## Requirements
 
 NuGet.exe must be available in:
-  - C:\ProgramData\Microsoft\Windows\PowerShell\PowerShellGet\
-  - C:\Users\info\AppData\Local\Microsoft\Windows\PowerShell\PowerShellGet\
+  - C:\ProgramData\Microsoft\Windows\PowerShell\PowerShellGet\ or
+  - C:\Users\<yourAccount>\AppData\Local\Microsoft\Windows\PowerShell\PowerShellGet\
   - NuGet.exe can be downloaded from https://aka.ms/psget-nugetexe
 
 ## Creating a local repository
@@ -41,8 +43,8 @@ Register your new share as a PowerShellGet Repository
 ````powershell
 $LocalGallery = @{
     Name                 = "LocalGallery"
-    SourceLocation       = "\\YourShare\psrepository\ps"
-    ScriptSourceLocation = "\\YourShare\psrepository\ps"
+    SourceLocation       = "\\YourShare\PSRepository"
+    ScriptSourceLocation = "\\YourShare\PSRepository"
     InstallationPolicy   = 'Trusted'
 }
 Register-PSRepository @LocalGallery
@@ -55,8 +57,8 @@ For file share-based repositories, SourceLocation and ScriptSourceLocation must 
 
 ````powershell
 Publish-Module -Path 'D:\temp\PsNetTools' -Repository LocalGallery -NuGetApiKey 'AnyStringWillDo'
-Move-Item -Path '\\YourShare\psrepository\ps\PsNetTools.0.7.65.nupkg' `
- -Destination '\\YourShare\psrepository\ps\Modules\PsNetTools.0.7.65.nupkg'
+Move-Item -Path '\\YourShare\PSRepository\PsNetTools.0.7.65.nupkg' `
+ -Destination '\\YourShare\PSRepository\Modules\PsNetTools.0.7.65.nupkg'
 
 Find-Module -Repository LocalGallery | Select-Object Version,Name,Description
 
@@ -68,6 +70,20 @@ Version Name         Description
 0.0.158 PSWriteHTML  PSWriteHTML is PowerShell Module to generate beautiful HTML reports, pages, emails without any knowledge of HTML, CSS or … 
 0.0.17  PSWritePDF   Little project to create, read, modify, split, merge PDF files on Windows, Linux and Mac.
 1.1.11  PSWriteWord  Simple project to create Microsoft Word in PowerShell without having Office installed.
+````
+
+## Use the Module
+
+````powershell
+Find-Module -Repository LocalGallery
+
+Install-Module -Repository LocalGallery -Name PsNetTools
+
+Get-InstalledModule
+
+Test-PsNetDig tinuwalther.github.io
+
+Uninstall-Module -Name PsNetTools
 ````
 
 ## Prepare a Script to publish
@@ -206,7 +222,7 @@ $Metadata = @{
     Author      = 'it@martin-walther.ch'
     Guid        = New-Guid
     Description = 'Create simple iCalendar Event with the properties EventStart, EventEnd, EventSubject, EventDescription, and EventLocation'
-    Path        = 'D:\github.com\PrivateStuff\New-PSiCalEvent\New-PSiCalendarEvent.ps1'
+    Path        = 'C:\Temp\New-PSiCalEvent\New-PSiCalendarEvent.ps1'
 }
 Update-ScriptFileInfo @Metadata
 ````
@@ -217,14 +233,31 @@ For file share-based repositories, SourceLocation and ScriptSourceLocation must 
 
 ````powershell
 Publish-Script -Path D:\github.com\PrivateStuff\New-PSiCalEvent\New-PSiCalendarEvent.ps1 -Repository LocalGallery
-Move-Item -Path '\\YourShare\psrepository\ps\New-PSiCalendarEvent.1.0.2.nupkg' `
- -Destination '\\YourShare\psrepository\ps\Scripts\New-PSiCalendarEvent.1.0.2.nupkg'
+Move-Item -Path '\\YourShare\PSRepository\New-PSiCalendarEvent.1.0.2.nupkg' `
+ -Destination '\\YourShare\PSRepository\Scripts\New-PSiCalendarEvent.1.0.2.nupkg'
 
 Find-Script -Repository LocalGallery | Select-Object Version,Name,Description
 
 Version Name                 Description
 ------- ----                 -----------
 1.0.2   New-PSiCalendarEvent Create simple iCalendar Event with the properties EventStart, EventEnd, EventSubject, EventDescription, and …
+````
+
+## Use the script
+
+````powershell
+Install-Script -Repository LocalGallery -Name New-PSiCalendarEvent
+
+Get-InstalledScript
+
+New-PSiCalendarEvent `
+ -EventStart '19.09.2021 13:00' `
+ -EventEnd '19.09.2021 14:00' `
+ -EventSubject 'New-PSiCalendarEvent' `
+ -EventDescription 'New-PSiCalendarEvent Description' `
+ -EventLocation 'Home Office' `-FullFilename 'New-PSiCalendarEvent'
+ 
+Uninstall-Script -Name New-PSiCalendarEvent
 ````
 
 # See also
