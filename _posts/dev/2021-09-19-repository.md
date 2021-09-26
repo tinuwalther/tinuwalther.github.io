@@ -34,7 +34,12 @@ NuGet.exe must be available in:
 
 Microsoft.PackageManagement.NuGetProvider.dll must be available in:
   - C:\Program Files\PackageManagement\ProviderAssemblies\nuget\2.8.5.208
-  - [Download the NuGetProvider.dll](https://tinuwalther.github.io/bin/Microsoft.PackageManagement.NuGetProvider.zip) from this site
+
+PowerShell Modules:
+  - PackageManagement 1.4.7
+  - PowerShellGet 2.2.5
+
+Download the Requirements from this site as [PowerShellGetForOffline.zip](https://tinuwalther.github.io/bin/PowerShellGetForOffline.zip).
 
 ## Creating a local repository
 
