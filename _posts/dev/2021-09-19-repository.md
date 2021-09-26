@@ -34,8 +34,7 @@ NuGet.exe must be available in:
 
 Microsoft.PackageManagement.NuGetProvider.dll must be available in:
   - C:\Program Files\PackageManagement\ProviderAssemblies\nuget\2.8.5.208
-
-  [Download the NuGetProvider.dll](https://tinuwalther.github.io/bin/Microsoft.PackageManagement.NuGetProvider.zip)
+  - [Download the NuGetProvider.dll](https://tinuwalther.github.io/bin/Microsoft.PackageManagement.NuGetProvider.zip) from this site
 
 ## Creating a local repository
 
