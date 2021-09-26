@@ -41,6 +41,10 @@ To create your own Profile for WindowsPowerShell start Visual Studio Code and ed
 - profile.ps1
 
 ````powershell
+code $PROFILE
+
+code $PROFILE.CurrentUserCurrentHost
+
 code $PROFILE.CurrentUserAllHosts
 ````
 
@@ -66,9 +70,10 @@ function prompt{
     }
     
     $history = Get-History -ErrorAction Ignore
+    $vscode  = (code --version)[0]
     $Version = "$($PSVersionTable.PSVersion.ToString())"
     Write-Host "[$($history.count[-1])] " -NoNewline
-    Write-Host ("$(($env:UserName).ToLower())@$(($env:ComputerName).ToLower())") -nonewline -foregroundcolor $color
+    Write-Host ("$(($env:UserName).ToLower())@$(($env:ComputerName).ToLower()) [VS Code $($vscode)]") -nonewline -foregroundcolor $color
     Write-Host (" I ") -nonewline
     Write-Host (([char]9829) ) -ForegroundColor $color -nonewline
     Write-Host (" PS $Version ") -nonewline
@@ -87,9 +92,10 @@ function prompt{
     $color = 'Green'
 
     $history = Get-History -ErrorAction Ignore
+    $vscode  = (code --version)[0]
     $Version = "$($PSVersionTable.PSVersion.ToString())"
     Write-Host "[$($history.count[-1])] " -NoNewline
-    Write-Host ("$((id -un).ToLower())@$((hostname).ToLower())") -nonewline -foregroundcolor $color
+    Write-Host ("$((id -un).ToLower())@$((hostname).ToLower()) [VS Code $($vscode)]") -nonewline -foregroundcolor $color
     Write-Host (" I ") -nonewline
     Write-Host (([char]9829) ) -ForegroundColor $color -nonewline
     Write-Host (" PS $Version ") -nonewline
