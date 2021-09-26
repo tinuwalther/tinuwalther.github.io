@@ -39,11 +39,11 @@ PowerShell Modules:
   - PackageManagement 1.4.7
   - PowerShellGet 2.2.5
 
-Download the Requirements from this site as PowerShellGetForOffline.zip:
+Download the Requirements from this site as [PowerShellGetForOffline.zip](https://tinuwalther.github.io/bin/PowerShellGetForOffline.zip):
 
 |Name|Size|SHA256|
 |-|-|-|
-|[PowerShellGetForOffline.zip](https://tinuwalther.github.io/bin/PowerShellGetForOffline.zip)|3427528 bytes (3347 KiB) |B430D703B08D0167D013DFD8E2DDF466D69BD37E827E67AEEAE99A178F57F49A|
+|PowerShellGetForOffline.zip|3427528 bytes (3347 KiB)|B430D703B08D0167D013DFD8E2DDF466D69BD37E827E67AEEAE99A178F57F49A|
 
 ## Creating a local repository
 
