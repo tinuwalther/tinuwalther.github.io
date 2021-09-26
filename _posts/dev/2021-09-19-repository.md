@@ -32,6 +32,11 @@ NuGet.exe must be available in:
   - C:\Users\<yourAccount>\AppData\Local\Microsoft\Windows\PowerShell\PowerShellGet\
   - NuGet.exe can be downloaded from https://aka.ms/psget-nugetexe
 
+Microsoft.PackageManagement.NuGetProvider.dll must be available in:
+  - C:\Program Files\PackageManagement\ProviderAssemblies\nuget\2.8.5.208
+
+  [Download the NuGetProvider.dll](https://tinuwalther.github.io/bin/Microsoft.PackageManagement.NuGetProvider.zip)
+
 ## Creating a local repository
 
 Create a new share on your NAS or something like that.
