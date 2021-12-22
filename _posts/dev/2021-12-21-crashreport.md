@@ -77,11 +77,15 @@ Get-WinEvent -FilterHashtable $params | Select-Object TimeCreated,Id,Message
 ````
 TimeCreated : 21.12.2021 12:29:14
 Id          : 1001
-Message     : The computer has rebooted from a bugcheck. The bugcheck was: 0x0000009f (0x0000000000000005, 0xffff950d5f4cc060, 0xffff950d7c5f0920, 0x0000000000000000). A dump was saved in: C:\WINDOWS\MEMORY.DMP. Report Id: cdc03408-1c74-42d1-ad9c-caae62d7edc3.
+Message     : The computer has rebooted from a bugcheck. 
+              The bugcheck was: 0x0000009f (0x0000000000000005, 0xffff950d5f4cc060, 0xffff950d7c5f0920, 0x0000000000000000). 
+              A dump was saved in: C:\WINDOWS\MEMORY.DMP. 
+              Report Id: cdc03408-1c74-42d1-ad9c-caae62d7edc3.
 
 TimeCreated : 21.12.2021 12:29:01
 Id          : 41
-Message     : The system has rebooted without cleanly shutting down first. This error could be caused if the system stopped responding, crashed, or lost power unexpectedly.
+Message     : The system has rebooted without cleanly shutting down first.
+              This error could be caused if the system stopped responding, crashed, or lost power unexpectedly.
 
 TimeCreated : 21.12.2021 12:29:09
 Id          : 6008
@@ -89,24 +93,24 @@ Message     : The previous system shutdown at 11:59:15 on 21.12.2021 was unexpec
 
 TimeCreated : 20.12.2021 18:56:59
 Id          : 1074
-Message     : The process C:\Windows\System32\RuntimeBroker.exe (Computer1) has initiated the power off of computer Computer1 on behalf of user
-              Computer1\Admin for the following reason: Other (Unplanned)
+Message     : The process C:\Windows\System32\RuntimeBroker.exe (Computer1) has initiated the power off of computer Computer1 on behalf of
+              user Computer1\Admin for the following reason: Other (Unplanned)
                Reason Code: 0x0
                Shut-down Type: power off
                Comment:
 
 TimeCreated : 20.12.2021 16:51:52
 Id          : 1074
-Message     : The process C:\WINDOWS\system32\winlogon.exe (Computer1) has initiated the restart of computer Computer1 on behalf of user NT
-              AUTHORITY\SYSTEM for the following reason: No title for this reason could be found
+Message     : The process C:\WINDOWS\system32\winlogon.exe (Computer1) has initiated the restart of computer Computer1 on behalf of
+              user NT AUTHORITY\SYSTEM for the following reason: No title for this reason could be found
                Reason Code: 0x500ff
                Shut-down Type: restart
                Comment:
 
 TimeCreated : 20.12.2021 16:51:50
 Id          : 1074
-Message     : The process rundll32.exe has initiated the restart of computer AT40845 on behalf of user Computer1\Admin for the following reason: Other     
-              (Unplanned)
+Message     : The process rundll32.exe has initiated the restart of computer Computer1 on behalf of user Computer1\Admin for the 
+              following reason: Other (Unplanned)
                Reason Code: 0x0
                Shut-down Type: restart
                Comment:
