@@ -12,6 +12,8 @@ permalink: /posts/:title:output_ext
 - [Table of Contents](#table-of-contents)
 - [Restart History](#restart-history)
 - [Restart or Crash-Report](#restart-or-crash-report)
+  - [Event IDs](#event-ids)
+  - [How to find reasons](#how-to-find-reasons)
 - [See also](#see-also)
 
 # Restart History
@@ -64,21 +66,35 @@ foreach($item in $RestartyApplication){
 
 # Restart or Crash-Report
 
+## Event IDs
+
+- 41:   Rebooted unexpectedly, no more info, search for Event ID 1001
+- 1001: Bugcheck number, Memory dump saved at ...
+- 1074: Power off, Restart by application or user
+- 2004: Low Memory Condition, could be the reason of a crash
+- 6008: Shutdown unexpectedly, exactly time-stamp of the shutdown, search for Event ID 1001
+
+# How to find reasons
+
+Search for specified Event IDs in the Systemlog:
+
 ````powershell
 $params = @{
     LogName   = 'System'
-    Id = 2004,6008,1074,41,1001,46
+    Id        = 2004,6008,1074,41,1001,46
     StartTime = (Get-Date).AddDays(-2)
     EndTime   = (Get-Date)
  }
 Get-WinEvent -FilterHashtable $params | Select-Object TimeCreated,Id,Message
 ````
 
+**Output**
+
 ````
 TimeCreated : 21.12.2021 12:29:14
 Id          : 1001
 Message     : The computer has rebooted from a bugcheck. 
-              The bugcheck was: 0x0000009f (0x0000000000000005, 0xffff950d5f4cc060, 0xffff950d7c5f0920, 0x0000000000000000). 
+              The bugcheck was: **0x0000009f** (0x0000000000000005, 0xffff950d5f4cc060, 0xffff950d7c5f0920, 0x0000000000000000). 
               A dump was saved in: C:\WINDOWS\MEMORY.DMP. 
               Report Id: cdc03408-1c74-42d1-ad9c-caae62d7edc3.
 
@@ -89,7 +105,7 @@ Message     : The system has rebooted without cleanly shutting down first.
 
 TimeCreated : 21.12.2021 12:29:09
 Id          : 6008
-Message     : The previous system shutdown at 11:59:15 on 21.12.2021 was unexpected.
+Message     : The previous system shutdown at **11:59:15** on 21.12.2021 was unexpected.
 
 TimeCreated : 20.12.2021 18:56:59
 Id          : 1074
