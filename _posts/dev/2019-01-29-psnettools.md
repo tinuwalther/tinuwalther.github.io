@@ -133,7 +133,7 @@ Go to [https://github.com/tinuwalther/PsNetTools/releases](https://github.com/ti
 Or install the latest version with PowerShell:
 
 ````powershell
-$ZipFile = "https://github.com/tinuwalther/PsNetTools/releases/download/v0.7.5/PsNetTools.zip"
+$ZipFile = "https://github.com/tinuwalther/PsNetTools/releases/download/v0.7.7/PsNetTools.zip"
 $OutFile = "$($env:USERPROFILE)\Downloads\PsNetTools-v0.7.5.zip"
 Invoke-WebRequest -Uri $ZipFile -OutFile $OutFile
 $ExpandFolder = "$($env:USERPROFILE)\Downloads\PsNetTools"
