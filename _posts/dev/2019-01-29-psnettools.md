@@ -126,27 +126,17 @@ My goal was to use the same commands on Windows, Mac and Linux and they should h
 
 ## Download Module
 
-You can use one of the following methods to download my module:  
+You can use one of the following methods to download my module:
+
+Install the latest version from PSGallery:
+
+````powershell
+Install-Module -Name PsNetTools -Repository PSGallery
+````
+
+Or download the latest version from GitHub:
 
 Go to [https://github.com/tinuwalther/PsNetTools/releases](https://github.com/tinuwalther/PsNetTools/releases/), download the latest Version of PsNetTools.zip and extract it.
-
-Or install the latest version with PowerShell:
-
-````powershell
-$ZipFile = "https://github.com/tinuwalther/PsNetTools/releases/download/v0.7.7/PsNetTools.zip"
-$OutFile = "$($env:USERPROFILE)\Downloads\PsNetTools-v0.7.5.zip"
-Invoke-WebRequest -Uri $ZipFile -OutFile $OutFile
-$ExpandFolder = "$($env:USERPROFILE)\Downloads\PsNetTools"
-if(-not(Test-Path $ExpandFolder)){$null = mkdir $ExpandFolder}
-Expand-Archive -Path $OutFile -OutputPath $ExpandFolder -Force
-Copy-Item -Path $ExpandFolder -Destination "C:\Program Files\WindowsPowerShell\Modules" -Recurse -Force -PassThru
-````
-
-Or clone the code from github:
-
-````powershell
-git clone https://github.com/tinuwalther/PsNetTools.git
-````
 
 ## Import Module
 
@@ -161,19 +151,19 @@ Get-Command -Module PsNetTools
 
 CommandType     Name                                               Version    Source
 -----------     ----                                               -------    ------
-Function        Add-PsNetHostsEntry                                0.7.5      PsNetTools
-Function        Get-PsNetAdapterConfiguration                      0.7.5      PsNetTools
-Function        Get-PsNetAdapters                                  0.7.5      PsNetTools
-Function        Get-PsNetHostsTable                                0.7.5      PsNetTools
-Function        Get-PsNetRoutingTable                              0.7.5      PsNetTools
-Function        Remove-PsNetHostsEntry                             0.7.5      PsNetTools
-Function        Start-PsNetPortListener                            0.7.5      PsNetTools
-Function        Test-PsNetDig                                      0.7.5      PsNetTools
-Function        Test-PsNetPing                                     0.7.5      PsNetTools
-Function        Test-PsNetTping                                    0.7.5      PsNetTools
-Function        Test-PsNetTracert                                  0.7.5      PsNetTools
-Function        Test-PsNetUping                                    0.7.5      PsNetTools
-Function        Test-PsNetWping                                    0.7.5      PsNetTools
+Function        Add-PsNetHostsEntry                                0.7.7      PsNetTools
+Function        Get-PsNetAdapterConfiguration                      0.7.7      PsNetTools
+Function        Get-PsNetAdapters                                  0.7.7      PsNetTools
+Function        Get-PsNetHostsTable                                0.7.7      PsNetTools
+Function        Get-PsNetRoutingTable                              0.7.7      PsNetTools
+Function        Remove-PsNetHostsEntry                             0.7.7      PsNetTools
+Function        Start-PsNetPortListener                            0.7.7      PsNetTools
+Function        Test-PsNetDig                                      0.7.7      PsNetTools
+Function        Test-PsNetPing                                     0.7.7      PsNetTools
+Function        Test-PsNetTping                                    0.7.7      PsNetTools
+Function        Test-PsNetTracert                                  0.7.7      PsNetTools
+Function        Test-PsNetUping                                    0.7.7      PsNetTools
+Function        Test-PsNetWping                                    0.7.7      PsNetTools
 ````
 
 ## Test-PsNetDig
