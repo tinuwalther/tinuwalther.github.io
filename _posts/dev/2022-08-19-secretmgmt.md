@@ -27,7 +27,7 @@ This module provides a convenient way for a user to store and retrieve secrets. 
 SecretManagement extension vaults:
 
 - Microsoft.PowerShell.SecretStore
-- SecretManagement.CyberArk (needs [psPAS](https://github.com/pspete/psPAS)) -> **Innovation Day!**
+- SecretManagement.CyberArk (needs [psPAS](https://github.com/pspete/psPAS))
 - SecretManagement.KeePass
 - and more
 
@@ -38,6 +38,8 @@ Install-Module Microsoft.PowerShell.SecretManagement, Microsoft.PowerShell.Secre
 ````
 
 ## SecretStore configuration
+
+List the configuration:
 
 ````powershell
 Get-SecretStoreConfiguration
@@ -50,6 +52,13 @@ Enter password:
       ----- -------------- --------------- -----------
 CurrentUser       Password             900      Prompt
 ````
+
+Change the password-timeout to 1 hour:
+
+````powershell
+Set-SecretStoreConfiguration -Scope CurrentUser -Authentication Password -PasswordTimeout 3600 -Interaction Prompt
+````
+
 
 ## Register the SecretStore module as a SecretVault
 
