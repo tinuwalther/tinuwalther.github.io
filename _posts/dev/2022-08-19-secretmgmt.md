@@ -15,6 +15,7 @@ permalink: /posts/:title:output_ext
   - [SecretStore configuration](#secretstore-configuration)
   - [Register the SecretStore module as a SecretVault](#register-the-secretstore-module-as-a-secretvault)
   - [Adding and retrieving secrets](#adding-and-retrieving-secrets)
+  - [Retrieve a secret and use it as PSCredential-Object](#retrieve-a-secret-and-use-it-as-pscredential-object)
 - [See also](#see-also)
 
 # Secret Management
@@ -128,6 +129,26 @@ Remove-Secret -Vault MyOwnStore -Name tinu@gmx.net
 Vault MyOwnStore requires a password.
 Enter password:
 ****
+````
+
+## Retrieve a secret and use it as PSCredential-Object
+
+First, unlock the secret-store:
+
+````powershell
+Unlock-SecretStore
+````
+
+In each scripts, put the following code to get the credentials of the given user (secret):
+
+````powershell
+$SecretName = "tinu@gmx.net"
+[PSCredential] $creds = New-Object System.Management.Automation.PSCredential $SecretName , (Get-Secret -Name $SecretName)
+$creds
+
+UserName                         Password
+--------                         --------
+tinu@gmx.net System.Security.SecureString
 ````
 
 # See also
