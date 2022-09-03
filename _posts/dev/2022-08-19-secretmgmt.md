@@ -12,9 +12,9 @@ permalink: /posts/:title:output_ext
 - [Table of Contents](#table-of-contents)
 - [Secret Management](#secret-management)
   - [Install the modules](#install-the-modules)
-  - [SecretStore configuration](#secretstore-configuration)
   - [Work with the SecretStore module as a SecretVault](#work-with-the-secretstore-module-as-a-secretvault)
     - [Register Module](#register-module)
+    - [SecretStore configuration](#secretstore-configuration)
     - [Get SecretVault](#get-secretvault)
     - [Adding and retrieving secrets](#adding-and-retrieving-secrets)
     - [Retrieve a secret and use it as PSCredential-Object](#retrieve-a-secret-and-use-it-as-pscredential-object)
@@ -46,10 +46,19 @@ SecretManagement extension vaults:
 ## Install the modules
 
 ````powershell
-Install-Module Microsoft.PowerShell.SecretManagement, Microsoft.PowerShell.SecretStore, SecretManagement.KeePass
+Install-Module Microsoft.PowerShell.SecretManagement, Microsoft.PowerShell.SecretStore, SecretManagement.KeePass -Verbose
 ````
 
-## SecretStore configuration
+## Work with the SecretStore module as a SecretVault
+
+### Register Module
+
+````powershell
+Register-SecretVault -ModuleName Microsoft.PowerShell.SecretStore -Name MyOwnStore
+````
+
+
+### SecretStore configuration
 
 List the configuration:
 
@@ -69,14 +78,6 @@ Change the password-timeout to 1 hour:
 
 ````powershell
 Set-SecretStoreConfiguration -Scope CurrentUser -Authentication Password -PasswordTimeout 3600 -Interaction Prompt
-````
-
-## Work with the SecretStore module as a SecretVault
-
-### Register Module
-
-````powershell
-Register-SecretVault -ModuleName Microsoft.PowerShell.SecretStore -Name MyOwnStore
 ````
 
 ### Get SecretVault
@@ -248,10 +249,66 @@ tinu     System.Security.SecureString
 
 ### Retrieve a secret and use it as PlainText
 
+Retrieve the password of a specified Name and use it as PlainText form the Clipboard:
+
 ````powershell
 $Name   = "Token"
 $Secret = Get-Secret -Name $Name
 [System.Net.NetworkCredential]::new($Name, $Secret.Password).Password | Set-Clipboard
+````
+
+List all Secrets with the Tag 'Business', and retrieve the password of a specified Name and use it as PlainText form the Clipboard:
+
+````powershell
+Write-Host "Get Secret from KeePassDB" -ForegroundColor Green 
+if(-not(Test-SecretVault -Name KeePassDB)){
+    Unlock-SecretVault -Name KeePassDB
+}
+
+$SecretInfo = Get-SecretInfo -Vault KeePassDB -WarningAction SilentlyContinue
+$Properties = (
+    'Name',
+    @{
+            N='Accessed'
+            E={
+                foreach($item in $_.Metadata.keys){
+                    if($item -match 'Accessed'){$($_.Metadata[$item])}
+                }
+            }
+        },
+    @{
+            N='Tags'
+            E={
+                foreach($item in $_.Metadata.keys){
+                    if($item -match 'Tags'){$($_.Metadata[$item])}
+                }
+            }
+        }
+)
+$SecretInfo | Select $Properties | Where Tags -match 'Business' | Out-String
+
+$Name   = Read-Host "Paste the FullName to search"
+$Secret = Get-Secret -Vault PrivatKdbx -Name $Name
+[System.Net.NetworkCredential]::new($Name, $Secret.Password).Password | Set-Clipboard
+Write-Host "Set the password to the Clipboard. " -ForegroundColor Green -NoNewline
+Read-Host -Prompt "Press any key to exit"
+````
+
+````
+Get Secret from KeePassDB
+
+Keepass Master Password
+Enter the Keepass Master password for: C:\Users\Secret\Documents\KeePassDB.kdbx
+Password for user Keepass Master Password: ********
+
+
+Name                Accessed            Tags
+----                --------            ----
+Test for any access 03.09.2022 10:56:46 Business
+
+
+Enter the FullName to search: Test for any access
+Set the password to the Clipboard. Press any key to exit:
 ````
 
 # See also
