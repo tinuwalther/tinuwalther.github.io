@@ -13,9 +13,21 @@ permalink: /posts/:title:output_ext
 - [Secret Management](#secret-management)
   - [Install the modules](#install-the-modules)
   - [SecretStore configuration](#secretstore-configuration)
-  - [Register the SecretStore module as a SecretVault](#register-the-secretstore-module-as-a-secretvault)
-  - [Adding and retrieving secrets](#adding-and-retrieving-secrets)
-  - [Retrieve a secret and use it as PSCredential-Object](#retrieve-a-secret-and-use-it-as-pscredential-object)
+  - [Work with the SecretStore module as a SecretVault](#work-with-the-secretstore-module-as-a-secretvault)
+    - [Register Module](#register-module)
+    - [Get SecretVault](#get-secretvault)
+    - [Adding and retrieving secrets](#adding-and-retrieving-secrets)
+    - [Retrieve a secret and use it as PSCredential-Object](#retrieve-a-secret-and-use-it-as-pscredential-object)
+    - [Remove SecretVault](#remove-secretvault)
+    - [Unregister SecretVault](#unregister-secretvault)
+  - [Work with the Keepass module as a SecretVault](#work-with-the-keepass-module-as-a-secretvault)
+    - [Register Module](#register-module-1)
+    - [Get SecretVault](#get-secretvault-1)
+    - [Set KeePass as DefaultVault](#set-keepass-as-defaultvault)
+    - [Unlock SecretVault](#unlock-secretvault)
+    - [Retrieving SecretInfo](#retrieving-secretinfo)
+    - [Retrieve a secret and use it as PSCredential-Object](#retrieve-a-secret-and-use-it-as-pscredential-object-1)
+    - [Retrieve a secret and use it as PlainText](#retrieve-a-secret-and-use-it-as-plaintext)
 - [See also](#see-also)
 
 # Secret Management
@@ -34,7 +46,7 @@ SecretManagement extension vaults:
 ## Install the modules
 
 ````powershell
-Install-Module Microsoft.PowerShell.SecretManagement, Microsoft.PowerShell.SecretStore
+Install-Module Microsoft.PowerShell.SecretManagement, Microsoft.PowerShell.SecretStore, SecretManagement.KeePass
 ````
 
 ## SecretStore configuration
@@ -59,20 +71,25 @@ Change the password-timeout to 1 hour:
 Set-SecretStoreConfiguration -Scope CurrentUser -Authentication Password -PasswordTimeout 3600 -Interaction Prompt
 ````
 
+## Work with the SecretStore module as a SecretVault
 
-## Register the SecretStore module as a SecretVault
+### Register Module
 
 ````powershell
 Register-SecretVault -ModuleName Microsoft.PowerShell.SecretStore -Name MyOwnStore
+````
 
+### Get SecretVault
+
+````powershell
 Get-SecretVault
 
 Name          ModuleName                       IsDefaultVault
 ----          ----------                       --------------
-MyOwnStore Microsoft.PowerShell.SecretStore True
+MyOwnStore    Microsoft.PowerShell.SecretStore True
 ````
 
-## Adding and retrieving secrets
+### Adding and retrieving secrets
 
 ````powershell
 $cred = Get-Credential
@@ -132,15 +149,7 @@ ExpireAfter 2022-06-24 20:00:00
 Url         https://gmx.net
 ````
 
-````powershell
-Remove-Secret -Vault MyOwnStore -Name tinu@gmx.net
-
-Vault MyOwnStore requires a password.
-Enter password:
-****
-````
-
-## Retrieve a secret and use it as PSCredential-Object
+### Retrieve a secret and use it as PSCredential-Object
 
 First, unlock the secret-store:
 
@@ -158,6 +167,91 @@ $creds
 UserName                         Password
 --------                         --------
 tinu@gmx.net System.Security.SecureString
+````
+
+### Remove SecretVault
+
+Un-registers an extension vault from SecretManagement for the current user.
+
+````powershell
+Get-SecretInfo -Vault MyOwnStore
+Remove-Secret -Vault MyOwnStore -Name tinu@gmx.net
+
+Vault MyOwnStore requires a password.
+Enter password:
+****
+````
+
+### Unregister SecretVault
+
+Un-registers an extension vault from SecretManagement for the current user.
+
+````powershell
+Get-SecretVault
+Unregister-SecretVault MyOwnStore
+````
+
+## Work with the Keepass module as a SecretVault
+
+### Register Module
+
+````powershell
+Register-SecretVault -Name "KeePassDB" -ModuleName "SecretManagement.Keepass" -VaultParameters @{
+	Path = "$($env:USERPROFILE)\Documents\KeePassDB.kdbx"
+	UseMasterPassword = $true
+  DefaultVault = $true
+}
+````
+
+### Get SecretVault
+
+````powershell
+Get-SecretVault
+
+Name        ModuleName                       IsDefaultVault
+----        ----------                       --------------
+KeePassDB   SecretManagement.Keepass         False
+````
+
+### Set KeePass as DefaultVault
+
+Sets the provided vault name as the default vault for the current user.
+
+````powershell
+Set-SecretVaultDefault -Name KeePassDB
+````
+
+### Unlock SecretVault
+
+First, unlock the secret-vault:
+
+````powershell
+Unlock-SecretVault -Name KeePassDB
+````
+
+### Retrieving SecretInfo
+
+````powershell
+Get-SecretInfo -Vault KeePassDB
+Get-SecretInfo -Vault KeePassDB -Name *Token*
+````
+
+### Retrieve a secret and use it as PSCredential-Object
+
+````powershell
+Get-Secret -Name "Token"
+
+UserName                     Password
+--------                     --------
+tinu     System.Security.SecureString
+````
+
+### Retrieve a secret and use it as PlainText
+
+````powershell
+$Name   = "Token"
+$Secret = Get-Secret -Name $Name
+[System.Net.NetworkCredential]::new($Name, $Secret.Password).Password | Set-Clipboard
 ````
 
 # See also
