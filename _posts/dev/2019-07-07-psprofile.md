@@ -87,9 +87,18 @@ function prompt{
 ## Mac OS
 
 ````powershell
+function Test-IsRoot {
+    return ((id -u) -eq 0)
+}
+
 function prompt{
 
-    $color = 'Green'
+    if (Test-IsRoot) {
+        $color = 'Red'
+    }
+    else{
+        $color = 'Green'
+    }
 
     $history = Get-History -ErrorAction Ignore
     $vscode  = (code --version)[0]
