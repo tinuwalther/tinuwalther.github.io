@@ -329,7 +329,7 @@ Set the password to the Clipboard. Press any key to exit:
 
 ## Full Example on AlmaLinux
 
-For this full example with AlmaLinux, you can use my Project [PSAutoMic](https://github.com/tinuwalther/PSAutoMic).
+For this full example with AlmaLinux, you can use my Project [PSAutoMic](https://github.com/tinuwalther/PSAutoMic) to create the Docker-Container.
 
 ### Create Docker Container
 
