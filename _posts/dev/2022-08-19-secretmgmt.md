@@ -11,8 +11,8 @@ permalink: /posts/:title:output_ext
 
 - [Table of Contents](#table-of-contents)
 - [Secret Management](#secret-management)
-  - [Install the modules](#install-the-modules)
   - [Work with the SecretStore module as a SecretVault](#work-with-the-secretstore-module-as-a-secretvault)
+    - [Install the modules](#install-the-modules)
     - [Register Module](#register-module)
     - [SecretStore configuration](#secretstore-configuration)
     - [Get SecretVault](#get-secretvault)
@@ -21,6 +21,7 @@ permalink: /posts/:title:output_ext
     - [Remove SecretVault](#remove-secretvault)
     - [Unregister SecretVault](#unregister-secretvault)
   - [Work with the Keepass module as a SecretVault](#work-with-the-keepass-module-as-a-secretvault)
+    - [Install the modules](#install-the-modules)
     - [Register Module](#register-module-1)
     - [Get SecretVault](#get-secretvault-1)
     - [Set KeePass as DefaultVault](#set-keepass-as-defaultvault)
@@ -28,6 +29,12 @@ permalink: /posts/:title:output_ext
     - [Retrieving SecretInfo](#retrieving-secretinfo)
     - [Retrieve a secret and use it as PSCredential-Object](#retrieve-a-secret-and-use-it-as-pscredential-object-1)
     - [Retrieve a secret and use it as PlainText](#retrieve-a-secret-and-use-it-as-plaintext)
+  - [Full Example on AlmaLinux](#full-example-on-almalinux)
+    - [Create Docker Container](#create-docker-container)
+    - [Install and configure KeePass](#install-and-configure-keepass)
+    - [Install and configure SecretManagement for KeePass](#install-and-configure-secretmanagement-for-keepass)
+    - [Adding and retrieving secrets from KeePass](#adding-and-retrieving-secrets-from-keepass)
+
 - [See also](#see-also)
 
 # Secret Management
@@ -39,24 +46,23 @@ This module provides a convenient way for a user to store and retrieve secrets. 
 SecretManagement extension vaults:
 
 - Microsoft.PowerShell.SecretStore
-- SecretManagement.CyberArk (needs [psPAS](https://github.com/pspete/psPAS))
+- SecretManagement.CyberArk (needs [psPAS](https://www.powershellgallery.com/packages/psPAS))
 - SecretManagement.KeePass
 - and more
 
-## Install the modules
+## Work with the SecretStore module as a SecretVault
+
+### Install the modules for SecretStore
 
 ````powershell
-Install-Module Microsoft.PowerShell.SecretManagement, Microsoft.PowerShell.SecretStore, SecretManagement.KeePass -Verbose
+Install-Module Microsoft.PowerShell.SecretManagement, Microsoft.PowerShell.SecretStore -Verbose
 ````
-
-## Work with the SecretStore module as a SecretVault
 
 ### Register Module
 
 ````powershell
 Register-SecretVault -ModuleName Microsoft.PowerShell.SecretStore -Name MyOwnStore
 ````
-
 
 ### SecretStore configuration
 
@@ -192,7 +198,15 @@ Get-SecretVault
 Unregister-SecretVault MyOwnStore
 ````
 
+[ [Top](#table-of-contents) ] 
+
 ## Work with the Keepass module as a SecretVault
+
+### Install the modules for KeePass
+
+````powershell
+Install-Module Microsoft.PowerShell.SecretManagement, SecretManagement.KeePass -Verbose
+````
 
 ### Register Module
 
@@ -200,7 +214,7 @@ Unregister-SecretVault MyOwnStore
 Register-SecretVault -Name "KeePassDB" -ModuleName "SecretManagement.Keepass" -VaultParameters @{
 	Path = "$($env:USERPROFILE)\Documents\KeePassDB.kdbx"
 	UseMasterPassword = $true
-  DefaultVault = $true
+    DefaultVault = $true
 }
 ````
 
@@ -311,8 +325,153 @@ Enter the FullName to search: Test for any access
 Set the password to the Clipboard. Press any key to exit:
 ````
 
+[ [Top](#table-of-contents) ] 
+
+## Full Example on AlmaLinux
+
+For this full example with AlmaLinux, you can use my Project [PSAutoMic](https://github.com/tinuwalther/PSAutoMic).
+
+### Create Docker Container
+
+Create a Docker-Image and Docker-Container with installed PowerShell and start the container:
+
+````bash
+docker start alma_container
+docker exec -it alma_container pwsh
+````
+
+````bash
+sh-5.1# pwsh
+PowerShell 7.3.4
+Get-OsInfo
+
+DistName      : AlmaLinux
+DistVersion   : 9.2 (Turquoise Kodkod)
+SupportURL    : https://almalinux.org/
+OS            : GNU/Linux
+KernelRelease : 5.15.90.1-microsoft-standard-WSL2
+OSInstallDate : 2023-06-02
+````
+
+### Install and configure KeePass
+
+Install config-manager, EPEL-repository, and keepassxc:
+
+````bash
+dnf install 'dnf-command(config-manager)'
+dnf config-manager --set-enabled crb
+dnf install epel-release
+dnf install keepassxc
+````
+
+Create a KeePassDB-file:
+
+````bash
+Usage: keepassxc-cli db-create [options] database
+Create a new database.
+
+Options:
+  -q, --quiet                   Silence password prompt and other secondary outputs.
+  --set-key-file <path>         Set the key file for the database.
+  -p, --set-password            Set a password for the database.
+  -t, --decryption-time <time>  Target decryption time in MS for the database.
+  -h, --help                    Display this help.
+
+Arguments:
+  database                      Path of the database.
+````
+
+I use a master-password for the database and it should be located at the home directory. You can use any volume for the location of the database to share it.
+
+````bash
+keepassxc-cli db-create --set-password /home/KeePassDB.kdbx
+
+Couldn't load translations.
+Enter password to encrypt database (optional): <your master-password>
+Repeat password: <your master-password>
+Successfully created new database.
+````
+
+### Install and configure SecretManagement for KeePass
+
+Install the SecretManagement.Keepass and all dependencies:
+
+````powershell
+Install-Module SecretManagement.Keepass -Verbose
+...
+VERBOSE: InstallPackage' - name='Microsoft.PowerShell.SecretManagement', version='1.1.2',destination='/tmp/311771630'  
+VERBOSE: InstallPackage' - name='PSFramework', version='1.7.270',destination='/tmp/311771630'                           
+VERBOSE: InstallPackage' - name='SecretManagement.KeePass', version='0.9.2',destination='/tmp/311771630'                
+...
+VERBOSE: Module 'SecretManagement.KeePass' was installed successfully to path '/root/.local/share/powershell/Modules/SecretManagement.KeePass/0.9.2'.
+````
+
+Register the SecretVault, and set it to the default vault, and activate the master-password option:
+
+````powershell
+cd home
+Register-SecretVault -Name "KeePassDB" -ModuleName "SecretManagement.Keepass" -VaultParameters @{
+	Path = "/home/KeePassDB.kdbx"
+	UseMasterPassword = $true
+    DefaultVault = $true
+}
+````
+
+````powershell
+Get-SecretVault
+
+Name      ModuleName               IsDefaultVault
+----      ----------               --------------
+KeePassDB SecretManagement.KeePass True
+````
+
+### Adding and retrieving secrets from KeePass
+
+Unlock the KeePassDB:
+
+````powershell
+Unlock-SecretVault -Name KeePassDB
+
+cmdlet Unlock-SecretVault at command pipeline position 1
+Supply values for the following parameters:
+Password: <your master-password>
+````
+
+Adding a secret:
+
+````powershell
+$cred = Get-Credential
+
+PowerShell credential request
+Enter your credentials.
+User: Tinu
+Password for user Tinu: ***********
+
+Set-Secret -Name $cred.UserName -SecureStringSecret $cred.Password
+````
+
+Retrieving secrets:
+
+````powershell
+Get-SecretInfo -Vault KeePassDB
+
+Name Type         VaultName
+---- ----         ---------
+Tinu PSCredential KeePassDB
+````
+
+````powershell
+$SecretName = "Tinu"
+$creds = New-Object System.Management.Automation.PSCredential $SecretName , (Get-Secret -Name $SecretName)
+
+$creds | Format-List
+
+UserName : Tinu
+Password : System.Security.SecureString
+````
+
 # See also
 
-[Microsoft.PowerShell.SecretManagement](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.secretmanagement/?view=ps-modules/) on docs.microsoft.com
+[Microsoft.PowerShell.SecretManagement](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.secretmanagement/?view=ps-modules/) on docs.microsoft.com, [KeePassXC: User Guide](https://keepassxc.org/docs/KeePassXC_UserGuide#_creating_your_first_database)
 
 [ [Top](#table-of-contents) ] [ [Blog](../categories.html) ]
