@@ -411,8 +411,8 @@ Register the SecretVault, and set it to the default vault, and activate the mast
 ````powershell
 cd home
 Register-SecretVault -Name "KeePassDB" -ModuleName "SecretManagement.Keepass" -VaultParameters @{
-	Path = "/home/KeePassDB.kdbx"
-	UseMasterPassword = $true
+    Path = "/home/KeePassDB.kdbx"
+    UseMasterPassword = $true
     DefaultVault = $true
 }
 ````
