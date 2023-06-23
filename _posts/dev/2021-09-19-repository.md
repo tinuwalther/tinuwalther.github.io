@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Private PowerShellGet Repositories"
+title:  "PowerShellGet Repositories"
 author: Tinu
 categories: "PowerShell-Module"
 tags:   PowerShell News
@@ -9,19 +9,23 @@ permalink: /posts/:title:output_ext
 # Table of Contents
 
 - [Table of Contents](#table-of-contents)
-- [Working with File Share PowerShellGet Repositories](#working-with-file-share-powershellget-repositories)
-    - [Requirements](#requirements)
-    - [Creating a local repository](#creating-a-local-repository)
-    - [Registering a local repository](#registering-a-local-repository)
-    - [Publish a Module to the local repository](#publish-a-module-to-the-local-repository)
-    - [Use the Module](#use-the-module)
-    - [Prepare a Script to publish](#prepare-a-script-to-publish)
-    - [Publish a Script to the local repository](#publish-a-script-to-the-local-repository)
-    - [Use the script](#use-the-script)
+- [File Share PowerShellGet Repositories](#file-share-powershellget-repositories)
+  - [Requirements](#requirements)
+  - [Creating a local repository](#creating-a-local-repository)
+  - [Registering a local repository](#registering-a-local-repository)
+- [Sonatype Nexus Repository](#sonatype-nexus-repository)
+  - [Using Docker](#using-docker)
+  - [Registering Repository to nexus container](#registering-repository-to-nexus-container)
+- [Use the Repository](#use-the-repository)
+  - [Publish a Module](#publish-a-module)
+  - [Use the Module](#use-the-module)
+  - [Prepare a Script to publish](#prepare-a-script-to-publish)
+  - [Publish a Script](#publish-a-script)
+  - [Use the script](#use-the-script)
 - [See also](#see-also)
 
 
-# Working with File Share PowerShellGet Repositories
+# File Share PowerShellGet Repositories
 
 It's possible to work with local, private PowerShellGet Repositories! The File Share Repository is the simplest way to work with local, private Repositories.
 
@@ -64,7 +68,42 @@ Register-PSRepository @LocalGallery
 Get-PSRepository | Select-Object Name,Trusted,SourceLocation,ScriptSourceLocation,Registered,PackageManagementProvider | Format-Table -AutoSize
 ````
 
-## Publish a Module to the local repository
+# Sonatype Nexus Repository
+
+You can download a docker image of sonatype nexus3 for your internal PowerShell Gallery.
+
+## Using Docker
+
+Docker Pull:
+
+````powershell
+docker pull sonatype/nexus3
+````
+
+To run, binding the exposed port 8081 to the host, use:
+
+````powershell
+docker run -d -p 8081:8081 --name nexus sonatype/nexus3
+````
+
+## Registering Repository to nexus container
+
+````powershell
+$Splatting = @{
+    Name                      = 'myPSGallery'
+    SourceLocation            = 'http://localhost:8081/repository/PSModules/'
+    PublishLocation           = 'http://localhost:8081/repository/PSModules/'
+    ScriptSourceLocation      = 'http://localhost:8081/repository/PSScripts/'
+    ScriptPublishLocation     = 'http://localhost:8081/repository/PSScripts/'
+    InstallationPolicy        = 'Trusted'
+    PackageManagementProvider = 'NuGet'
+}
+Register-PSRepository @Splatting -Verbose
+````
+
+# Use the Repository
+
+## Publish a Module
 
 For file share-based repositories, SourceLocation and ScriptSourceLocation must match. That's why I move the module to a Modules subfolder.
 
@@ -74,15 +113,6 @@ Move-Item -Path '\\YourShare\PSRepository\PsNetTools.0.7.65.nupkg' `
  -Destination '\\YourShare\PSRepository\Modules\PsNetTools.0.7.65.nupkg'
 
 Find-Module -Repository LocalGallery | Select-Object Version,Name,Description
-
-Version Name         Description
-------- ----         -----------
-5.3.0   Pester       Pester provides a framework for running BDD style Tests to execute and validate PowerShell commands inside of PowerShell … 
-0.7.65  PsNetTools   Cross platform PowerShell module to test some network features
-0.1.12  PSWriteExcel Little project to create Excel files without Microsoft Excel being installed.
-0.0.158 PSWriteHTML  PSWriteHTML is PowerShell Module to generate beautiful HTML reports, pages, emails without any knowledge of HTML, CSS or … 
-0.0.17  PSWritePDF   Little project to create, read, modify, split, merge PDF files on Windows, Linux and Mac.
-1.1.11  PSWriteWord  Simple project to create Microsoft Word in PowerShell without having Office installed.
 ````
 
 ## Use the Module
@@ -240,7 +270,7 @@ $Metadata = @{
 Update-ScriptFileInfo @Metadata
 ````
 
-## Publish a Script to the local repository
+## Publish a Script
 
 For file share-based repositories, SourceLocation and ScriptSourceLocation must match. That's why I move the script to a Scripts subfolder.
 
@@ -250,10 +280,6 @@ Move-Item -Path '\\YourShare\PSRepository\New-PSiCalendarEvent.1.0.2.nupkg' `
  -Destination '\\YourShare\PSRepository\Scripts\New-PSiCalendarEvent.1.0.2.nupkg'
 
 Find-Script -Repository LocalGallery | Select-Object Version,Name,Description
-
-Version Name                 Description
-------- ----                 -----------
-1.0.2   New-PSiCalendarEvent Create simple iCalendar Event with the properties EventStart, EventEnd, EventSubject, EventDescription, and …
 ````
 
 ## Use the script
@@ -275,6 +301,6 @@ Uninstall-Script -Name New-PSiCalendarEvent
 
 # See also
 
-[Working with Private PowerShellGet Repositories](https://docs.microsoft.com/en-us/powershell/scripting/gallery/how-to/working-with-local-psrepositories?view=powershell-7.1) on Microsoft Docs
+[Working with Private PowerShellGet Repositories](https://docs.microsoft.com/en-us/powershell/scripting/gallery/how-to/working-with-local-psrepositories?view=powershell-7.1) on Microsoft Docs, [Nexus Docker](https://github.com/sonatype/docker-nexus) on github.com, [Nexus3](https://registry.hub.docker.com/r/sonatype/nexus3#!) on Docker Hub.
 
 [ [Top](#table-of-contents) ] [ [Blog](../categories.html) ]
