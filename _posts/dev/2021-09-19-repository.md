@@ -115,6 +115,8 @@ Move-Item -Path '\\YourShare\PSRepository\PsNetTools.0.7.65.nupkg' `
  -Destination '\\YourShare\PSRepository\Modules\PsNetTools.0.7.65.nupkg'
 
 Find-Module -Repository LocalGallery | Select-Object Version,Name,Description
+
+ Find-Module -Repository myPSGallery -Credential (Get-Credential)
 ````
 
 ## Use the Module
@@ -283,6 +285,8 @@ Move-Item -Path '\\YourShare\PSRepository\New-PSiCalendarEvent.1.0.2.nupkg' `
  -Destination '\\YourShare\PSRepository\Scripts\New-PSiCalendarEvent.1.0.2.nupkg'
 
 Find-Script -Repository LocalGallery | Select-Object Version,Name,Description
+
+Find-Script -Repository myPSGallery -Credential (Get-Credential)
 ````
 
 ## Use the script
