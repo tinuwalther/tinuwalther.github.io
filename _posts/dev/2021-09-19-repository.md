@@ -6,6 +6,7 @@ categories: "PowerShell-Module"
 tags:   PowerShell News
 permalink: /posts/:title:output_ext
 ---
+
 # Table of Contents
 
 - [Table of Contents](#table-of-contents)
@@ -109,6 +110,7 @@ For file share-based repositories, SourceLocation and ScriptSourceLocation must 
 
 ````powershell
 Publish-Module -Path 'D:\temp\PsNetTools' -Repository LocalGallery -NuGetApiKey 'AnyStringWillDo'
+
 Move-Item -Path '\\YourShare\PSRepository\PsNetTools.0.7.65.nupkg' `
  -Destination '\\YourShare\PSRepository\Modules\PsNetTools.0.7.65.nupkg'
 
@@ -276,6 +278,7 @@ For file share-based repositories, SourceLocation and ScriptSourceLocation must 
 
 ````powershell
 Publish-Script -Path D:\github.com\PrivateStuff\New-PSiCalEvent\New-PSiCalendarEvent.ps1 -Repository LocalGallery
+
 Move-Item -Path '\\YourShare\PSRepository\New-PSiCalendarEvent.1.0.2.nupkg' `
  -Destination '\\YourShare\PSRepository\Scripts\New-PSiCalendarEvent.1.0.2.nupkg'
 
