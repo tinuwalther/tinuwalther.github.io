@@ -9,22 +9,36 @@ permalink: /posts/:title:output_ext
 
 # Table of Contents
 
+<!-- TOC -->
+
 - [Table of Contents](#table-of-contents)
 - [File Share PowerShellGet Repositories](#file-share-powershellget-repositories)
-  - [Requirements](#requirements)
-  - [Creating a local repository](#creating-a-local-repository)
-  - [Registering a local repository](#registering-a-local-repository)
+    - [Requirements](#requirements)
+    - [Creating a local repository](#creating-a-local-repository)
+    - [Registering a local repository](#registering-a-local-repository)
 - [Sonatype Nexus Repository](#sonatype-nexus-repository)
-  - [Using Docker](#using-docker)
-  - [Registering Repository to nexus container](#registering-repository-to-nexus-container)
+    - [Using Docker](#using-docker)
+    - [Create a user](#create-a-user)
+        - [Activate NuGet API Key](#activate-nuget-api-key)
+    - [Create Nuget Repositories](#create-nuget-repositories)
+    - [Registering Repository to nexus container](#registering-repository-to-nexus-container)
 - [Use the Repository](#use-the-repository)
-  - [Publish a Module](#publish-a-module)
-  - [Use the Module](#use-the-module)
-  - [Prepare a Script to publish](#prepare-a-script-to-publish)
-  - [Publish a Script](#publish-a-script)
-  - [Use the script](#use-the-script)
+    - [Publish a Module to the file share-based repository](#publish-a-module-to-the-file-share-based-repository)
+    - [Publish a Module to the nexus repository](#publish-a-module-to-the-nexus-repository)
+    - [Use the Module](#use-the-module)
+    - [Prepare a Script to publish](#prepare-a-script-to-publish)
+- [>](#)
+- [>](#)
+- [Custom date formats that we want to use](#custom-date-formats-that-we-want-to-use)
+- [Convert input to universal time](#convert-input-to-universal-time)
+- [Fill in ICS/iCalendar properties based on RFC2445](#fill-in-icsicalendar-properties-based-on-rfc2445)
+- [Output ICS File](#output-ics-file)
+    - [Publish a Script for file share-based repositories](#publish-a-script-for-file-share-based-repositories)
+    - [Publish a Script for nexus repository](#publish-a-script-for-nexus-repository)
+    - [Use the script](#use-the-script)
 - [See also](#see-also)
 
+<!-- /TOC -->
 
 # File Share PowerShellGet Repositories
 
@@ -69,6 +83,8 @@ Register-PSRepository @LocalGallery
 Get-PSRepository | Select-Object Name,Trusted,SourceLocation,ScriptSourceLocation,Registered,PackageManagementProvider | Format-Table -AutoSize
 ````
 
+[ [Top](#table-of-contents) ] 
+
 # Sonatype Nexus Repository
 
 You can download a docker image of sonatype nexus3 for your internal PowerShell Gallery.
@@ -87,24 +103,55 @@ To run, binding the exposed port 8081 to the host, use:
 docker run -d -p 8081:8081 --name nexus sonatype/nexus3
 ````
 
+## Create a user
+
+Open http://localhost:8081 and login as admin. Navigate to Repository administration, click Security, Users and create a new user. Add the user to the **nx-admin** group.
+
+### Activate NuGet API Key
+
+To publish Modules and Scripts, you must have a valide NuGet API Key. Open http://localhost:8081 and login as user. Navigate to Security, Realms and activate **NuGet API-Key Realm**.
+
+![API Key](./image/2021-09-19-repository/Realms.png)
+
+Navigate to the user profile and click NuGet API Key and click the Button **Access API Key** and copy the API Key.
+
+![API Key](./image/2021-09-19-repository/NuGetAPIKey.png)
+
+## Create Nuget Repositories
+
+Create two new Nuget repositories, one for PowerShell Modules and the other for PowerShell Scripts.
+
+Open http://localhost:8081 and login as user. Navigate to Repository administration, click Repositories and create a Nuget (hosted) Repository for PSModules and one for PSScripts.
+
+![Nuget Repo](./image/2021-09-19-repository/Nuget-repo.png)
+
+The new repositories could be accessed over ````http://localhost:8081/repository/PSModules/```` and ````http://localhost:8081/repository/PSScripts/````.
+
 ## Registering Repository to nexus container
 
+Before the nexus repository can be used, it must be registered using the Register-PSRepository command. For nexus repositories with no anonymous access you must provide your credentials:
+
 ````powershell
+$PSModulesUri = 'http://localhost:8081/repository/PSModules/'
+$PSSCriptsUri = 'http://localhost:8081/repository/PSSCripts/'
 $Splatting = @{
     Name                      = 'myPSGallery'
-    SourceLocation            = 'http://localhost:8081/repository/PSModules/'
-    PublishLocation           = 'http://localhost:8081/repository/PSModules/'
-    ScriptSourceLocation      = 'http://localhost:8081/repository/PSScripts/'
-    ScriptPublishLocation     = 'http://localhost:8081/repository/PSScripts/'
+    SourceLocation            = $PSModulesUri
+    PublishLocation           = $PSModulesUri
+    ScriptSourceLocation      = $PSSCriptsUri
+    ScriptPublishLocation     = $PSSCriptsUri
     InstallationPolicy        = 'Trusted'
     PackageManagementProvider = 'NuGet'
+    Credential                = Get-Credential
 }
 Register-PSRepository @Splatting -Verbose
 ````
 
+[ [Top](#table-of-contents) ] 
+
 # Use the Repository
 
-## Publish a Module
+## Publish a Module to the file share-based repository
 
 For file share-based repositories, SourceLocation and ScriptSourceLocation must match. That's why I move the module to a Modules subfolder.
 
@@ -115,8 +162,16 @@ Move-Item -Path '\\YourShare\PSRepository\PsNetTools.0.7.65.nupkg' `
  -Destination '\\YourShare\PSRepository\Modules\PsNetTools.0.7.65.nupkg'
 
 Find-Module -Repository LocalGallery | Select-Object Version,Name,Description
+````
 
- Find-Module -Repository myPSGallery -Credential (Get-Credential)
+## Publish a Module to the nexus repository
+
+For nexus repositories with no anonymous access you must provide your API Key/credentials:
+
+````powershell
+Publish-Module -Path 'D:\temp\PsNetTools' -Repository myPSGallery -NuGetApiKey 'YourAPIKey' -Verbose
+
+Find-Module -Repository myPSGallery -Credential (Get-Credential) -Verbose
 ````
 
 ## Use the Module
@@ -269,24 +324,32 @@ $Metadata = @{
     Author      = 'it@martin-walther.ch'
     Guid        = New-Guid
     Description = 'Create simple iCalendar Event with the properties EventStart, EventEnd, EventSubject, EventDescription, and EventLocation'
-    Path        = 'C:\Temp\New-PSiCalEvent\New-PSiCalendarEvent.ps1'
+    Path        = 'D:\Temp\New-PSiCalEvent\New-PSiCalendarEvent.ps1'
 }
 Update-ScriptFileInfo @Metadata
 ````
 
-## Publish a Script
+## Publish a Script for file share-based repositories
 
 For file share-based repositories, SourceLocation and ScriptSourceLocation must match. That's why I move the script to a Scripts subfolder.
 
 ````powershell
-Publish-Script -Path D:\github.com\PrivateStuff\New-PSiCalEvent\New-PSiCalendarEvent.ps1 -Repository LocalGallery
+Publish-Script -Path D:\Temp\New-PSiCalEvent\New-PSiCalendarEvent.ps1 -Repository LocalGallery
 
 Move-Item -Path '\\YourShare\PSRepository\New-PSiCalendarEvent.1.0.2.nupkg' `
  -Destination '\\YourShare\PSRepository\Scripts\New-PSiCalendarEvent.1.0.2.nupkg'
 
 Find-Script -Repository LocalGallery | Select-Object Version,Name,Description
+````
 
-Find-Script -Repository myPSGallery -Credential (Get-Credential)
+## Publish a Script for nexus repository
+
+For nexus repositories with no anonymous access you must provide your API Key/credentials:
+
+````powershell
+Publish-Script -Path D:\Temp\New-PSiCalEvent\New-PSiCalendarEvent.ps1 -Repository myPSGallery -NuGetApiKey 'YourAPIKey' -Verbose
+
+Find-Script -Repository myPSGallery -Credential (Get-Credential) -Verbose
 ````
 
 ## Use the script
