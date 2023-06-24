@@ -9,8 +9,6 @@ permalink: /posts/:title:output_ext
 
 # Table of Contents
 
-<!-- TOC -->
-
 - [Table of Contents](#table-of-contents)
 - [File Share PowerShellGet Repositories](#file-share-powershellget-repositories)
     - [Requirements](#requirements)
@@ -27,18 +25,10 @@ permalink: /posts/:title:output_ext
     - [Publish a Module to the nexus repository](#publish-a-module-to-the-nexus-repository)
     - [Use the Module](#use-the-module)
     - [Prepare a Script to publish](#prepare-a-script-to-publish)
-- [>](#)
-- [>](#)
-- [Custom date formats that we want to use](#custom-date-formats-that-we-want-to-use)
-- [Convert input to universal time](#convert-input-to-universal-time)
-- [Fill in ICS/iCalendar properties based on RFC2445](#fill-in-icsicalendar-properties-based-on-rfc2445)
-- [Output ICS File](#output-ics-file)
     - [Publish a Script for file share-based repositories](#publish-a-script-for-file-share-based-repositories)
     - [Publish a Script for nexus repository](#publish-a-script-for-nexus-repository)
     - [Use the script](#use-the-script)
 - [See also](#see-also)
-
-<!-- /TOC -->
 
 # File Share PowerShellGet Repositories
 
