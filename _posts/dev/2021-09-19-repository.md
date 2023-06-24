@@ -101,11 +101,11 @@ Open http://localhost:8081 and login as admin. Navigate to Repository administra
 
 To publish Modules and Scripts, you must have a valide NuGet API Key. Open http://localhost:8081 and login as user. Navigate to Security, Realms and activate **NuGet API-Key Realm**.
 
-![API Key](./image/2021-09-19-repository/Realms.png)
+![API Key](../assets/Realms.png)
 
 Navigate to the user profile and click NuGet API Key and click the Button **Access API Key** and copy the API Key.
 
-![API Key](./image/2021-09-19-repository/NuGetAPIKey.png)
+![API Key](../assets/NuGetAPIKey.png)
 
 ## Create Nuget Repositories
 
@@ -113,7 +113,7 @@ Create two new Nuget repositories, one for PowerShell Modules and the other for 
 
 Open http://localhost:8081 and login as user. Navigate to Repository administration, click Repositories and create a Nuget (hosted) Repository for PSModules and one for PSScripts.
 
-![Nuget Repo](./image/2021-09-19-repository/Nuget-repo.png)
+![Nuget Repo](../assets/Nuget-repo.png)
 
 The new repositories could be accessed over ````http://localhost:8081/repository/PSModules/```` and ````http://localhost:8081/repository/PSScripts/````.
 
