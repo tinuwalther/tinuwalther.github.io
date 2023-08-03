@@ -1,6 +1,6 @@
 # Home
 
-I ♥ PS 7.3.6 > **PowerShell**, this is the gratest scripting language for DevOps Engineers.
+I ♥ PS 7.3.6 > Hello PowerShell enthusiasts
 
 ![My helpful screenshot](/assets/words.png)
 
