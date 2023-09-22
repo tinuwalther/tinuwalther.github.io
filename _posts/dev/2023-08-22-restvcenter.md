@@ -121,10 +121,6 @@ host-1567 esxi1567.company.com CONNECTED        POWERED_ON
 
 # See also
 
-#https://communities.vmware.com/t5/VMware-Aria-Automation/Getting-vCenter-alarms-and-it-properties/m-p/2954710
-
 [API Reference](https://developer.vmware.com/apis/vsphere-automation/v7.0U3/) on VMware Developper Documentation.
-
-#https://docs.vmware.com/en/VMware-Pulse-IoT-Center/2.0.2/pulse-api/GUID-4C6DB085-B2FB-4C0B-9EB8-20D348055071.htmlentity.entity.type
 
 [ [Top](#table-of-contents) ] [ [Blog](../categories.html) ]
