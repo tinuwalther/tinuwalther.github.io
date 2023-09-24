@@ -22,39 +22,69 @@ permalink: /posts/:title:output_ext
 
 # PowerCLI
 
-List some properties from an ESXiHost with PowerCLI.
+List some properties of all ESXiHost with PowerCLI.
 
 ````powershell
 Connect-ViServer -Server "vcenter.example.com"
 
+$MgmtNic    = "key-vim.host.VirtualNic-vmk0"
+$vMotionNic = "key-vim.host.VirtualNic-vmk1"
+
+$EsxiProperties = @(
+    @{N='Name';E={$PSItem.Name}}
+    @{N='OverAllStatus';E={$PSItem.OverAllStatus}}
+    @{N='Vendor';E={$PSItem.Hardware.SystemInfo.Vendor}}
+    @{N='Model';E={$PSItem.Hardware.SystemInfo.Model}}
+    @{N='BootTime';E={$PSItem.runtime.BootTime}}
+    @{N='Version';E={$PSItem.Config.Product.Version}}
+    @{N='Build';E={$PSItem.Config.Product.Build}}
+    @{N='PowerState';E={$PSItem.runtime.PowerState}}
+    @{N='StandbyMode';E={$PSItem.runtime.StandbyMode}}
+    @{N='MaintenanceMode'; E={$PSItem.runtime.InMaintenanceMode}}
+    @{
+        N='IPv4Address'
+        E={($PSItem.Config.Network.Vnic).Where({$_.Key -eq $MgmtNic}).Spec.Ip[0].IpAddress}}
+    @{
+        N='SubnetMask'
+        E={($_.Config.Network.Vnic).Where({$_.Key -eq $MgmtNic}).Spec.Ip[0].SubnetMask}}
+    @{
+        N='vMotionIPv4Address'
+        E={($PSItem.Config.Network.Vnic).Where({$_.Key -eq $vMotionNic}).Spec.Ip[0].IpAddress}
+    }
+    @{
+        N='vMotionSubnetMask'
+        E={($PSItem.Config.Network.Vnic).Where({$_.Key -eq $vMotionNic}).Spec.Ip[0].SubnetMask}
+    }
+    @{
+        N='Cluster'
+        E={(Get-View -ViewType ClusterComputeResource -Filter @{"Host" = $($PSItem.Config.Host.Value)}).Name}
+    }
+    @{N='VMs';E={$PSItem.Vm.Count}}
+)
+
 $AllVMHost = Get-View -ViewType HostSystem
-$AllVMHost | Select-Object -Property Name, OverAllStatus,  
- @{N='Vendor';E={$PSItem.Hardware.SystemInfo.Vendor}}, 
- @{N='Model';E={$PSItem.Hardware.SystemInfo.Model}}, @{N='BootTime';E={$PSItem.runtime.BootTime}}, 
- @{N='Version';E={$PSItem.Config.Product.Version}}, 
- @{N='Build';E={$PSItem.Config.Product.Build}}, 
- @{N='PowerState';E={$PSItem.runtime.PowerState}}, 
- @{N='StandbyMode';E={$PSItem.runtime.StandbyMode}}, 
- @{N='MaintenanceMode';E={$PSItem.runtime.InMaintenanceMode}}},
- @{N='IPv4Address';E={($PSItem.Config.Network.Vnic).Where({$_.Key -eq "key-vim.host.VirtualNic-vmk0"}).Spec.Ip[0].IpAddress}},
- @{N='SubnetMask';E={($_.Config.Network.Vnic).Where({$_.Key -eq "key-vim.host.VirtualNic-vmk0"}).Spec.Ip[0].SubnetMask}},
- @{N='Cluster';E={
-    Get-View -ViewType ClusterComputeResource -Filter @{"Host" = $($PSItem.Config.Host.Value)} | Select-Object -ExpandProperty Name
- }},
-  @{N='VMs';E={$PSItem.Vm.Count}}
+$AllVMHost | Select-Object $EsxiProperties
 ````
+
 Output
 
 ````Text
-Name                  BootTime            PowerState StandbyMode MaintenanceMode IPv4Address 
-----                  --------            ---------- ----------- --------------- ----------- 
-esx703.example.com  27.06.2023 20:35:05  poweredOn none                  False 10.x.y.z
-esx704.example.com  15.06.2023 14:38:53  poweredOn none                  False 10.x.y.z
-esx793.example.com  24.08.2023 14:47:28  poweredOn none                  False 10.x.y.z
-esx790.example.com  25.08.2023 06:56:17  poweredOn none                  False 10.x.y.z
-esx791.example.com  25.08.2023 06:57:17  poweredOn none                  False 10.x.y.z
-esx792.example.com  25.08.2023 07:04:31  poweredOn none                  False 10.x.y.z
-esx002.example.com  22.09.2023 13:49:18  poweredOn none                   True 10.x.y.z
+Name               : esxi002.example.com
+OverAllStatus      : red
+Vendor             : HPE
+Model              : Synergy 480 Gen10
+BootTime           : 22.09.2023 13:49:18
+Version            : 7.0.3
+Build              : 20328353
+PowerState         : poweredOn
+StandbyMode        : none
+MaintenanceMode    : True
+IPv4Address        : 10.x.y.z
+SubnetMask         : 255.255.255.0
+vMotionIPv4Address : 10.x.y.z
+vMotionSubnetMask  : 255.255.255.0
+Cluster            : Linux
+VMs                : 20
 ````
 
 # ESXCLI
