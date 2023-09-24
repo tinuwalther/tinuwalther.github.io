@@ -28,12 +28,20 @@ List some properties from an ESXiHost with PowerCLI.
 Connect-ViServer -Server "vcenter.example.com"
 
 $AllVMHost = Get-View -ViewType HostSystem
-$AllVMHost | Select-Object -Property Name,  
- @{N='BootTime';E={$PSItem.runtime.BootTime}}, 
+$AllVMHost | Select-Object -Property Name, OverAllStatus,  
+ @{N='Vendor';E={$PSItem.Hardware.SystemInfo.Vendor}}, 
+ @{N='Model';E={$PSItem.Hardware.SystemInfo.Model}}, @{N='BootTime';E={$PSItem.runtime.BootTime}}, 
+ @{N='Version';E={$PSItem.Config.Product.Version}}, 
+ @{N='Build';E={$PSItem.Config.Product.Build}}, 
  @{N='PowerState';E={$PSItem.runtime.PowerState}}, 
  @{N='StandbyMode';E={$PSItem.runtime.StandbyMode}}, 
  @{N='MaintenanceMode';E={$PSItem.runtime.InMaintenanceMode}}},
- @{N='IPv4Address';E={($PSItem.Config.Network.Vnic).Where({$_.Key -eq "key-vim.host.VirtualNic-vmk0"}).Spec.Ip[0].IpAddress}}
+ @{N='IPv4Address';E={($PSItem.Config.Network.Vnic).Where({$_.Key -eq "key-vim.host.VirtualNic-vmk0"}).Spec.Ip[0].IpAddress}},
+ @{N='SubnetMask';E={($_.Config.Network.Vnic).Where({$_.Key -eq "key-vim.host.VirtualNic-vmk0"}).Spec.Ip[0].SubnetMask}},
+ @{N='Cluster';E={
+    Get-View -ViewType ClusterComputeResource -Filter @{"Host" = $($PSItem.Config.Host.Value)} | Select-Object -ExpandProperty Name
+ }},
+  @{N='VMs';E={$PSItem.Vm.Count}}
 ````
 Output
 
@@ -58,7 +66,7 @@ The ESXCLI tool allows for remote management of ESXi hosts by using the ESXCLI c
 You can use the native ESXCLI over ssh on ESXiHosts.
 
 ````bash
-system boot device get
+esxcli system boot device get
 ````
 
 ## Get-EsxCli
