@@ -22,10 +22,13 @@ permalink: /posts/:title:output_ext
 
 # PowerCLI
 
-List some properties of all ESXiHost with PowerCLI.
+List some properties of all ESXiHost with PowerCLI in a fast way.
 
 ````powershell
 Connect-ViServer -Server "vcenter.example.com"
+
+$Stopwatch = [System.Diagnostics.Stopwatch]::new()
+$Stopwatch.Start()
 
 $MgmtNic    = "key-vim.host.VirtualNic-vmk0"
 $vMotionNic = "key-vim.host.VirtualNic-vmk1"
@@ -60,10 +63,29 @@ $EsxiProperties = @(
         E={(Get-View -ViewType ClusterComputeResource -Filter @{"Host" = $($PSItem.Config.Host.Value)}).Name}
     }
     @{N='VMs';E={$PSItem.Vm.Count}}
+    @{
+        N='Network'
+        E={
+            $VMHost.Network.Value | ForEach-Object {
+                (Get-View -ViewType Network | Where-Object Key -eq $PSItem).Name
+            }
+        }
+    }
+    @{
+        N='Datastore'
+        E={
+            $VMHost.Datastore.Value | ForEach-Object {
+                (Get-View -ViewType Datastore | Where-Object MoRef -match $PSItem).Name
+            }
+        }
+    }
 )
 
-$AllVMHost = Get-View -ViewType HostSystem
-$AllVMHost | Select-Object $EsxiProperties
+$VMHost = Get-View -ViewType HostSystem #-Filter @{"Name" = "esxi002.example.com"}
+$VMHost | Select-Object $EsxiProperties
+
+$Stopwatch.Stop()
+$Stopwatch.Elapsed.TotalSeconds
 ````
 
 Output
@@ -85,6 +107,8 @@ vMotionIPv4Address : 10.x.y.z
 vMotionSubnetMask  : 255.255.255.0
 Cluster            : Linux
 VMs                : 20
+Network            : {...}
+Datastore          : {...}
 ````
 
 # ESXCLI
@@ -101,7 +125,7 @@ esxcli system boot device get
 
 ## Get-EsxCli
 
-You can use ESXCLI as PowerShell command.
+If the ESXiHost is connected to a vCenter, then you can use ESXCLI as PowerShell command.
 
 ````powershell
 Connect-ViServer -Server "vcenter.example.com"
@@ -125,12 +149,13 @@ Connect-ViServer -Server "vcenter.example.com"
 $AllVMHost = Get-View -ViewType HostSystem
 foreach($item in $AllVMHost){
     $EsxCli = Get-EsxCli -VMHost $item.Name -V2
-    $EsxCli.hardware.Power.policy.set.Invoke(@{id="2")})
+    $EsxCli.hardware.Power.policy.set.Invoke(@{id="2"})
 }
 ````
 
 # See also
 
-[ESXCLI](https://developer.vmware.com/web/tool/7.0/esxcli) on VMware Developper Documentation.
+[ESXCLI](https://developer.vmware.com/web/tool/7.0/esxcli) on VMware Developper Documentation.  
+[How to use ESXCLI v2 Commands in PowerCLI](https://www.virten.net/2016/11/how-to-use-esxcli-v2-commands-in-powercli/) on virten.net.
 
 [ [Top](#table-of-contents) ] [ [Blog](../categories.html) ]

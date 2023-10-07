@@ -22,7 +22,7 @@ permalink: /posts/:title:output_ext
 
 ## Get-View vs. Get-VM
 
-The performance wiht Get-View is much better than Get-VM:
+The performance with Get-View is much better than Get-VM:
 
 ````powershell
 Connect-ViServer -Server "vcenter.example.com"
