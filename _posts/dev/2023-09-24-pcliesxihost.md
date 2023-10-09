@@ -7,68 +7,148 @@ tags:   PowerShell
 permalink: /posts/:title:output_ext
 ---
 
-# Table of Contents
-
-<!-- TOC -->
-
-- [Table of Contents](#table-of-contents)
-- [PowerCLI](#powercli)
-- [ESXCLI](#esxcli)
-    - [Native ESXCLI](#native-esxcli)
-    - [Get-EsxCli](#get-esxcli)
-- [See also](#see-also)
-
-<!-- /TOC -->
-
 # PowerCLI
 
 List some properties of all ESXiHost with PowerCLI in a fast way.
 
 ````powershell
+# Connect to your VIServer
 Connect-ViServer -Server "vcenter.example.com"
 
-$Stopwatch = [System.Diagnostics.Stopwatch]::new()
-$Stopwatch.Start()
+# Enable StopWatch to calculate the runtime
+# $Stopwatch = [System.Diagnostics.Stopwatch]::new()
+# $Stopwatch.Start()
 
+# Specify the Management and vMotion Nic
 $MgmtNic    = "key-vim.host.VirtualNic-vmk0"
 $vMotionNic = "key-vim.host.VirtualNic-vmk1"
 
-$EsxiProperties = @(
-    @{N='Name';E={$PSItem.Name}}
-    @{N='OverAllStatus';E={$PSItem.OverAllStatus}}
-    @{N='Vendor';E={$PSItem.Hardware.SystemInfo.Vendor}}
-    @{N='Model';E={$PSItem.Hardware.SystemInfo.Model}}
-    @{N='BootTime';E={$PSItem.runtime.BootTime}}
-    @{N='Version';E={$PSItem.Config.Product.Version}}
-    @{N='Build';E={$PSItem.Config.Product.Build}}
-    @{N='PowerState';E={$PSItem.runtime.PowerState}}
-    @{N='StandbyMode';E={$PSItem.runtime.StandbyMode}}
-    @{N='MaintenanceMode'; E={$PSItem.runtime.InMaintenanceMode}}
+# Specify the Hardware properties
+$Hardware = @(
+    @{
+        N='Vendor'
+        E={
+            $PSItem.Hardware.SystemInfo.Vendor
+        }
+    }
+    @{
+        N='Model'
+        E={
+            $PSItem.Hardware.SystemInfo.Model
+        }
+    }
+)
+
+# Specify the Runtime properties
+$Runtime = @(
+    @{
+        N='BootTime'
+        E={
+            $PSItem.runtime.BootTime
+        }
+    }
+    @{
+        N='PowerState'
+        E={
+            $PSItem.runtime.PowerState
+        }
+    }
+    @{
+        N='StandbyMode'
+        E={
+            $PSItem.runtime.StandbyMode
+        }
+    }
+    @{
+        N='MaintenanceMode'
+        E={
+            $PSItem.runtime.InMaintenanceMode
+        }
+    }
+)
+
+# Specify the Network properties
+$Network = @(
     @{
         N='IPv4Address'
-        E={($PSItem.Config.Network.Vnic).Where({$_.Key -eq $MgmtNic}).Spec.Ip[0].IpAddress}}
+        E={
+            ($PSItem.Config.Network.Vnic).Where({$_.Key -eq $MgmtNic}).Spec.Ip[0].IpAddress
+        }
+    }
     @{
         N='SubnetMask'
-        E={($_.Config.Network.Vnic).Where({$_.Key -eq $MgmtNic}).Spec.Ip[0].SubnetMask}}
+        E={
+            ($PSItem.Config.Network.Vnic).Where({$_.Key -eq $MgmtNic}).Spec.Ip[0].SubnetMask
+        }
+    }
     @{
         N='vMotionIPv4Address'
-        E={($PSItem.Config.Network.Vnic).Where({$_.Key -eq $vMotionNic}).Spec.Ip[0].IpAddress}
+        E={
+            ($PSItem.Config.Network.Vnic).Where({$_.Key -eq $vMotionNic}).Spec.Ip[0].IpAddress
+        }
     }
     @{
         N='vMotionSubnetMask'
-        E={($PSItem.Config.Network.Vnic).Where({$_.Key -eq $vMotionNic}).Spec.Ip[0].SubnetMask}
+        E={
+            ($PSItem.Config.Network.Vnic).Where({$_.Key -eq $vMotionNic}).Spec.Ip[0].SubnetMask
+        }
     }
-    @{
-        N='Cluster'
-        E={(Get-View -ViewType ClusterComputeResource -Filter @{"Host" = $($PSItem.Config.Host.Value)}).Name}
-    }
-    @{N='VMs';E={$PSItem.Vm.Count}}
     @{
         N='Network'
         E={
             $VMHost.Network.Value | ForEach-Object {
                 (Get-View -ViewType Network | Where-Object Key -eq $PSItem).Name
             }
+        }
+    }
+)
+
+# Specify the Product properties
+$Product = @(
+    @{
+        N='Version'
+        E={
+            $PSItem.Config.Product.Version
+        }
+    }
+    @{
+        N='Build'
+        E={
+            $PSItem.Config.Product.Build
+        }
+    }
+)
+
+# Specify the general properties
+$Properties = @(
+    @{
+        N='Name'
+        E={
+            $PSItem.Name
+        }
+    }
+    @{
+        N='OverAllStatus'
+        E={
+            $PSItem.OverAllStatus
+        }
+    }
+    @{
+        N='NtpServer'
+        E={
+            $PSItem.Config.DateTimeInfo.NtpConfig.Server
+        }
+    }
+    @{
+        N='VMs'
+        E={
+            $PSItem.Vm.Count
+        }
+    }
+    @{
+        N='Cluster'
+        E={
+            (Get-View -ViewType ClusterComputeResource -Filter @{"Host" = $($PSItem.Config.Host.Value)}).Name
         }
     }
     @{
@@ -81,11 +161,14 @@ $EsxiProperties = @(
     }
 )
 
+# Get all or one ESXiHost
 $VMHost = Get-View -ViewType HostSystem #-Filter @{"Name" = "esxi002.example.com"}
-$VMHost | Select-Object $EsxiProperties
+# Display the specified properties
+$VMHost | Select-Object @($Properties + $Product + $Hardware + $Runtime + $Network)
 
-$Stopwatch.Stop()
-$Stopwatch.Elapsed.TotalSeconds
+# Enable StopWatch to calculate the runtime
+# $Stopwatch.Stop()
+# $Stopwatch.Elapsed.TotalSeconds
 ````
 
 Output
@@ -95,6 +178,7 @@ Name               : esxi002.example.com
 OverAllStatus      : red
 Vendor             : HPE
 Model              : Synergy 480 Gen10
+NtpServer          : {ntp1.example.com, ntp2.example.com}
 BootTime           : 22.09.2023 13:49:18
 Version            : 7.0.3
 Build              : 20328353
@@ -110,6 +194,8 @@ VMs                : 20
 Network            : {...}
 Datastore          : {...}
 ````
+
+There are a lot of more properties, which you can define. Enter $VMHost. and navigate to the property that you need.
 
 # ESXCLI
 
