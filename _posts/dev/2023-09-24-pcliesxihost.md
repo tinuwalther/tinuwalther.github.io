@@ -91,6 +91,12 @@ $Network = @(
         }
     }
     @{
+        N='DefaultGateway'
+        E={
+            $PSItem.Config.Network.IpRouteConfig.DefaultGateway
+        }
+    }
+    @{
         N='vMotionIPv4Address'
         E={
             ($PSItem.Config.Network.Vnic).Where({$_.Key -eq $vMotionNic}).Spec.Ip[0].IpAddress
@@ -149,9 +155,11 @@ $Properties = @(
         }
     }
     @{
-        N='VMs'
+        N='VM'
         E={
-            $PSItem.Vm.Count
+            $VMHost.Vm.Value | ForEach-Object {
+                (Get-View -ViewType VirtualMachine | Where-Object MoRef -match $PSItem).Name
+            }
         }
     }
     @{
@@ -173,7 +181,8 @@ $Properties = @(
 # Get all or one ESXiHost
 $VMHost = Get-View -ViewType HostSystem #-Filter @{"Name" = "esxi002.example.com"}
 # Display the specified properties
-$VMHost | Select-Object @($Properties + $Product + $Hardware + $Runtime + $Network)
+$output = $VMHost | Select-Object @($Properties + $Product + $Hardware + $Runtime + $Network)
+$output
 
 # Enable StopWatch to calculate the runtime
 # $Stopwatch.Stop()
@@ -196,10 +205,11 @@ StandbyMode        : none
 MaintenanceMode    : True
 IPv4Address        : 10.x.y.z
 SubnetMask         : 255.255.255.0
+DefaultGateway     : 10.x.y.z
 vMotionIPv4Address : 10.x.y.z
 vMotionSubnetMask  : 255.255.255.0
 Cluster            : Linux
-VMs                : 20
+VM                 : {...}
 Network            : {...}
 Datastore          : {...}
 ````
