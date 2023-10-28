@@ -8,21 +8,28 @@ permalink: /posts/:title:output_ext
 ---
 
 # Table of Contents
-<!-- TOC -->
 
 - [Table of Contents](#table-of-contents)
 - [GitLab Pipeline](#gitlab-pipeline)
     - [Rules](#rules)
     - [Stages](#stages)
     - [Jobs](#jobs)
+    - [Tags](#tags)
     - [Extends](#extends)
     - [Includes](#includes)
     - [Script](#script)
     - [Example 1](#example-1)
+    - [Example 2](#example-2)
+    - [Example 3](#example-3)
+        - [gitlab-ci.yml](#gitlab-ciyml)
+        - [test-node.yml](#test-nodeyml)
+        - [deploy-job.yml](#deploy-jobyml)
+        - [cleanup-runner.yml](#cleanup-runneryml)
+        - [Pester Test Validate Input](#pester-test-validate-input)
+        - [Pester Test Diplicated Values](#pester-test-diplicated-values)
     - [Troubleshooting](#troubleshooting)
 - [See also](#see-also)
 
-<!-- /TOC -->
 
 # GitLab Pipeline
 
