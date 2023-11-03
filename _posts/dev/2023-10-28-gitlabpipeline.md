@@ -152,19 +152,19 @@ test-job:
   stage: test
   tags: [gitlab-runner-tag]
   script:
-    - echo "Running $CI_JOB_NAME, $CI_COMMIT_BRANCH!"
+    - echo "Running '$CI_JOB_NAME' on Branch '$CI_COMMIT_BRANCH' with Message '$CI_COMMIT_TITLE'"
 
 deploy-job:
   stage: deploy
   tags: [gitlab-runner-tag]
   script:
-    - echo "Running $CI_JOB_NAME, $CI_COMMIT_BRANCH!"
+    - echo "Running '$CI_JOB_NAME' on Branch '$CI_COMMIT_BRANCH' with Message '$CI_COMMIT_TITLE'"
 
 cleanup-job:
   stage: cleanup
   tags: [gitlab-runner-tag]
   script:
-    - echo "Running $CI_JOB_NAME, $CI_COMMIT_BRANCH!"
+    - echo "Running '$CI_JOB_NAME' on Branch '$CI_COMMIT_BRANCH' with Message '$CI_COMMIT_TITLE'"
 ````
 
 ## Example 2
