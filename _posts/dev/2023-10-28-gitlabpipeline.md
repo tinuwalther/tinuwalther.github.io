@@ -141,30 +141,52 @@ workflow:
   name: 'Pipeline for do anything for me'
   rules:
     - if: $CI_PIPELINE_SOURCE == 'merge_request_event'
-    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH  
 
 stages:
   - test
   - deploy
   - cleanup
 
+.execute_script:
+  before_script:
+    - Write-Host "Running Job '$CI_JOB_NAME' on Branch '$CI_COMMIT_BRANCH' with commit message '$CI_COMMIT_TITLE'!"
+
 test-job:
   stage: test
-  tags: [gitlab-runner-tag]
+  rules:
+    - if: $CI_COMMIT_TITLE =~ /TEST:.*/
+  tags: [test-win-adm]
+  extends: .execute_script
   script:
-    - echo "Running '$CI_JOB_NAME' on Branch '$CI_COMMIT_BRANCH' with Message '$CI_COMMIT_TITLE'"
+    - Write-Host "Doing some test"
 
 deploy-job:
   stage: deploy
-  tags: [gitlab-runner-tag]
-  script:
-    - echo "Running '$CI_JOB_NAME' on Branch '$CI_COMMIT_BRANCH' with Message '$CI_COMMIT_TITLE'"
+  rules:
+    - if: $CI_COMMIT_TITLE =~ /TEST:.*/
+  tags: [test-win-adm]
+  extends: .execute_script
+  script: |
+    Write-Host "Doing some deployment to:"
+    $ProjectFullname = Get-Item $CI_PROJECT_DIR
+    tree /A ($ProjectFullname.FullName).ToLower()
 
 cleanup-job:
   stage: cleanup
-  tags: [gitlab-runner-tag]
-  script:
-    - echo "Running '$CI_JOB_NAME' on Branch '$CI_COMMIT_BRANCH' with Message '$CI_COMMIT_TITLE'"
+  rules:
+    - if: $CI_COMMIT_TITLE =~ /TEST:.*/
+  tags: [test-win-adm]
+  extends: .execute_script
+  script: |
+    Write-Host "Doing some cleanup on: $CI_BUILDS_DIR"
+    $SplittedPath = $CI_BUILDS_DIR -split '\\'
+    $RootPath = Join-Path -Path $SplittedPath[0] -ChildPath $SplittedPath[1]
+    Write-Host "Set the location to $RootPath"
+    Set-Location $RootPath
+    $CleaningPath = Join-Path -Path $RootPath -ChildPath $SplittedPath[2]
+    Write-Host "Cleaning up the $CleaningPath"
+    Remove-Item $CleaningPath -Recurse -Force -WhatIf
 ````
 
 ## Example 2
