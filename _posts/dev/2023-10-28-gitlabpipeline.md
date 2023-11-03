@@ -11,25 +11,24 @@ permalink: /posts/:title:output_ext
 
 - [Table of Contents](#table-of-contents)
 - [GitLab Pipeline](#gitlab-pipeline)
-    - [Rules](#rules)
-    - [Stages](#stages)
-    - [Jobs](#jobs)
-    - [Tags](#tags)
-    - [Extends](#extends)
-    - [Includes](#includes)
-    - [Script](#script)
-    - [Example 1](#example-1)
-    - [Example 2](#example-2)
-    - [Example 3](#example-3)
-        - [gitlab-ci.yml](#gitlab-ciyml)
-        - [test-node.yml](#test-nodeyml)
-        - [deploy-job.yml](#deploy-jobyml)
-        - [cleanup-runner.yml](#cleanup-runneryml)
-        - [Pester Test Validate Input](#pester-test-validate-input)
-        - [Pester Test Diplicated Values](#pester-test-diplicated-values)
-    - [Troubleshooting](#troubleshooting)
+  - [Rules](#rules)
+  - [Stages](#stages)
+  - [Jobs](#jobs)
+  - [Tags](#tags)
+  - [Extends](#extends)
+  - [Includes](#includes)
+  - [Script](#script)
+  - [Example 1](#example-1)
+  - [Example 2](#example-2)
+  - [Example 3](#example-3)
+    - [gitlab-ci.yml](#gitlab-ciyml)
+    - [test-node.yml](#test-nodeyml)
+    - [deploy-job.yml](#deploy-jobyml)
+    - [cleanup-runner.yml](#cleanup-runneryml)
+    - [Pester Test Validate Input](#pester-test-validate-input)
+    - [Pester Test Diplicated Values](#pester-test-diplicated-values)
+  - [Troubleshooting](#troubleshooting)
 - [See also](#see-also)
-
 
 # GitLab Pipeline
 
@@ -39,7 +38,7 @@ A GitLab CI/CD pipeline is the file ````.gitlab-ci.yml```` in the root of your p
 
 ## Rules
 
-````
+````powershell
 if: $CI_PIPELINE_SOURCE == 'merge_request_event'
 if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
 if: $CI_COMMIT_TITLE =~ /TEST:.*/
@@ -49,7 +48,7 @@ if: $CI_COMMIT_TITLE =~ /TEST:.*/
 
 List of stages for jobs, and their order of execution. If stages is not defined in the ````.gitlab-ci.yml```` file, the default pipeline stages are:
 
-````
+````powershell
 .pre
 build
 test
@@ -61,7 +60,7 @@ deploy
 
 Hidden Jobs begins with a point in the name ````.cleanup_git````.
 
-````
+````powersehll
 .cleanup_git:
   stage: .post
   script:
@@ -70,7 +69,7 @@ Hidden Jobs begins with a point in the name ````.cleanup_git````.
 
 Normal Job:
 
-````
+````powershell
 test-node-yaml-test:
   rules:
     - if: $CI_COMMIT_TITLE =~ /TEST:.*/
@@ -86,7 +85,7 @@ Tags of your GitLab-Runner.
 
 Reuse the configuration or Scripts.
 
-````
+````powersehll
 extends: .test_node_yaml # included script
 extends: .deploy_script  # hidden job
 ````
@@ -95,7 +94,7 @@ extends: .deploy_script  # hidden job
 
 Configurations and Scripts outside of the ````.gitlab-ci.yml````.
 
-````
+````powersehll
 include: 
   - local: '/CI/init-env.yml'
   - local: '/CI/build-job.yml'
@@ -110,14 +109,14 @@ A Script can be either a single Command or a Scriptblock.
 
 Single Command:
 
-````
+````powershell
 script:
   - echo "Running Job $CI_JOB_NAME, $CI_COMMIT_BRANCH!"
 ````
 
 Scriptblock:
 
-````
+````powershell
 script: |
   Write-Host "Start Job-ID $($CI_JOB_ID), Job-Name $($CI_JOB_NAME)"
   if(-not(Test-Path D:\Pikett-Scripts)){
