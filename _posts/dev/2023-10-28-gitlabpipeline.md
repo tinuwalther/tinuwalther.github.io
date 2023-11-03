@@ -145,8 +145,6 @@ stages:
 
 test-job:
   stage: test
-  rules:
-    - if: $CI_COMMIT_TITLE =~ /TEST:.*/
   tags: [test-win-adm]
   extends: .execute_script
   script:
@@ -154,8 +152,6 @@ test-job:
 
 deploy-job:
   stage: deploy
-  rules:
-    - if: $CI_COMMIT_TITLE =~ /TEST:.*/
   tags: [test-win-adm]
   extends: .execute_script
   script: |
@@ -165,8 +161,6 @@ deploy-job:
 
 cleanup-job:
   stage: cleanup
-  rules:
-    - if: $CI_COMMIT_TITLE =~ /TEST:.*/
   tags: [test-win-adm]
   extends: .execute_script
   script: |
