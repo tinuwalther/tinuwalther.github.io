@@ -21,12 +21,6 @@ permalink: /posts/:title:output_ext
   - [Example 1](#example-1)
   - [Example 2](#example-2)
   - [Example 3](#example-3)
-    - [gitlab-ci.yml](#gitlab-ciyml)
-    - [test-node.yml](#test-nodeyml)
-    - [deploy-job.yml](#deploy-jobyml)
-    - [cleanup-runner.yml](#cleanup-runneryml)
-    - [Pester Test Validate Input](#pester-test-validate-input)
-    - [Pester Test Diplicated Values](#pester-test-diplicated-values)
   - [Troubleshooting](#troubleshooting)
 - [See also](#see-also)
 
@@ -129,8 +123,7 @@ script: |
 
 ## Example 1
 
-<details>
-<summary>A very simple Pipeline.</summary>
+A very simple Pipeline.
 
 ````powershell
 # A pipeline is composed of independent jobs that run scripts, grouped into stages.
@@ -188,8 +181,6 @@ cleanup-job:
     Write-Host "Cleaning up the $CleaningPath"
     Remove-Item $CleaningPath -Recurse -Force
 ````
-
-</details>
 
 ## Example 2
 
