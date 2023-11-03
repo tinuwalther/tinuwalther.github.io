@@ -129,7 +129,8 @@ script: |
 
 ## Example 1
 
-A very simple Pipeline.
+<details>
+<summary>A very simple Pipeline.</summary>
 
 ````powershell
 # A pipeline is composed of independent jobs that run scripts, grouped into stages.
@@ -185,8 +186,10 @@ cleanup-job:
     Set-Location $RootPath
     $CleaningPath = Join-Path -Path $RootPath -ChildPath $SplittedPath[2]
     Write-Host "Cleaning up the $CleaningPath"
-    Remove-Item $CleaningPath -Recurse -Force -WhatIf
+    Remove-Item $CleaningPath -Recurse -Force
 ````
+
+</details>
 
 ## Example 2
 
