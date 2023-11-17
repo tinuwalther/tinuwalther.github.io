@@ -14,6 +14,7 @@ permalink: /posts/:title:output_ext
 - [Table of Contents](#table-of-contents)
 - [PowerCLI](#powercli)
     - [Get-View vs. Get-VM](#get-view-vs-get-vm)
+    - [Fast listing of old Snapshots](#fast-listing-of-old-snapshots)
 - [See also](#see-also)
 
 <!-- /TOC -->
@@ -60,6 +61,32 @@ Output
 
 ````Text
 0.1823357 seconds
+````
+
+## Fast listing of old Snapshots
+
+````powershell
+$Stopwatch = [System.Diagnostics.Stopwatch]::new()
+$Stopwatch.Start()
+
+$FastVMs  = Get-View -ViewType VirtualMachine -Filter @{'Config.Template' = 'false'; 'Snapshot' = '.*'}
+$Snapshot = $FastVMs | ForEach-Object {
+    $CreateTime = Get-Date ($_.Snapshot.RootSnapshotList[0].CreateTime)
+    [PSCustomObject][Ordered] @{
+        CreateTime       = Get-Date ($CreateTime) -Format 'yyyy-MM-dd HH:mm:ss'
+        VMName           = $_.Name
+        Snapshot         = $_.Snapshot.RootSnapshotList[0].Name -replace '%2f', '/'
+        Description      = $_.Snapshot.RootSnapshotList[0].Description
+        TotalDays        = [Math]::Round((New-TimeSpan -Start $CreateTime -End (Get-Date)).TotalDays,0)
+        ChildSnapshot    = $_.Snapshot.RootSnapshotList[0].ChildSnapshotList
+        ChildDescription = $_.Snapshot.RootSnapshotList[0].ChildSnapshotList.Description
+        ChildCreateTime  = $_.Snapshot.RootSnapshotList[0].ChildSnapshotList.CreateTime
+    }
+} | Sort-Object CreateTime 
+$Snapshot.Where( {$_.Description -notmatch 'do not delete' -and $_.TotalDays -gt $day} ) | Format-Table -AutoSize
+
+$Stopwatch.Stop()
+$Stopwatch.Elapsed.TotalSeconds
 ````
 
 # See also
