@@ -26,6 +26,8 @@ permalink: /posts/:title:output_ext
 
 GitLab Pipeline is your friend - UNDER CONSTRUCTION!
 
+![GitLab Pipeline](../assets/git-pipeline.png)
+
 A GitLab CI/CD pipeline is the file ````.gitlab-ci.yml```` in the root of your project.
 
 # Rules
@@ -484,6 +486,19 @@ Describe "Test for duplicated values" -Tag 'Required' {
     }
 }
 ````
+
+### Pipeline TestJob
+
+![GitLab Pipeline TestJob](../assets/git-pipeline-testjob.png)
+
+### Pipeline DeployJob
+
+![GitLab Pipeline DeployJob](../assets/git-pipeline-deployjob.png)
+
+### Pipeline CleanUpJob
+
+![GitLab Pipeline CleanUpJob](../assets/git-pipeline-cleanupjob.png)
+
 
 # Troubleshooting
 
