@@ -9,10 +9,11 @@ permalink: /posts/:title:output_ext
 
 # Table of Contents
 
+- [Table of Contents](#table-of-contents)
 - [PowerCLI](#powercli)
 - [ESXCLI](#esxcli)
-    - [Native ESXCLI](#native-esxcli)
-    - [Get-EsxCli](#get-esxcli)
+  - [Native ESXCLI](#native-esxcli)
+  - [Get-EsxCli](#get-esxcli)
 - [See also](#see-also)
 
 
