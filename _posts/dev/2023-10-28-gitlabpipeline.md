@@ -3,7 +3,7 @@ layout: post
 title:  "GitLab Pipeline"
 author: Tinu
 categories: "GitLab"
-tags:   PowerShell
+tags:   PowerShell News
 permalink: /posts/:title:output_ext
 ---
 
