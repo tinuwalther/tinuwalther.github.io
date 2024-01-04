@@ -3,7 +3,7 @@ layout: post
 title:  "Remove content from Temp"
 author: Tinu
 categories: "PowerShell-Basic"
-tags:   PowerShell News
+tags:   PowerShell
 permalink: /posts/:title:output_ext
 ---
 
