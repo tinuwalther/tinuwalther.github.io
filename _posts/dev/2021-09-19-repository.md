@@ -3,7 +3,7 @@ layout: post
 title:  "PowerShellGet Repositories"
 author: Tinu
 categories: "PowerShell-Module"
-tags:   PowerShell News
+tags:   PowerShell
 permalink: /posts/:title:output_ext
 ---
 
@@ -11,23 +11,23 @@ permalink: /posts/:title:output_ext
 
 - [Table of Contents](#table-of-contents)
 - [File Share PowerShellGet Repositories](#file-share-powershellget-repositories)
-    - [Requirements](#requirements)
-    - [Creating a local repository](#creating-a-local-repository)
-    - [Registering a local repository](#registering-a-local-repository)
+  - [Requirements](#requirements)
+  - [Creating a local repository](#creating-a-local-repository)
+  - [Registering a local repository](#registering-a-local-repository)
 - [Sonatype Nexus Repository](#sonatype-nexus-repository)
-    - [Using Docker](#using-docker)
-    - [Create a user](#create-a-user)
-        - [Activate NuGet API Key](#activate-nuget-api-key)
-    - [Create Nuget Repositories](#create-nuget-repositories)
-    - [Registering Repository to nexus container](#registering-repository-to-nexus-container)
+  - [Using Docker](#using-docker)
+  - [Create a user](#create-a-user)
+    - [Activate NuGet API Key](#activate-nuget-api-key)
+  - [Create Nuget Repositories](#create-nuget-repositories)
+  - [Registering Repository to nexus container](#registering-repository-to-nexus-container)
 - [Use the Repository](#use-the-repository)
-    - [Publish a Module to the file share-based repository](#publish-a-module-to-the-file-share-based-repository)
-    - [Publish a Module to the nexus repository](#publish-a-module-to-the-nexus-repository)
-    - [Use the Module](#use-the-module)
-    - [Prepare a Script to publish](#prepare-a-script-to-publish)
-    - [Publish a Script for file share-based repositories](#publish-a-script-for-file-share-based-repositories)
-    - [Publish a Script for nexus repository](#publish-a-script-for-nexus-repository)
-    - [Use the script](#use-the-script)
+  - [Publish a Module to the file share-based repository](#publish-a-module-to-the-file-share-based-repository)
+  - [Publish a Module to the nexus repository](#publish-a-module-to-the-nexus-repository)
+  - [Use the Module](#use-the-module)
+  - [Prepare a Script to publish](#prepare-a-script-to-publish)
+  - [Publish a Script for file share-based repositories](#publish-a-script-for-file-share-based-repositories)
+  - [Publish a Script for nexus repository](#publish-a-script-for-nexus-repository)
+  - [Use the script](#use-the-script)
 - [See also](#see-also)
 
 # File Share PowerShellGet Repositories
