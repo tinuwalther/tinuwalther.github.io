@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "REST APIs v7.0U3"
+title:  "vSphere REST API v7.0U3"
 author: Tinu
 categories: "VMware"
 tags:   PowerShell
