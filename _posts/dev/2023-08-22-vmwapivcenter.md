@@ -10,7 +10,7 @@ permalink: /posts/:title:output_ext
 # Table of Contents
 
 - [Table of Contents](#table-of-contents)
-- [APIs](#apis)
+- [vSphere REST API](#vsphere-rest-api)
   - [CIS REST APIs](#cis-rest-apis)
   - [Appliance REST APIs](#appliance-rest-apis)
 - [Examples](#examples)
@@ -18,7 +18,7 @@ permalink: /posts/:title:output_ext
   - [Get all ESXiHosts](#get-all-esxihosts)
 - [See also](#see-also)
 
-# APIs
+# vSphere REST API
 
 Before you can execute a Rest API call, be sure that you have configured the SSL:
 
