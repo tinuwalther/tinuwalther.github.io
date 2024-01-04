@@ -3,7 +3,7 @@ layout: post
 title:  "How to get the current OS"
 author: Tinu
 categories: "PowerShell-Basic"
-tags:   PowerShell News
+tags:   PowerShell
 permalink: /posts/:title:output_ext
 ---
 
