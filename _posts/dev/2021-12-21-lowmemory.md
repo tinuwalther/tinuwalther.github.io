@@ -3,7 +3,7 @@ layout: post
 title:  "Low Memory Condition"
 author: Tinu
 categories: "PowerShell-Eventlog"
-tags:   PowerShell News
+tags:   PowerShell
 permalink: /posts/:title:output_ext
 ---
 
@@ -12,7 +12,7 @@ permalink: /posts/:title:output_ext
 - [Table of Contents](#table-of-contents)
 - [Low Memory Condition](#low-memory-condition)
   - [Identify the programs that trigger Low Memory Condition](#identify-the-programs-that-trigger-low-memory-condition)
-  - [Configure Virtual Memory manually](#configure-virtual-memory-(pagefile)-manually)
+  - [Configure Virtual Memory (Pagefile) manually](#configure-virtual-memory-pagefile-manually)
   - [Check for corruption of your files](#check-for-corruption-of-your-files)
   - [Check for disk errors](#check-for-disk-errors)
 - [See also](#see-also)
