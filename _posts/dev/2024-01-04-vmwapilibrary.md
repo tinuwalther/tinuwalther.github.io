@@ -196,7 +196,7 @@ $libraryObject | Add-Member -MemberType NoteProperty -Name 'libraryItemError' -V
 #endregion
 ````
 
-List the referenceObject:
+List the reference object:
 
 ````powershell
 $libraryObject | Format-List
