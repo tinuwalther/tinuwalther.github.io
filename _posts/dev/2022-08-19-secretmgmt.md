@@ -3,7 +3,7 @@ layout: post
 title:  "Microsoft Secret Management"
 author: Tinu
 categories: "PowerShell-Basic"
-tags:   PowerShell News
+tags:   PowerShell
 permalink: /posts/:title:output_ext
 ---
 
@@ -12,7 +12,7 @@ permalink: /posts/:title:output_ext
 - [Table of Contents](#table-of-contents)
 - [Secret Management](#secret-management)
   - [Work with the SecretStore module as a SecretVault](#work-with-the-secretstore-module-as-a-secretvault)
-    - [Install the modules](#install-the-modules)
+    - [Install the modules for SecretStore](#install-the-modules-for-secretstore)
     - [Register Module](#register-module)
     - [SecretStore configuration](#secretstore-configuration)
     - [Get SecretVault](#get-secretvault)
@@ -21,7 +21,7 @@ permalink: /posts/:title:output_ext
     - [Remove SecretVault](#remove-secretvault)
     - [Unregister SecretVault](#unregister-secretvault)
   - [Work with the Keepass module as a SecretVault](#work-with-the-keepass-module-as-a-secretvault)
-    - [Install the modules](#install-the-modules)
+    - [Install the modules for KeePass](#install-the-modules-for-keepass)
     - [Register Module](#register-module-1)
     - [Get SecretVault](#get-secretvault-1)
     - [Set KeePass as DefaultVault](#set-keepass-as-defaultvault)
@@ -34,7 +34,6 @@ permalink: /posts/:title:output_ext
     - [Install and configure KeePass](#install-and-configure-keepass)
     - [Install and configure SecretManagement for KeePass](#install-and-configure-secretmanagement-for-keepass)
     - [Adding and retrieving secrets from KeePass](#adding-and-retrieving-secrets-from-keepass)
-
 - [See also](#see-also)
 
 # Secret Management
