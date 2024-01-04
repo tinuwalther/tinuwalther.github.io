@@ -3,7 +3,7 @@ layout: post
 title:  "Reboot and Crash-Report"
 author: Tinu
 categories: "PowerShell-Eventlog"
-tags:   PowerShell News
+tags:   PowerShell
 permalink: /posts/:title:output_ext
 ---
 
@@ -13,7 +13,7 @@ permalink: /posts/:title:output_ext
 - [Restart History](#restart-history)
 - [Restart or Crash-Report](#restart-or-crash-report)
   - [Event IDs](#event-ids)
-  - [How to find reasons](#how-to-find-reasons)
+- [How to find reasons](#how-to-find-reasons)
 - [See also](#see-also)
 
 # Restart History
