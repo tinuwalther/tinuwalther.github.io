@@ -1,23 +1,23 @@
 ---
 layout: post
-title:  "Content Library"
+title:  "API Content Library"
 author: Tinu
 categories: "VMware"
-tags:   PowerShell
+tags:   PowerShell News
 permalink: /posts/:title:output_ext
 ---
 
 # Table of Contents
 
 - [Table of Contents](#table-of-contents)
-- [Rest API](#rest-api)
+- [vSphere REST API](#vsphere-rest-api)
   - [Login to vCenter](#login-to-vcenter)
   - [Get the VM for cloning](#get-the-vm-for-cloning)
   - [Get the Content Library](#get-the-content-library)
   - [Create the Library Item](#create-the-library-item)
 - [See also](#see-also)
 
-# Rest API
+# vSphere REST API
 
 Before you can execute a Rest API call, be sure that you have configured the SSL:
 
