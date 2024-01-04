@@ -3,7 +3,7 @@ layout: post
 title:  "Query VirtualMachines"
 author: Tinu
 categories: "VMware"
-tags:   PowerShell
+tags:   PowerShell News
 permalink: /posts/:title:output_ext
 ---
 
