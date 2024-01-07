@@ -3,21 +3,13 @@ layout: post
 title:  "Query VirtualMachines"
 author: Tinu
 categories: "VMware"
-tags:   PowerShell News
+tags:   PowerShell
 permalink: /posts/:title:output_ext
 ---
 
 # Table of Contents
 
-<!-- TOC -->
-
-- [Table of Contents](#table-of-contents)
-- [PowerCLI](#powercli)
-    - [Get-View vs. Get-VM](#get-view-vs-get-vm)
-    - [Fast listing of old Snapshots](#fast-listing-of-old-snapshots)
-- [See also](#see-also)
-
-<!-- /TOC -->
+<!-- TOC -->autoauto- [Table of Contents](#table-of-contents)auto- [PowerCLI](#powercli)auto    - [Get-View vs. Get-VM](#get-view-vs-get-vm)auto    - [Fast listing of old Snapshots](#fast-listing-of-old-snapshots)auto- [See also](#see-also)autoauto<!-- /TOC -->
 
 # PowerCLI
 
