@@ -3,14 +3,13 @@ layout: post
 title:  "GitLab Pipeline"
 author: Tinu
 categories: "GitLab"
-tags:   PowerShell News
+tags:   PowerShell
 permalink: /posts/:title:output_ext
 ---
 
 # Table of Contents
 
 - [Table of Contents](#table-of-contents)
-- [GitLab Pipeline](#gitlab-pipeline)
 - [Rules](#rules)
 - [Stages](#stages)
 - [Jobs](#jobs)
@@ -21,6 +20,15 @@ permalink: /posts/:title:output_ext
 - [Example 1](#example-1)
 - [Example 2](#example-2)
 - [Example 3](#example-3)
+  - [gitlab-ci.yml](#gitlab-ciyml)
+  - [test-node.yml](#test-nodeyml)
+  - [deploy-job.yml](#deploy-jobyml)
+  - [cleanup-runner.yml](#cleanup-runneryml)
+  - [Pester Test Validate Input](#pester-test-validate-input)
+  - [Pester Test Diplicated Values](#pester-test-diplicated-values)
+    - [Pipeline TestJob](#pipeline-testjob)
+    - [Pipeline DeployJob](#pipeline-deployjob)
+    - [Pipeline CleanUpJob](#pipeline-cleanupjob)
 - [Troubleshooting](#troubleshooting)
 - [See also](#see-also)
 
