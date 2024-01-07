@@ -10,77 +10,15 @@ permalink: /posts/:title:output_ext
 # Table of Contents
 
 - [Table of Contents](#table-of-contents)
-- [vSphere REST API](#vsphere-rest-api)
-  - [Login to vCenter](#login-to-vcenter)
+  - [vCenter Login](#vcenter-login)
   - [Get the VM for cloning](#get-the-vm-for-cloning)
   - [Get the Content Library](#get-the-content-library)
   - [Create the Library Item](#create-the-library-item)
 - [See also](#see-also)
 
-# vSphere REST API
+## vCenter Login
 
-Before you can execute a Rest API call, be sure that you have configured the SSL:
-
-````powershell
-#region SslProtocol
-$SslProtocol      = 'Tls12'
-$CurrentProtocols = ([System.Net.ServicePointManager]::SecurityProtocol).toString() -split ', '
-if (!($SslProtocol -in $CurrentProtocols)){
-    [System.Net.ServicePointManager]::SecurityProtocol += [System.Net.SecurityProtocolType]::$($SslProtocol)
-}
-#endregion
-````
-
-Define your vCenter Server:
-
-````powershell
-# Define your vCenter Server and set the credentials
-$vCenterServer  = 'vCenterServer.company.local'
-$ApiCredentials = Get-Credential -Message 'vCenter Credentials' -UserName "$($env:USERDOMAIN)\$($env:USERNAME)"
-````
-
-## Login to vCenter
-
-Login to vCenter and get an API Token:
-
-````powershell
-#region Login vCenter
-#Required basic authentication header. Takes in a Base64 encoded value of your username:password
-$pair = "$($ApiCredentials.UserName):$($ApiCredentials.GetNetworkCredential().Password)"
-
-#Encode the string to the RFC2045-MIME variant of Base64, except not limited to 76 char/line.
-$bytes  = [System.Text.Encoding]::ASCII.GetBytes($pair)
-$base64 = [System.Convert]::ToBase64String($bytes)
-
-#Create the Auth value as the method, a space, and then the encoded pair Method Base64String
-$basicAuthValue = "Basic $base64"
-#Create the header Authorization
-$headers = @{
-    'Content-Type'  = 'application/json'
-    'Authorization' = $basicAuthValue
-}
-
-$Properties = @{
-    Uri             = "https://$($vCenterServer)/api/session"
-    Method          = 'Post'
-    Headers         = $headers
-    UseBasicParsing = $true
-    ContentType     = 'application/json'
-    ErrorAction     = 'Stop'
-}
-
-$Token = Invoke-RestMethod @Properties
-#endregion
-````
-
-````powershell
-#region Token for authorization
-$headers = @{
-    'Content-Type'          = 'application/json'
-    'vmware-api-session-id' = $Token
-}
-#endregion
-````
+For the login to the vCenter Server see [vSphere REST API](https://tinuwalther.github.io/posts/vmwapivcenter.html)
 
 ## Get the VM for cloning
 
@@ -97,7 +35,7 @@ $vmName = 'TPL-RHEL8'
 $Properties = @{
     Uri             = "https://$($vCenterServer)/api/vcenter/vm?names=$($vmName)"
     Method          = 'Get'
-    Headers         = $headers
+    Headers         = $ApiSessionHeaders
     UseBasicParsing = $true
     ContentType     = 'application/json'
     ErrorAction     = 'Stop'
@@ -113,7 +51,7 @@ $libraryObject | Add-Member -MemberType NoteProperty -Name 'vmId' -Value $($vm.v
 $Properties = @{
     Uri             = "https://$($vCenterServer)/api/vcenter/vm/$($libraryObject.vmId)"
     Method          = 'Get'
-    Headers         = $headers
+    Headers         = $ApiSessionHeaders
     UseBasicParsing = $true
     ContentType     = 'application/json'
     ErrorAction     = 'Stop'
@@ -138,7 +76,7 @@ $librarySpec = @{
 $Properties = @{
     Uri             = "https://$($vCenterServer)/api/content/library?action=find"
     Method          = 'Post'
-    Headers         = $headers
+    Headers         = $ApiSessionHeaders
     Body            = $librarySpec | ConvertTo-Json
     UseBasicParsing = $true
     ContentType     = 'application/json'
@@ -178,7 +116,7 @@ $libraryItemSpec = @{
 $Properties = @{
     Uri             = "https://$($vCenterServer)/api/vcenter/ovf/library-item"
     Method          = 'Post'
-    Headers         = $headers
+    Headers         = $ApiSessionHeaders
     Body            = $libraryItemSpec | ConvertTo-Json
     UseBasicParsing = $true
     ContentType     = 'application/json'
@@ -208,7 +146,7 @@ List the Content Library Item:
 $Properties = @{
     Uri             = "https://$($vCenterServer)/api/content/library/item/$($libraryObject.libraryItemId)"
     Method          = 'Get'
-    Headers         = $headers
+    Headers         = $ApiSessionHeaders
     UseBasicParsing = $true
     ContentType     = 'application/json'
     ErrorAction     = 'Stop'
