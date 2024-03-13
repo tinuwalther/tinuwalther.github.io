@@ -101,13 +101,15 @@ body {
     font-style:italic;
   }
   
-  code, pre {
+  code {
     font-family:Monaco, Bitstream Vera Sans Mono, Lucida Console, Terminal, Consolas, Liberation Mono, DejaVu Sans Mono, Courier New, monospace;
     background-color: var(--bg-code);
     color: var(--code);
   }
   
   pre {
+    font-family:Monaco, Bitstream Vera Sans Mono, Lucida Console, Terminal, Consolas, Liberation Mono, DejaVu Sans Mono, Courier New, monospace;
+    background-color: var(--bg-secondary);
     padding:8px 15px;
     background: var(--bg-code); //background: #282626;
     border-radius:5px;
