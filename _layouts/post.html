@@ -19,3 +19,9 @@ layout: default
 </p>
 
 <p>{{content}}</p>
+
+<footer>
+  {% for post in site.posts %}
+    <p>Published on {{ post.date | date: "%B %-d, %Y" }} by {{ post.author }}</p>
+  {% endfor %}
+</footer>
