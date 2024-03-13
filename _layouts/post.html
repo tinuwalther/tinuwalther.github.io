@@ -34,12 +34,12 @@ layout: default
   </div>
 </div>
 
-<div class="container">
+<div class="container text-center">
 
   <div class="row">
     <div class="col-lg-8 col-md-10 mx-auto">
 
-      <div class="container6">
+      <div class="col">
 
         {% if page.previous.url %}
         <a class="btn btn-primary float-left" href="{{ page.previous.url | prepend: site.baseurl | replace: '//', '/' }}" 
@@ -48,6 +48,8 @@ layout: default
         <p> | </p>
         {% endif %}
 
+      </div>
+      <div class="col">
 
         <a href="{{ page.url }}"> [ Top ] </a>
         <p> | </p>
@@ -55,6 +57,8 @@ layout: default
         <p> | </p>
         <a href="/categories.html"> [ Blog ] </a>
         
+      </div>
+      <div class="col">
         
         {% if page.next.url %}
         <p> | </p>
