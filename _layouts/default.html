@@ -59,6 +59,10 @@
 
       {{ content }}
 
+      {% for post in site.posts %}
+        <p><small><b>Published on </b> <em>{{ post.date | date: "%B %-d, %Y" }}</em><b> by </b> <em>{{ post.author }}</em></small></p>
+      {% endfor %}
+
       </section>
 
       <footer>
