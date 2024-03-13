@@ -59,9 +59,7 @@
 
       {{ content }}
 
-      {% if post.date %}
-        <p><small><b>published on </b> <em>{{ post.date | date: "%B %-d, %Y" }}</em><b> by </b> <em>{{ site.github.owner_name }}</em></small></p>
-      {% endif %}
+      <p><small><b>published on </b> <em>{{ post.date | date: "%B %-d, %Y" }}</em><b> by </b> <em>{{ site.github.owner_name }}</em></small></p>
 
       </section>
 
