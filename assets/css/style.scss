@@ -42,6 +42,7 @@ body {
   }
 
   p, ul, ol, table, pre, dl {
+    color: var(--text);
     margin:0 0 20px;
   }
   
@@ -102,9 +103,9 @@ body {
   
   pre {
     padding:8px 15px;
-    //background: #282626;
+    background: var(--bg-code); //background: #282626;
     border-radius:5px;
-    //border:1px solid #282626;
+    border:1px solid var(--bg-code); //#282626;
     overflow-x: auto;
   }
   
@@ -130,7 +131,7 @@ body {
   
   img {
     max-width:100%;
-    background: #282626;
+    background: var(--bg-code); //background: #282626;
   }
   
   header {
