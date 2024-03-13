@@ -11,7 +11,7 @@ html {
 
 html[data-theme='dark'] {
   --bg: #333;
-  --bg-code: #1f1f1f;
+  --bg-code: #111111;
   --bg-secondary: #444;
   --headings: #39f;
   --text: #bbb;
@@ -37,7 +37,7 @@ body {
     margin:0 0 20px;
   }
   
-  p, strong, b, em, span, code, small {
+  p, strong, b, em, span, small {
     color: var(--text);
   }
 
