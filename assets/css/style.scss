@@ -67,20 +67,9 @@ body {
     font-style:italic;
   }
   
-  code {
+  code, pre {
     font-family:Monaco, Bitstream Vera Sans Mono, Lucida Console, Terminal, Consolas, Liberation Mono, DejaVu Sans Mono, Courier New, monospace;
     color:#05f946; //#333;
-    padding:8px 15px;
-    background: #000000; //#f8f8f8;
-    border-radius:5px;
-    border:1px solid #000000; //#e5e5e5;
-    overflow-x: auto;
-  }
-
-  
-  pre {
-    font-family:Monaco, Bitstream Vera Sans Mono, Lucida Console, Terminal, Consolas, Liberation Mono, DejaVu Sans Mono, Courier New, monospace;
-    color:#333;
   }
   
   pre {
