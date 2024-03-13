@@ -7,7 +7,7 @@ tags:   PowerShell
 permalink: /posts/:title:output_ext
 ---
 
-# Table of Contents
+## Table of Contents
 
 - [Table of Contents](#table-of-contents)
 - [Write Single-Value to the Registry](#write-single-value-to-the-registry)
@@ -16,7 +16,7 @@ permalink: /posts/:title:output_ext
 
 Copy items from a local to a remote computer using a psremote-session.
 
-# Write Single-Value to the Registry
+## Write Single-Value to the Registry
 
 ````powershell
 function Set-RegistryValue {
@@ -50,7 +50,7 @@ $params = @{
 Set-RegistryValue -args $params
 ````
 
-## Volatile registry key
+### Volatile registry key
 
 If you use the New-Item-Cmdlet, the subkey is created as stable key. Sometimes you need a subkey that will be deleted after a reboot, you can create a volatile subkey.
 
@@ -61,7 +61,7 @@ $SubKey.CreateSubKey('Volatile', $true , [Microsoft.Win32.RegistryOptions]::Vola
 $SubKey.CreateSubKey('Non-Volatile', $true , [Microsoft.Win32.RegistryOptions]::None)
 ````
 
-# See also
+## See also
 
 [Set-ItemPropertyValue](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.management/set-itemproperty?view=powershell-6) on Microsoft Docs.
 

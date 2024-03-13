@@ -7,7 +7,7 @@ tags:   PowerShell
 permalink: /posts/:title:output_ext
 ---
 
-# Table of Contents
+## Table of Contents
 
 - [Table of Contents](#table-of-contents)
 - [PowerCLI](#powercli)
@@ -16,8 +16,7 @@ permalink: /posts/:title:output_ext
   - [Get-EsxCli](#get-esxcli)
 - [See also](#see-also)
 
-
-# PowerCLI
+## PowerCLI
 
 List some properties of all ESXiHost with PowerCLI in a fast way.
 
@@ -217,11 +216,11 @@ Datastore          : {...}
 
 There are a lot of more properties, which you can define. Enter $VMHost. and navigate to the property that you need.
 
-# ESXCLI
+## ESXCLI
 
 The ESXCLI tool allows for remote management of ESXi hosts by using the ESXCLI command set.
 
-## Native ESXCLI
+### Native ESXCLI
 
 You can use the native ESXCLI over ssh on ESXiHosts.
 
@@ -229,7 +228,7 @@ You can use the native ESXCLI over ssh on ESXiHosts.
 esxcli system boot device get
 ````
 
-## Get-EsxCli
+### Get-EsxCli
 
 If the ESXiHost is connected to a vCenter, then you can use ESXCLI as PowerShell command.
 
@@ -259,7 +258,7 @@ foreach($item in $AllVMHost){
 }
 ````
 
-# See also
+## See also
 
 [ESXCLI](https://developer.vmware.com/web/tool/7.0/esxcli) on VMware Developper Documentation.  
 [How to use ESXCLI v2 Commands in PowerCLI](https://www.virten.net/2016/11/how-to-use-esxcli-v2-commands-in-powercli/) on virten.net.

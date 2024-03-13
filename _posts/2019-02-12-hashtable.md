@@ -7,13 +7,13 @@ tags:   PowerShell
 permalink: /posts/:title:output_ext
 ---
 
-# Table of Contents
+## Table of Contents
 
 - [Table of Contents](#table-of-contents)
 - [Create a hashtable](#create-a-hashtable)
 - [Loop through a hashtable](#loop-through-a-hashtable)
 
-# Create a hashtable
+## Create a hashtable
 
 Create a hashtable from an file-system-object.
 
@@ -38,7 +38,7 @@ Pictures                       /Users/xxx
 Public                         /Users/xxx
 ````
 
-# Loop through a hashtable
+## Loop through a hashtable
 
 Loop through a hashtable and get one single entry.
 

@@ -7,7 +7,7 @@ tags:   PowerShell News
 permalink: /posts/:title:output_ext
 ---
 
-# Table of Contents
+## Table of Contents
 
 - [Table of Contents](#table-of-contents)
   - [vCenter Login](#vcenter-login)
@@ -16,11 +16,11 @@ permalink: /posts/:title:output_ext
   - [Create the Library Item](#create-the-library-item)
 - [See also](#see-also)
 
-## vCenter Login
+### vCenter Login
 
 For the login to the vCenter Server see [vSphere REST API](https://tinuwalther.github.io/posts/vmwapivcenter.html)
 
-## Get the VM for cloning
+### Get the VM for cloning
 
 Clone a virtual machine as OVF-Template in a Content Library.
 
@@ -62,7 +62,7 @@ $libraryObject | Add-Member -MemberType NoteProperty -Name 'vmName' -Value $($vm
 #endregion
 ````
 
-## Get the Content Library
+### Get the Content Library
 
 Get the id of the target Content Library:
 
@@ -93,7 +93,7 @@ $libraryObject | Add-Member -MemberType NoteProperty -Name 'libraryName' -Value 
 #endregion
 ````
 
-## Create the Library Item
+### Create the Library Item
 
 Clone the virtual machine as OVF-Template in the Content Library:
 
@@ -155,7 +155,7 @@ $myItem = Invoke-RestMethod @Properties
 $myItem | Format-List
 ````
 
-# See also
+## See also
 
 [API Reference](https://developer.vmware.com/apis/vsphere-automation/v7.0U3/) on VMware Developper Documentation.
 

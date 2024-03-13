@@ -7,7 +7,7 @@ tags:   PowerShell
 permalink: /posts/:title:output_ext
 ---
 
-# Table of Contents
+## Table of Contents
 
 - [Table of Contents](#table-of-contents)
   - [PowerShell 7](#powershell-7)
@@ -15,7 +15,7 @@ permalink: /posts/:title:output_ext
   - [Unknown Environment](#unknown-environment)
 - [See also](#see-also)
 
-## PowerShell 7
+### PowerShell 7
 
 With PowerShell 7 it's easy to determine the current os:
 
@@ -25,7 +25,7 @@ $IsLinux
 $IsWindows
 ````
 
-## Windows PowerShell
+### Windows PowerShell
 
 In Windows PowerShell it's easy to determine the current os:
 
@@ -33,7 +33,7 @@ In Windows PowerShell it's easy to determine the current os:
 [Environment]::OSVersion
 ````
 
-## Unknown Environment
+### Unknown Environment
 
 If you don't know which PowerShell you running on which OS, you can use the following code:
 
@@ -74,7 +74,7 @@ switch(Get-CurrentOS){
 }
 ````
 
-# See also
+## See also
 
 [Determine the OS version, Linux and Windows from Powershell](https://stackoverflow.com/questions/44703646/determine-the-os-version-linux-and-windows-from-powershell) on stack overflow
 

@@ -7,7 +7,7 @@ tags:   PowerShell
 permalink: /posts/:title:output_ext
 ---
 
-# Table of Contents
+## Table of Contents
 
 - [Table of Contents](#table-of-contents)
 - [Create your own PowerShell Profile](#create-your-own-powershell-profile)
@@ -18,21 +18,21 @@ permalink: /posts/:title:output_ext
   - [Mac OS](#mac-os)
 - [See also](#see-also)
 
-# Create your own PowerShell Profile
+## Create your own PowerShell Profile
 
-## Scope
+### Scope
 
 You can create a profile for the following scopes:
 
 Description | Path
-- | -
+-|-
 Current User, Current Host | $PROFILE
 Current User, Current Host | $PROFILE.CurrentUserCurrentHost
 Current User, All Hosts | $PROFILE.CurrentUserAllHosts
 All Users, Current Host | $PROFILE.AllUsersCurrentHost
 All Users, All Hosts | $PROFILE.AllUsersAllHosts
 
-## Profile
+### Profile
 
 To create your own Profile for WindowsPowerShell start Visual Studio Code and edit each of the following profile.ps1:
 
@@ -48,11 +48,11 @@ code $PROFILE.CurrentUserCurrentHost
 code $PROFILE.CurrentUserAllHosts
 ````
 
-# Functions in your Profile
+## Functions in your Profile
 
 My prefered functions in my own profile.ps1
 
-## Windows
+### Windows
 
 ````powershell
 function Test-IsAdministrator {
@@ -84,7 +84,7 @@ function prompt{
 }
 ````
 
-## Mac OS
+### Mac OS
 
 ````powershell
 function Test-IsRoot {
@@ -127,7 +127,7 @@ Output, if you start PowerShell:
 [0] [user@computer] I ♥ PS 7.1.4 C:\Users\Admin >
 ````
 
-# See also
+## See also
 
 [About Profiles](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_profiles?view=powershell-6) on Microsoft Docs.
 

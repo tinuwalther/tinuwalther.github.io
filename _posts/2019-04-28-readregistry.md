@@ -7,7 +7,7 @@ tags:   PowerShell
 permalink: /posts/:title:output_ext
 ---
 
-# Table of Contents
+## Table of Contents
 
 - [Table of Contents](#table-of-contents)
 - [Read Single-Value from Registry](#read-single-value-from-registry)
@@ -16,7 +16,7 @@ permalink: /posts/:title:output_ext
 
 Copy items from a local to a remote computer using a psremote-session.
 
-# Read Single-Value from Registry
+## Read Single-Value from Registry
 
 ````powershell
 function Get-RegistryValue {
@@ -46,7 +46,7 @@ $params = @{
 return (Get-RegistryValue -args $params)
 ````
 
-# Read Values from all Users
+## Read Values from all Users
 
 ````powershell
 $ErrorActionPreference = 'SilentlyContinue'
@@ -67,7 +67,7 @@ Get-ChildItem "HKU:\" | ForEach {
 }
 ````
 
-# See also
+## See also
 
 [Get-ItemPropertyValue](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.management/get-itempropertyvalue?view=powershell-6) on Microsoft Docs.
 

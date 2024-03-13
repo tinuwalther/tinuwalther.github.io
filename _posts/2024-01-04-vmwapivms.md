@@ -7,7 +7,7 @@ tags:   PowerShell News
 permalink: /posts/:title:output_ext
 ---
 
-# Table of Contents
+## Table of Contents
 
 - [Table of Contents](#table-of-contents)
 - [Virtual Machines](#virtual-machines)
@@ -16,7 +16,7 @@ permalink: /posts/:title:output_ext
   - [Get properties of the specified virtual machine by id](#get-properties-of-the-specified-virtual-machine-by-id)
 - [See also](#see-also)
 
-# Virtual Machines
+## Virtual Machines
 
 To list some properties of a virtual machine, you need three steps.
 
@@ -24,11 +24,11 @@ To list some properties of a virtual machine, you need three steps.
 - Get the identifier of a virtual machine by name
 - Get properties of the specified virtual machine by id
 
-## vCenter Login
+### vCenter Login
 
 For the login to the vCenter Server see [vSphere REST API](https://tinuwalther.github.io/posts/vmwapivcenter.html)
 
-## Get the identifier of a virtual machine by name
+### Get the identifier of a virtual machine by name
 
 To get the identifier of a virtual machine, you have to provide the name of the virtual machine and set it to the filter in the API Url.
 
@@ -63,7 +63,7 @@ cpu_count       : 2
 
 If you need the VMSummary of all VMs, change the API Url to `https://$($vCenterServer)/api/vcenter/vm`. This will returns information about at most 4000 visible virtual machines in vCenter.
 
-## Get properties of the specified virtual machine by id
+### Get properties of the specified virtual machine by id
 
 To list some properties of a virtual machine, you have to provide the identifier of the virtual machine.
 
@@ -109,7 +109,7 @@ guest_OS             : RHEL_8_64
 hardware             : @{upgrade_policy=NEVER; upgrade_status=NONE; version=VMX_14}
 ````
 
-# See also
+## See also
 
 [API Reference](https://developer.vmware.com/apis/vsphere-automation/v7.0U3/) on VMware Developper Documentation,
 [Data Structure VMSummary](https://developer.vmware.com/apis/vsphere-automation/v7.0U3/vcenter/data-structures/VM/Summary/) on VMware Developper Documentation,

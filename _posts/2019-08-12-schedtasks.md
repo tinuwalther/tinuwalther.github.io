@@ -7,28 +7,21 @@ tags:   PowerShell
 permalink: /posts/:title:output_ext
 ---
 
-# Table of Contents
+## Table of Contents
 
 - [Table of Contents](#table-of-contents)
 - [Task Scheduler](#task-scheduler)
   - [Create a Scheduled Task](#create-a-scheduled-task)
-- [Create the script](#create-the-script)
-- [Create a new task action](#create-a-new-task-action)
-- [Create a new trigger](#create-a-new-trigger)
-- [Create new task principal](#create-new-task-principal)
-- [Create new task settings](#create-new-task-settings)
-- [Register the new PowerShell scheduled task](#register-the-new-powershell-scheduled-task)
   - [Delete a Scheduled Task](#delete-a-scheduled-task)
-- [Delete the new PowerShell scheduled task](#delete-the-new-powershell-scheduled-task)
   - [Task Actions](#task-actions)
   - [Task Information](#task-information)
 - [Troubleshooting](#troubleshooting)
 - [Task Scheduler Errors](#task-scheduler-errors)
 - [See also](#see-also)
 
-# Task Scheduler
+## Task Scheduler
 
-## Create a Scheduled Task
+### Create a Scheduled Task
 
 ````powershell
 # Create the script
@@ -85,14 +78,14 @@ Get-ScheduledTask -TaskName "RestartOnce" | Select *
 Get-ScheduledTask "RestartOnce" | Get-ScheduledTaskInfo | Select *
 ````
 
-## Delete a Scheduled Task
+### Delete a Scheduled Task
 
 ````powershell
 # Delete the new PowerShell scheduled task
 Unregister-ScheduledTask -TaskName "RestartOnce" -Confirm:$false
 ````
 
-## Task Actions
+### Task Actions
 
 Action: Start a program
 
@@ -100,7 +93,7 @@ Program/script: %SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe
 
 Add arguments: -NoProfile -NoLogo -NonInteractive -ExecutionPolicy Bypass -File "C:\Temp\MyScript.ps1"
 
-## Task Information
+### Task Information
 
 ````powershell
 Get-ScheduledTask | Where-Object TaskName -match "Verify Summary" | ForEach {
@@ -135,7 +128,7 @@ LastTaskResult     : 0
 NumberOfMissedRuns : 0
 ````
 
-# Troubleshooting
+## Troubleshooting
 
 Start the PowerShell-Script with a CMD-Script, to verify that the script can be run with the configured Account in the ScheduledTask.
 
@@ -159,14 +152,14 @@ echo End %script% %date%%time% >> %log%
 
 In the Logfile, you can find any Errors- or Output from the PowerShell-Script.
 
-# Task Scheduler Errors
+## Task Scheduler Errors
 
 Error | Problem | Solution
 -|-|-
 0x1 | Path to the program does not exists | Correct the Path to the program e.g. change powershell.exe to C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
 0xFFFD0000 | Path to the script does not exists | Correct the Path to the script
 
-# See also
+## See also
 
 [Task Scheduler Error and Success Constants](https://docs.microsoft.com/en-us/windows/win32/taskschd/task-scheduler-error-and-success-constants) on Microsoft Docs.
 

@@ -7,7 +7,7 @@ tags:   PowerShell
 permalink: /posts/:title:output_ext
 ---
 
-# Table of Contents
+## Table of Contents
 
 - [Table of Contents](#table-of-contents)
 - [PowerShell Gallery](#powershell-gallery)
@@ -16,14 +16,11 @@ permalink: /posts/:title:output_ext
 - [Publish Scripts](#publish-scripts)
 - [Script Template](#script-template)
 
+## PowerShell Gallery
 
-# PowerShell Gallery
+[PowerShell Gallery API](https://www.powershellgallery.com/api/v2)
 
-https://www.powershellgallery.com/api/v2
-
-[ [Top] ](#)
-
-# Internal Gallery
+## Internal Gallery
 
 [Working with Private PowerShellGet Repositories](https://docs.microsoft.com/en-us/powershell/scripting/gallery/how-to/working-with-local-psrepositories?view=powershell-7.1)
 
@@ -52,9 +49,7 @@ Register-PSRepository @Scripts
 Get-PSRepository | Select-Object Name,Trusted,SourceLocation,ScriptSourceLocation,Registered,PackageManagementProvider | ft -a
 ````
 
-[ [Top] ](#)
-
-# Publish Modules
+## Publish Modules
 
 Publish a Module to a file share repo - the NuGet API key must be a non-blank string.
 
@@ -62,9 +57,7 @@ Publish a Module to a file share repo - the NuGet API key must be a non-blank st
 Publish-Module -Path 'D:\temp\PsNetTools' -Repository HomeGallery -NuGetApiKey 'AnyStringWillDo'
 ````
 
-[ [Top] ](#)
-
-# Publish Scripts
+## Publish Scripts
 
 ````powershell
 $Script  = 'Add-MongoDBDocument'
@@ -79,9 +72,9 @@ Update-ScriptFileInfo @Metadata
 Publish-Script -Path "D:\temp\Database\$($Script).ps1" -Repository HomeGallery -Force
 ````
 
-[ [Top] ](#)
+[ [Top](#table-of-contents) ]
 
-# Script Template
+## Script Template
 
 ````powershell
 <#PSScriptInfo
@@ -119,7 +112,7 @@ Publish-Script -Path "D:\temp\Database\$($Script).ps1" -Repository HomeGallery -
 
 
 
-<# 
+<#
 
 .DESCRIPTION 
 Add a document in the inventory-table of the local MongoDB
@@ -167,4 +160,4 @@ end {
 }
 ````
 
-[ [Top] ](#)
+[ [Top](#table-of-contents) ] [ [Blog](../categories.html) ]

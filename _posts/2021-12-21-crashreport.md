@@ -7,7 +7,7 @@ tags:   PowerShell
 permalink: /posts/:title:output_ext
 ---
 
-# Table of Contents
+## Table of Contents
 
 - [Table of Contents](#table-of-contents)
 - [Restart History](#restart-history)
@@ -16,7 +16,7 @@ permalink: /posts/:title:output_ext
 - [How to find reasons](#how-to-find-reasons)
 - [See also](#see-also)
 
-# Restart History
+## Restart History
 
 Create a restart history
 
@@ -64,9 +64,9 @@ foreach($item in $RestartyApplication){
 }
 ````
 
-# Restart or Crash-Report
+## Restart or Crash-Report
 
-## Event IDs
+### Event IDs
 
 - 41:   Rebooted unexpectedly, no more info, search for Event ID 1001
 - 1001: Bugcheck number, Memory dump saved at ...
@@ -74,7 +74,7 @@ foreach($item in $RestartyApplication){
 - 2004: Low Memory Condition, could be the reason of a crash
 - 6008: Shutdown unexpectedly, exactly time-stamp of the shutdown, search for Event ID 1001
 
-# How to find reasons
+## How to find reasons
 
 Search for specified Event IDs in the Systemlog:
 
@@ -90,7 +90,7 @@ Get-WinEvent -FilterHashtable $params | Select-Object TimeCreated,Id,Message
 
 **Output**
 
-````
+````text
 TimeCreated : 21.12.2021 12:29:14
 Id          : 1001
 Message     : The computer has rebooted from a bugcheck. 
@@ -132,7 +132,7 @@ Message     : The process rundll32.exe has initiated the restart of computer Com
                Comment:
 ````
 
-# See also
+## See also
 
 [How to Use PowerShell to Write to Event Logs](https://devblogs.microsoft.com/scripting/how-to-use-powershell-to-write-to-event-logs/) on devblogs.microsoft.com
 

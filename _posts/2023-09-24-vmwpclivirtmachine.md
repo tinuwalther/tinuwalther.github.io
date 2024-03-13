@@ -7,13 +7,19 @@ tags:   PowerShell
 permalink: /posts/:title:output_ext
 ---
 
-# Table of Contents
+## Table of Contents
 
-<!-- TOC -->autoauto- [Table of Contents](#table-of-contents)auto- [PowerCLI](#powercli)auto    - [Get-View vs. Get-VM](#get-view-vs-get-vm)auto    - [Fast listing of old Snapshots](#fast-listing-of-old-snapshots)auto- [See also](#see-also)autoauto<!-- /TOC -->
+[Table of Contents](#table-of-contents)
+[PowerCLI](#powercli)
+- [Table of Contents](#table-of-contents)
+- [PowerCLI](#powercli)
+  - [Get-View vs. Get-VM](#get-view-vs-get-vm)
+  - [Fast listing of old Snapshots](#fast-listing-of-old-snapshots)
+- [See also](#see-also)
 
-# PowerCLI
+## PowerCLI
 
-## Get-View vs. Get-VM
+### Get-View vs. Get-VM
 
 The performance with Get-View is much better than Get-VM:
 
@@ -55,7 +61,7 @@ Output
 0.1823357 seconds
 ````
 
-## Fast listing of old Snapshots
+### Fast listing of old Snapshots
 
 ````powershell
 $Stopwatch = [System.Diagnostics.Stopwatch]::new()
@@ -81,7 +87,7 @@ $Stopwatch.Stop()
 $Stopwatch.Elapsed.TotalSeconds
 ````
 
-# See also
+## See also
 
 [API Reference](https://developer.vmware.com/apis/vsphere-automation/v7.0U3/) on VMware Developper Documentation.
 

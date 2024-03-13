@@ -7,7 +7,7 @@ tags:   PowerShell
 permalink: /posts/:title:output_ext
 ---
 
-# Table of Contents
+## Table of Contents
 
 - [Table of Contents](#table-of-contents)
 - [List certificates](#list-certificates)
@@ -16,14 +16,14 @@ permalink: /posts/:title:output_ext
 - [Remove certificates](#remove-certificates)
 - [See also](#see-also)
 
-# List certificates
+## List certificates
 
 ````powershell
 $Issuer = '*'
 Get-ChildItem Cert:\LocalMachine -Recurse | Where-Object Issuer -match "CN=$Issuer"
 ````
 
-## List all expired certificates
+### List all expired certificates
 
 ````powershell
 $Issuer = '*'
@@ -42,7 +42,7 @@ $ret = foreach($item in $certs){
 $ret | Format-List
 ````
 
-# Import certificates
+## Import certificates
 
 ````powershell
 $Source = 'C:\temp\certstoimport'
@@ -52,7 +52,7 @@ foreach($item in (Get-ChildItem $Source -Filter '*.cer')){
 }
 ````
 
-# Remove certificates
+## Remove certificates
 
 ````powershell
 $Issuer = '*'
@@ -62,7 +62,7 @@ foreach($item in $certs){
 }
 ````
 
-# See also
+## See also
 
 [Certificate Provider](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.security/about/about_certificate_provider?view=powershell-6) on Microsoft Docs.
 

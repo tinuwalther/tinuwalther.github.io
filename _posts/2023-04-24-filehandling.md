@@ -7,14 +7,14 @@ tags:   PowerShell
 permalink: /posts/:title:output_ext
 ---
 
-# Table of Contents
+## Table of Contents
 
 - [Table of Contents](#table-of-contents)
   - [Define the Function](#define-the-function)
-  - [Call the Function](#call-the-function)
+  - [Call the function](#call-the-function)
 - [See also](#see-also)
 
-## Define the Function
+### Define the Function
 
 A function for some file-handling examples. First we see a parameter block with ValidateScript to ensure that a file has been specified. The type of this parameter must be a file. The second paramter is only a switch for the output.
 
@@ -84,7 +84,7 @@ function Invoke-MwaFileReader {
 }
 ````
 
-## Call the function
+### Call the function
 
 We call the function with the named parameter file:
 
@@ -94,7 +94,7 @@ Invoke-MwaFileReader -file "D:\github.com\PSXiDiag\data\inventory.csv" -Verbose
 
 The file is a CSV and is importet as an objet with Import-Csv.
 
-````
+````powershell
 VERBOSE: [ 2023-04-24 18:31:23.086 ] [ Begin   ] Invoke-MwaFileReader
 VERBOSE: [ 2023-04-24 18:31:23.087 ] [ Process ] Invoke-MwaFileReader
 VERBOSE: D:\github.com\PSXiDiag\data\inventory.csv
@@ -122,7 +122,7 @@ Invoke-MwaFileReader "D:\github.com\PSXiDiag\data\Inventory.json" -Verbose
 
 The file is a JSON and is importet with Get-Content and formatet as object with ConvertFrom-Json.
 
-````
+````powershell
 VERBOSE: [ 2023-04-24 18:31:28.611 ] [ Begin   ] Invoke-MwaFileReader
 VERBOSE: [ 2023-04-24 18:31:28.611 ] [ Process ] Invoke-MwaFileReader
 VERBOSE: D:\github.com\PSXiDiag\data\Inventory.json
@@ -150,7 +150,7 @@ Next we use the function with pipe the parameter for file:
 
 The file is a Textfile and importet with Get-Content.
 
-````
+````powershell
 VERBOSE: [ 2023-04-24 18:31:32.502 ] [ Begin   ] Invoke-MwaFileReader
 VERBOSE: [ 2023-04-24 18:31:32.502 ] [ Process ] Invoke-MwaFileReader
 VERBOSE: D:\temp\words.txt
@@ -178,7 +178,7 @@ Invoke-MwaFileReader "D:\NotExists.txt" -Verbose
 
 The file does not exists and the ValidateScript-Block returned the custom-defined message.
 
-````
+````powershell
 Invoke-MwaFileReader: Cannot validate argument on parameter 'file'. File 'D:\NotExists.txt' not found
 ````
 
@@ -190,7 +190,7 @@ Invoke-MwaFileReader -file
 
 We forgot the file-path and the type-definition in the paramter returned the default message.
 
-````
+````powershell
 Invoke-MwaFileReader: Missing an argument for parameter 'file'. Specify a parameter of type 'System.IO.FileInfo' and try again.
 ````
 
@@ -200,7 +200,7 @@ Next we call the function with no parameter and type at the prompt for file '!?'
 Invoke-MwaFileReader # Type !? at the prompt for file
 ````
 
-````
+````powershell
 cmdlet Invoke-MwaFileReader at command pipeline position 1
 Supply values for the following parameters:
 (Type !? for Help.)
@@ -209,7 +209,7 @@ Specify a valide fullname of a file to read.
 file:
 ````
 
-# See also
+## See also
 
 [ValidateScript Attribute Declaration](https://learn.microsoft.com/en-us/powershell/scripting/developer/cmdlet/validatescript-attribute-declaration?view=powershell-7.3) on Microsoft.
 

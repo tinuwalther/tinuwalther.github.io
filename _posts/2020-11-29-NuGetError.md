@@ -1,25 +1,27 @@
 ---
 layout: post
-title:  "Unable to resolve package source https://www.powershellgallery.com/api/v2"
+title:  "Unable to resolve package source"
 author: Tinu
 categories: "PowerShell-Errors"
 tags:   PowerShell
 permalink: /posts/:title:output_ext
 ---
 
-# Table of Contents
+## Table of Contents
 
 - [Table of Contents](#table-of-contents)
-- [Unable to resolve package source https://www.powershellgallery.com/api/v2](#unable-to-resolve-package-source-httpswwwpowershellgallerycomapiv2)
+- [Unable to resolve package source](#unable-to-resolve-package-source)
   - [Problem](#problem)
   - [Cause](#cause)
   - [Solution](#solution)
 
-# Unable to resolve package source https://www.powershellgallery.com/api/v2
+## Unable to resolve package source
+
+Unable to resolve package source https://www.powershellgallery.com/api/v2  
 
 Find-Module will result in a meaningless warning if you search for a known module in the Powershell gallery.
 
-## Problem
+### Problem
 
 ````powershell
 Find-Module -Name PSWriteHTML
@@ -37,11 +39,11 @@ At C:\Program Files\WindowsPowerShell\Modules\PowerShellGet\2.2\PSModule.psm1:88
 + FullyQualifiedErrorId : NoMatchFoundForCriteria,Microsoft.PowerShell.PackageManagement.Cmdlets.FindPackage
 ````
 
-## Cause
+### Cause
 
 Thats a good question, I didn't find something about this.
 
-## Solution
+### Solution
 
 Use NuGet provider to install the required module to the target location.
 

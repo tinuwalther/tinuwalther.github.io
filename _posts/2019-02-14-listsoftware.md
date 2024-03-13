@@ -7,13 +7,13 @@ tags:   PowerShell
 permalink: /posts/:title:output_ext
 ---
 
-# Table of Contents
+## Table of Contents
 
 - [Table of Contents](#table-of-contents)
 - [Get Software from WMI](#get-software-from-wmi)
 - [Get Software from Uninstallkey](#get-software-from-uninstallkey)
 
-# Get Software from WMI
+## Get Software from WMI
 
 Loop through the Win32_Product class and get all installed software.
 
@@ -43,7 +43,7 @@ InstallDate Vendor                     Name                        Version
 20180918    Microsoft Corporation      PowerShell 6-x64            6.1.0.0
 ````
 
-# Get Software from Uninstallkey
+## Get Software from Uninstallkey
 
 Formats a hashtable to a PSCustomObject.
 

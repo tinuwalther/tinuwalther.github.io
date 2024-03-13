@@ -7,7 +7,7 @@ tags:   PowerShell
 permalink: /posts/:title:output_ext
 ---
 
-# Table of Contents
+## Table of Contents
 
 - [Table of Contents](#table-of-contents)
 - [No match was found for the specified search criteria and module name](#no-match-was-found-for-the-specified-search-criteria-and-module-name)
@@ -16,11 +16,11 @@ permalink: /posts/:title:output_ext
   - [Solution](#solution)
   - [See also](#see-also)
 
-# No match was found for the specified search criteria and module name
+## No match was found for the specified search criteria and module name
 
 Find-Module could not connect to the specified uri in the registered repositories.
 
-## Problem
+### Problem
 
 ````powershell
 Find-Module -Name PSWriteHTML
@@ -33,11 +33,11 @@ At C:\Program Files\WindowsPowerShell\Modules\PowerShellGet\2.2\PSModule.psm1:88
 + FullyQualifiedErrorId : NoMatchFoundForCriteria,Microsoft.PowerShell.PackageManagement.Cmdlets.FindPackage
 ````
 
-## Cause
+### Cause
 
 TLS 1.2 is set to be the default for the PowerShell Gallery since April 2020, but this is not set on the computer.
 
-## Solution
+### Solution
 
 To Fix TLS issue on the current session, run below command:
 
@@ -76,7 +76,7 @@ if($value -ne 1){
 Restart-Computer
 ````
 
-## See also
+### See also
 
 [PowerShell Gallery TLS Support](https://devblogs.microsoft.com/powershell/powershell-gallery-tls-support/)
 

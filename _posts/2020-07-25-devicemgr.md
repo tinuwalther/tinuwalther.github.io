@@ -7,13 +7,13 @@ tags:   PowerShell
 permalink: /posts/:title:output_ext
 ---
 
-# Table of Contents
+## Table of Contents
 
 - [Table of Contents](#table-of-contents)
 - [Find Information about Device Errors](#find-information-about-device-errors)
 - [See also](#see-also)
 
-# Find Information about Device Errors
+## Find Information about Device Errors
 
 Get-CimInstance -ClassName Win32_PNPEntity.
 
@@ -88,7 +88,7 @@ function Get-ErrorDeviceList{
 Get-ErrorDeviceList  -Verbose
 ````
 
-# See also
+## See also
 
 [Error codes in Device Manager in Windows](https://support.microsoft.com/en-us/help/310123/error-codes-in-device-manager-in-windows)
 

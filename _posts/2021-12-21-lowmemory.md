@@ -7,7 +7,7 @@ tags:   PowerShell
 permalink: /posts/:title:output_ext
 ---
 
-# Table of Contents
+## Table of Contents
 
 - [Table of Contents](#table-of-contents)
 - [Low Memory Condition](#low-memory-condition)
@@ -17,11 +17,11 @@ permalink: /posts/:title:output_ext
   - [Check for disk errors](#check-for-disk-errors)
 - [See also](#see-also)
 
-# Low Memory Condition
+## Low Memory Condition
 
 Low memory occurs when the device you are working runs **out of RAM** and also is **low on virtual memory**. This can happen in a situation where you burden your device with programs that cannot be supported by its RAM. Another instance when low memory error can occur is **when the programs do not free the memory** they have been using after their completion. We call this process memory overuse or **memory leak**.
 
-## Identify the programs that trigger Low Memory Condition
+### Identify the programs that trigger Low Memory Condition
 
 This function can be used to identify the programs that trigger Low Memory Condition of a Windows Server.
 
@@ -93,7 +93,7 @@ function Get-LowMemoryCondition{
 Get-LowMemoryCondition -LastMonth 1
 ````
 
-## Configure Virtual Memory (Pagefile) manually
+### Configure Virtual Memory (Pagefile) manually
 
 Disable automatic-managed PageFile, set the initial- and maximum-size manually and rebbot the computer:
 
@@ -123,29 +123,29 @@ if(($currentpagefile.InitialSize) -lt $memory){
 }
 ````
 
-## Check for corruption of your files
+### Check for corruption of your files
 
 Start the prompt as the administrator and type in these letters
 
-````
+````cmd
 sfc /scannow
 ````
 
-## Check for disk errors
+### Check for disk errors
 
 Start the prompt as the administrator and type in these letters
 
-````
+````cmd
 chkdsk C:/f
 ````
 
 or scan with no reboot and no fixing
 
-````
+````cmd
 chkdsk C: /scan
 ````
 
-# See also
+## See also
 
 [How to Use PowerShell to Write to Event Logs](https://devblogs.microsoft.com/scripting/how-to-use-powershell-to-write-to-event-logs/) on devblogs.microsoft.com
 

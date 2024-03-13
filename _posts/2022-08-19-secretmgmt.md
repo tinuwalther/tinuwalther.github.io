@@ -7,7 +7,7 @@ tags:   PowerShell
 permalink: /posts/:title:output_ext
 ---
 
-# Table of Contents
+## Table of Contents
 
 - [Table of Contents](#table-of-contents)
 - [Secret Management](#secret-management)
@@ -36,7 +36,7 @@ permalink: /posts/:title:output_ext
     - [Adding and retrieving secrets from KeePass](#adding-and-retrieving-secrets-from-keepass)
 - [See also](#see-also)
 
-# Secret Management
+## Secret Management
 
 Use [Microsoft.PowerShell.SecretManagement](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.secretmanagement/?view=ps-modules) and do not store passwords in files!
 
@@ -49,21 +49,21 @@ SecretManagement extension vaults:
 - SecretManagement.KeePass
 - and more
 
-## Work with the SecretStore module as a SecretVault
+### Work with the SecretStore module as a SecretVault
 
-### Install the modules for SecretStore
+#### Install the modules for SecretStore
 
 ````powershell
 Install-Module Microsoft.PowerShell.SecretManagement, Microsoft.PowerShell.SecretStore -Verbose
 ````
 
-### Register Module
+#### Register Module
 
 ````powershell
 Register-SecretVault -ModuleName Microsoft.PowerShell.SecretStore -Name MyOwnStore
 ````
 
-### SecretStore configuration
+#### SecretStore configuration
 
 List the configuration:
 
@@ -85,7 +85,7 @@ Change the password-timeout to 1 hour:
 Set-SecretStoreConfiguration -Scope CurrentUser -Authentication Password -PasswordTimeout 3600 -Interaction Prompt
 ````
 
-### Get SecretVault
+#### Get SecretVault
 
 ````powershell
 Get-SecretVault
@@ -95,7 +95,7 @@ Name          ModuleName                       IsDefaultVault
 MyOwnStore    Microsoft.PowerShell.SecretStore True
 ````
 
-### Adding and retrieving secrets
+#### Adding and retrieving secrets
 
 ````powershell
 $cred = Get-Credential
@@ -155,7 +155,7 @@ ExpireAfter 2022-06-24 20:00:00
 Url         https://gmx.net
 ````
 
-### Retrieve a secret and use it as PSCredential-Object
+#### Retrieve a secret and use it as PSCredential-Object
 
 First, unlock the secret-store:
 
@@ -175,7 +175,7 @@ UserName                         Password
 tinu@gmx.net System.Security.SecureString
 ````
 
-### Remove SecretVault
+#### Remove SecretVault
 
 Un-registers an extension vault from SecretManagement for the current user.
 
@@ -188,7 +188,7 @@ Enter password:
 ****
 ````
 
-### Unregister SecretVault
+#### Unregister SecretVault
 
 Un-registers an extension vault from SecretManagement for the current user.
 
@@ -197,17 +197,17 @@ Get-SecretVault
 Unregister-SecretVault MyOwnStore
 ````
 
-[ [Top](#table-of-contents) ] 
+[ [Top](#table-of-contents) ]
 
-## Work with the Keepass module as a SecretVault
+### Work with the Keepass module as a SecretVault
 
-### Install the modules for KeePass
+#### Install the modules for KeePass
 
 ````powershell
 Install-Module Microsoft.PowerShell.SecretManagement, SecretManagement.KeePass -Verbose
 ````
 
-### Register Module
+#### Register Module
 
 ````powershell
 Register-SecretVault -Name "KeePassDB" -ModuleName "SecretManagement.Keepass" -VaultParameters @{
@@ -217,7 +217,7 @@ Register-SecretVault -Name "KeePassDB" -ModuleName "SecretManagement.Keepass" -V
 }
 ````
 
-### Get SecretVault
+#### Get SecretVault
 
 ````powershell
 Get-SecretVault
@@ -227,7 +227,7 @@ Name        ModuleName                       IsDefaultVault
 KeePassDB   SecretManagement.Keepass         False
 ````
 
-### Set KeePass as DefaultVault
+#### Set KeePass as DefaultVault
 
 Sets the provided vault name as the default vault for the current user.
 
@@ -235,7 +235,7 @@ Sets the provided vault name as the default vault for the current user.
 Set-SecretVaultDefault -Name KeePassDB
 ````
 
-### Unlock SecretVault
+#### Unlock SecretVault
 
 First, unlock the secret-vault:
 
@@ -243,14 +243,14 @@ First, unlock the secret-vault:
 Unlock-SecretVault -Name KeePassDB
 ````
 
-### Retrieving SecretInfo
+#### Retrieving SecretInfo
 
 ````powershell
 Get-SecretInfo -Vault KeePassDB
 Get-SecretInfo -Vault KeePassDB -Name *Token*
 ````
 
-### Retrieve a secret and use it as PSCredential-Object
+#### Retrieve a secret and use it as PSCredential-Object
 
 ````powershell
 Get-Secret -Name "Token"
@@ -260,7 +260,7 @@ UserName                     Password
 tinu     System.Security.SecureString
 ````
 
-### Retrieve a secret and use it as PlainText
+#### Retrieve a secret and use it as PlainText
 
 Retrieve the password of a specified Name and use it as PlainText form the Clipboard:
 
@@ -307,7 +307,7 @@ Write-Host "Set the password to the Clipboard. " -ForegroundColor Green -NoNewli
 Read-Host -Prompt "Press any key to exit"
 ````
 
-````
+````powershell
 Get Secret from KeePassDB
 
 Keepass Master Password
@@ -324,13 +324,13 @@ Enter the FullName to search: Test for any access
 Set the password to the Clipboard. Press any key to exit:
 ````
 
-[ [Top](#table-of-contents) ] 
+[ [Top](#table-of-contents) ]
 
-## Full Example on AlmaLinux
+### Full Example on AlmaLinux
 
 For this full example with AlmaLinux, you can use my Project [PSAutoMic](https://github.com/tinuwalther/PSAutoMic) to create the Docker-Container.
 
-### Create Docker Container
+#### Create Docker Container
 
 Create a Docker-Image and Docker-Container with installed PowerShell and start the container:
 
@@ -352,7 +352,7 @@ KernelRelease : 5.15.90.1-microsoft-standard-WSL2
 OSInstallDate : 2023-06-02
 ````
 
-### Install and configure KeePass
+#### Install and configure KeePass
 
 Install config-manager, EPEL-repository, and keepassxc:
 
@@ -391,7 +391,7 @@ Repeat password: <your master-password>
 Successfully created new database.
 ````
 
-### Install and configure SecretManagement for KeePass
+#### Install and configure SecretManagement for KeePass
 
 Install the SecretManagement.Keepass and all dependencies:
 
@@ -424,7 +424,7 @@ Name      ModuleName               IsDefaultVault
 KeePassDB SecretManagement.KeePass True
 ````
 
-### Adding and retrieving secrets from KeePass
+#### Adding and retrieving secrets from KeePass
 
 Unlock the KeePassDB:
 
@@ -469,7 +469,7 @@ UserName : Tinu
 Password : System.Security.SecureString
 ````
 
-# See also
+## See also
 
 [Microsoft.PowerShell.SecretManagement](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.secretmanagement/?view=ps-modules/) on docs.microsoft.com, [KeePassXC: User Guide](https://keepassxc.org/docs/KeePassXC_UserGuide#_creating_your_first_database)
 

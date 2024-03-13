@@ -7,7 +7,7 @@ tags:   PowerShell
 permalink: /posts/:title:output_ext
 ---
 
-# Table of Contents
+## Table of Contents
 
 - [Table of Contents](#table-of-contents)
 - [PowerShell Module Template](#powershell-module-template)
@@ -25,7 +25,7 @@ permalink: /posts/:title:output_ext
     - [Functions.Tests.ps1](#functionstestsps1)
     - [Functions.Tests.json](#functionstestsjson)
 
-# PowerShell Module Template
+## PowerShell Module Template
 
 How to create a new PowerShell-Module with PSModuleTemplate?
 
@@ -36,19 +36,19 @@ How to create a new PowerShell-Module with PSModuleTemplate?
 5. Save your function-files in the folder Code
 6. Build your Module with Build-Module.ps1
 
-## README
+### README
 
 Information about your project.
 
-## CHANGELOG
+### CHANGELOG
 
 Update this file whenever you make changes on your module!
 
-## CI
+### CI
 
 This is the folder for all Continous Integration scripts like a script to automate the Module-File (Build-Module.ps1) and other scripts.
 
-### Build-Module.ps1
+#### Build-Module.ps1
 
 This script builds your module automatically.  
 
@@ -57,7 +57,7 @@ The script also updates the Manifest-File (PSD1) with the functions to export. I
 
 Finally Build-Module.ps1 tests if your Module can be imported and removed without any errors. It tests also if the Module contains all of your exported functions.
 
-### Module-Settings.json
+#### Module-Settings.json
 
 The settings-file will be created, if you build the module at the first time and contains the following properties:
 
@@ -67,34 +67,34 @@ The settings-file will be created, if you build the module at the first time and
     ModuleAuthor
     ModuleCompany
 
-## Code
+### Code
 
 In this folder save all your functions as PS1-Files with the Name of the function you want to have in the Module. e.g. Get-SCSSomeSettings.ps1.
 
-### Get-SCSSomeSettings.ps1
+#### Get-SCSSomeSettings.ps1
 
 This is an example function-file, you can copy and rename this file for your own use. Before you build your module, please delete the Get-SCSSomeSettings.ps1.
 
-## Module-Folder
+### Module-Folder
 
 The Module-Folder will be created automatically with the Build-Module.script.
 
-### Manifest-File
+#### Manifest-File
 
 Automatically generated Manifest-file (PSD1), please update some settings by editing the file in vs-code.
 
-### Module-File
+#### Module-File
 
 PowerShell-Module-file (PSM1), contains all your functions from the Code-folder.
 
-## Tests
+### Tests
 
 This folder contains all the Pester-Test-scripts.  
 
-### Functions.Tests.ps1
+#### Functions.Tests.ps1
 
 Functions.Tests.ps1 tests all of your scripts/functions in the folder Code.  
 
-### Functions.Tests.json
+#### Functions.Tests.json
 
 This file will be created, if there were some errors in the Build-Module.

@@ -7,7 +7,7 @@ tags:   PowerShell
 permalink: /posts/:title:output_ext
 ---
 
-# Table of Contents
+## Table of Contents
 
 - [Table of Contents](#table-of-contents)
 - [Rules](#rules)
@@ -38,7 +38,7 @@ GitLab Pipeline is your friend - UNDER CONSTRUCTION!
 
 A GitLab CI/CD pipeline is the file ````.gitlab-ci.yml```` in the root of your project.
 
-# Rules
+## Rules
 
 ````powershell
 if: $CI_PIPELINE_SOURCE == 'merge_request_event'
@@ -46,7 +46,7 @@ if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
 if: $CI_COMMIT_TITLE =~ /TEST:.*/
 ````
 
-# Stages
+## Stages
 
 List of stages for jobs, and their order of execution. If stages is not defined in the ````.gitlab-ci.yml```` file, the default pipeline stages are:
 
@@ -58,7 +58,7 @@ deploy
 .post
 ````
 
-# Jobs
+## Jobs
 
 Hidden Jobs begins with a point in the name ````.cleanup_git````.
 
@@ -79,11 +79,11 @@ test-node-yaml-test:
   extends: .test_node_yaml
 ````
 
-# Tags
+## Tags
 
 Tags of your GitLab-Runner.
 
-# Extends
+## Extends
 
 Reuse the configuration or Scripts.
 
@@ -92,7 +92,7 @@ extends: .test_node_yaml # included script
 extends: .deploy_script  # hidden job
 ````
 
-# Includes
+## Includes
 
 Configurations and Scripts outside of the ````.gitlab-ci.yml````.
 
@@ -105,7 +105,7 @@ include:
   - local: '/CI/cleanup-runner.yml'
 ````
 
-# Script
+## Script
 
 A Script can be either a single Command or a Scriptblock.
 
@@ -129,7 +129,9 @@ script: |
   Write-Host "End Job-ID $($CI_JOB_ID), Job-Name $($CI_JOB_NAME)"
 ````
 
-# Example 1
+[ [Top](#table-of-contents) ]
+
+## Example 1
 
 A very simple Pipeline.
 
@@ -184,7 +186,9 @@ cleanup-job:
     Remove-Item $CleaningPath -Recurse -Force
 ````
 
-# Example 2
+[ [Top](#table-of-contents) ]
+
+## Example 2
 
 Copy items to the Runner in a specified target path.
 
@@ -215,12 +219,14 @@ deploy-cloud:  # This job runs in the build stage, which runs first of defined s
   extends: .deploy_script
 ````
 
-# Example 3
+[ [Top](#table-of-contents) ]
+
+## Example 3
 
 This Pipeline does only execute if the commit message starts with TEST:.  
 Execute Pester-Tests, upload the report as artifact back to the Git-Repository.
 
-## gitlab-ci.yml
+### gitlab-ci.yml
 
 ````powershell
 # A pipeline is composed of independent jobs that run scripts, grouped into stages.
@@ -263,7 +269,9 @@ cleanup-runner-test:
   extends: .cleanup_runner
 ````
 
-## test-node.yml
+[ [Top](#table-of-contents) ]
+
+### test-node.yml
 
 ````powershell
 .test_node_yaml:  # This job runs in the test stage, which runs second of defined stages.
@@ -316,7 +324,9 @@ cleanup-runner-test:
     expire_in: 2 days
 ````
 
-## deploy-job.yml
+[ [Top](#table-of-contents) ]
+
+### deploy-job.yml
 
 ````powershell
 .deploy_job:  # This job runs in the deploy stage, which runs third of defined stages.
@@ -367,7 +377,9 @@ cleanup-runner-test:
     expire_in: 1 days
 ````
 
-## cleanup-runner.yml
+[ [Top](#table-of-contents) ]
+
+### cleanup-runner.yml
 
 ````powershell
 .cleanup_runner: # This job runs in the .post stage, which runs last.
@@ -400,12 +412,14 @@ cleanup-runner-test:
     if(Test-Path $CleanupPath){
       Remove-Item -Path $CleanupPath -recurse -force -Confirm:$false
     }
-	
+
     if($LastExitCode -gt 0) { Throw "LastExitCode $($LastExitCode)" }
     Write-Host "End Job-ID $($CI_JOB_ID), Job-Name $($CI_JOB_NAME)"
 ````
 
-## Pester Test Validate Input
+[ [Top](#table-of-contents) ]
+
+### Pester Test Validate Input
 
 ````powershell
 BeforeDiscovery {
@@ -454,7 +468,9 @@ Describe "Validate Input from <_.Name>" -Tag 'Required' -ForEach $yamlfile {
 }
 ````
 
-## Pester Test Diplicated Values
+[ [Top](#table-of-contents) ]
+
+### Pester Test Diplicated Values
 
 ````powershell
 Describe "Test for duplicated values" -Tag 'Required' {
@@ -495,20 +511,21 @@ Describe "Test for duplicated values" -Tag 'Required' {
 }
 ````
 
-### Pipeline TestJob
+[ [Top](#table-of-contents) ]
+
+#### Pipeline TestJob
 
 ![GitLab Pipeline TestJob](../assets/git-pipeline-testjob.png)
 
-### Pipeline DeployJob
+#### Pipeline DeployJob
 
 ![GitLab Pipeline DeployJob](../assets/git-pipeline-deployjob.png)
 
-### Pipeline CleanUpJob
+#### Pipeline CleanUpJob
 
 ![GitLab Pipeline CleanUpJob](../assets/git-pipeline-cleanupjob.png)
 
-
-# Troubleshooting
+## Troubleshooting
 
 Ensure that you do not have any try-catch in your PowerShell-code.
 
@@ -516,6 +533,8 @@ Ensure that you do not have any try-catch in your PowerShell-code.
 
 ````
 
-# See also
+## See also
 
 [CI/CD pipelines](https://docs.gitlab.com/ee/ci/pipelines/) on GitLab docs
+
+[ [Top](#table-of-contents) ] [ [Blog](../categories.html) ]

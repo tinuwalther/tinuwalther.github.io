@@ -7,22 +7,21 @@ tags:   PowerShell
 permalink: /posts/:title:output_ext
 ---
 
-# Table of Contents
-<!-- TOC -->
+## Table of Contents
 
+[Table of Contents](#table-of-contents)
+[Get the latest VMware Modules](#get-the-latest-vmware-modules)
 - [Table of Contents](#table-of-contents)
 - [Get the latest VMware Modules](#get-the-latest-vmware-modules)
-    - [Download Modules](#download-modules)
-    - [Compress the PowerCLI-Modules](#compress-the-powercli-modules)
+  - [Download Modules](#download-modules)
+  - [Compress the PowerCLI-Modules](#compress-the-powercli-modules)
 - [See also](#see-also)
 
-<!-- /TOC -->
-
-# Get the latest VMware Modules
+## Get the latest VMware Modules
 
 How to create offline VMware Modules.
 
-## Download Modules
+### Download Modules
 
 Download PowerCLI and their Dependencies:
 
@@ -30,7 +29,7 @@ Download PowerCLI and their Dependencies:
 Save-Module -Name VMware.PowerCLI -Path F:\temp\VMware\ -Repository PSGallery
 ````
 
-## Compress the PowerCLI-Modules
+### Compress the PowerCLI-Modules
 
 Required Modules from "F:\temp\VMware\VMware.PowerCLI\13.0.0.20829139\VMware.PowerCLI.psd1"
 
@@ -62,8 +61,8 @@ Required Modules from "F:\temp\VMware\VMware.PowerCLI\13.0.0.20829139\VMware.Pow
     @{"ModuleName"="VMware.Sdk.vSphere";"ModuleVersion"="8.0.110.20624081"}
     @{"ModuleName"="VMware.PowerCLI.VCenter";"ModuleVersion"="12.6.0.19600125"}
     @{"ModuleName"="VMware.Sdk.Nsx.Policy";"ModuleVersion"="4.0.0.20829136"}
-    # @{"ModuleName"="VMware.Sdk.Vcf.CloudBuilder";"ModuleVersion"="0.0.0.0"}
-    # @{"ModuleName"="VMware.Sdk.Vcf.SddcManager";"ModuleVersion"="0.0.0.0"}
+    ## @{"ModuleName"="VMware.Sdk.Vcf.CloudBuilder";"ModuleVersion"="0.0.0.0"}
+    ## @{"ModuleName"="VMware.Sdk.Vcf.SddcManager";"ModuleVersion"="0.0.0.0"}
 )
 
 $Source = $RequiredModules.ModuleName | ForEach-Object {
@@ -80,6 +79,6 @@ $ArchiveFilePath = "F:\temp\VMware\VMware-Moduel.13.0.zip"
 Compress-Archive -Path $Source -DestinationPath $ArchiveFilePath -CompressionLevel Optimal
 ````
 
-# See also
+## See also
 
 [ [Top](#table-of-contents) ] [ [Blog](../categories.html) ]
