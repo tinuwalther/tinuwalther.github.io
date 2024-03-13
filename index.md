@@ -7,3 +7,7 @@ I ♥ PS 7.3.6 > Hello PowerShell enthusiasts. Here you can find some example fo
 ````powershell
 iex "& { $(irm https://aka.ms/install-powershell.ps1) } -UseMSI"
 ````
+
+{{% highlight powershell %}}
+iex "& { $(irm https://aka.ms/install-powershell.ps1) } -UseMSI"
+{{% endhighlight %}}
