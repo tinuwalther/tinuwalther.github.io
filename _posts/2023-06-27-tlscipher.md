@@ -87,5 +87,3 @@ HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 
 ## See also
 
 [Get all cipher suites](https://learn.microsoft.com/en-us/powershell/module/tls/get-tlsciphersuite?view=windowsserver2022-ps), [Protocols in TLS/SSL (Schannel SSP)](https://learn.microsoft.com/en-us/windows/win32/secauthn/protocols-in-tls-ssl--schannel-ssp-), [Transport Layer Security (TLS) registry settings](https://learn.microsoft.com/en-us/windows-server/security/tls/tls-registry-settings?tabs=diffie-hellman) on Microsoft.
-
-[ [Top](#table-of-contents) ] [ [Blog](../categories.html) ]

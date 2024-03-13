@@ -141,5 +141,3 @@ host-1567 esxi1567.company.com CONNECTED        POWERED_ON
 ## See also
 
 [API Reference](https://developer.vmware.com/apis/vsphere-automation/v7.0U3/) on VMware Developper Documentation.
-
-[ [Top](#table-of-contents) ] [ [Blog](../categories.html) ]

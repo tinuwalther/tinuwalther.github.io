@@ -67,5 +67,3 @@ Output:
 ````text
 Source W:\WebSites, Target Z:\Backup\WebSites
 ````
-
-[ [Top](#table-of-contents) ] [ [Blog](../categories.html) ]

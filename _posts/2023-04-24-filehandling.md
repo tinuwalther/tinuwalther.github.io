@@ -212,5 +212,3 @@ file:
 ## See also
 
 [ValidateScript Attribute Declaration](https://learn.microsoft.com/en-us/powershell/scripting/developer/cmdlet/validatescript-attribute-declaration?view=powershell-7.3) on Microsoft.
-
-[ [Top](#table-of-contents) ] [ [Blog](../categories.html) ]

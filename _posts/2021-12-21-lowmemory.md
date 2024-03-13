@@ -148,5 +148,3 @@ chkdsk C: /scan
 ## See also
 
 [How to Use PowerShell to Write to Event Logs](https://devblogs.microsoft.com/scripting/how-to-use-powershell-to-write-to-event-logs/) on devblogs.microsoft.com
-
-[ [Top](#table-of-contents) ] [ [Blog](../categories.html) ]

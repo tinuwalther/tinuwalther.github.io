@@ -70,5 +70,3 @@ Get-ChildItem "HKU:\" | ForEach {
 ## See also
 
 [Get-ItemPropertyValue](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.management/get-itempropertyvalue?view=powershell-6) on Microsoft Docs.
-
-[ [Top](#table-of-contents) ] [ [Blog](../categories.html) ]

@@ -50,5 +50,3 @@ Use NuGet provider to install the required module to the target location.
 ````powershell
 Register-PackageSource -Name PSNuGet -Location https://www.powershellgallery.com/api/v2 -ProviderName NuGet
 ````
-
-[ [Top](#table-of-contents) ] [ [Blog](../categories.html) ]

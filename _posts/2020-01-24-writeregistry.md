@@ -64,5 +64,3 @@ $SubKey.CreateSubKey('Non-Volatile', $true , [Microsoft.Win32.RegistryOptions]::
 ## See also
 
 [Set-ItemPropertyValue](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.management/set-itemproperty?view=powershell-6) on Microsoft Docs.
-
-[ [Top](#table-of-contents) ] [ [Blog](../categories.html) ]

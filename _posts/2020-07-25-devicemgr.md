@@ -93,5 +93,3 @@ Get-ErrorDeviceList  -Verbose
 [Error codes in Device Manager in Windows](https://support.microsoft.com/en-us/help/310123/error-codes-in-device-manager-in-windows)
 
 [Win32_PnPEntity class](https://docs.microsoft.com/de-de/windows/win32/cimwin32prov/win32-pnpentity?redirectedfrom=MSDN)
-
-[ [Top](#table-of-contents) ] [ [Blog](../categories.html) ]

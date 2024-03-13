@@ -28,5 +28,3 @@ MyAccount       {Domain Users, Remote Desktop Users}
 ## See also
 
 [Get-ADPrincipalGroupMembership](https://docs.microsoft.com/en-us/powershell/module/addsadministration/get-adprincipalgroupmembership?view=win10-ps) on Microsoft Docs.
-
-[ [Top](#table-of-contents) ] [ [Blog](../categories.html) ]

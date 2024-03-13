@@ -77,5 +77,3 @@ switch(Get-CurrentOS){
 ## See also
 
 [Determine the OS version, Linux and Windows from Powershell](https://stackoverflow.com/questions/44703646/determine-the-os-version-linux-and-windows-from-powershell) on stack overflow
-
-[ [Top](#table-of-contents) ] [ [Blog](../categories.html) ]

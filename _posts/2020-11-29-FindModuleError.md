@@ -79,5 +79,3 @@ Restart-Computer
 ### See also
 
 [PowerShell Gallery TLS Support](https://devblogs.microsoft.com/powershell/powershell-gallery-tls-support/)
-
-[ [Top](#table-of-contents) ] [ [Blog](../categories.html) ]

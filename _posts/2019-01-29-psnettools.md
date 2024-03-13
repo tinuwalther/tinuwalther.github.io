@@ -735,5 +735,3 @@ DateTime            AddressFamily Address    Port
 21.02.2019 19:56:07  InterNetwork 127.0.0.1 53666
 Listener Closed Safely
 ````
-
-[ [Top](#table-of-contents) ] [ [Blog](../categories.html) ]

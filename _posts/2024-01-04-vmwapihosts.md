@@ -64,5 +64,3 @@ If you need the HostSummary of all ESXi Hosts, change the API Url to `https://$(
 
 [API Reference](https://developer.vmware.com/apis/vsphere-automation/v7.0U3/) on VMware Developper Documentation,
 [Data Structure HostSummary](https://developer.vmware.com/apis/vsphere-automation/v7.0U3/vcenter/data-structures/Host/Summary/) on VMware Developper Documentation,
-
-[ [Top](#table-of-contents) ] [ [Blog](../categories.html) ]

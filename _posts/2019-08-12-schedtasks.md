@@ -162,5 +162,3 @@ Error | Problem | Solution
 ## See also
 
 [Task Scheduler Error and Success Constants](https://docs.microsoft.com/en-us/windows/win32/taskschd/task-scheduler-error-and-success-constants) on Microsoft Docs.
-
-[ [Top](#table-of-contents) ] [ [Blog](../categories.html) ]

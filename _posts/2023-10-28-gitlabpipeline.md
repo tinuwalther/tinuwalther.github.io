@@ -536,5 +536,3 @@ Ensure that you do not have any try-catch in your PowerShell-code.
 ## See also
 
 [CI/CD pipelines](https://docs.gitlab.com/ee/ci/pipelines/) on GitLab docs
-
-[ [Top](#table-of-contents) ] [ [Blog](../categories.html) ]

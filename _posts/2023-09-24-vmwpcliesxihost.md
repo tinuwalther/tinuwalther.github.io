@@ -262,5 +262,3 @@ foreach($item in $AllVMHost){
 
 [ESXCLI](https://developer.vmware.com/web/tool/7.0/esxcli) on VMware Developper Documentation.  
 [How to use ESXCLI v2 Commands in PowerCLI](https://www.virten.net/2016/11/how-to-use-esxcli-v2-commands-in-powercli/) on virten.net.
-
-[ [Top](#table-of-contents) ] [ [Blog](../categories.html) ]

@@ -130,5 +130,3 @@ Output, if you start PowerShell:
 ## See also
 
 [About Profiles](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_profiles?view=powershell-6) on Microsoft Docs.
-
-[ [Top](#table-of-contents) ] [ [Blog](../categories.html) ]

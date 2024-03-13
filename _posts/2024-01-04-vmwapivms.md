@@ -114,5 +114,3 @@ hardware             : @{upgrade_policy=NEVER; upgrade_status=NONE; version=VMX_
 [API Reference](https://developer.vmware.com/apis/vsphere-automation/v7.0U3/) on VMware Developper Documentation,
 [Data Structure VMSummary](https://developer.vmware.com/apis/vsphere-automation/v7.0U3/vcenter/data-structures/VM/Summary/) on VMware Developper Documentation,
 [Data Structure VMInfo](https://developer.vmware.com/apis/vsphere-automation/v7.0U3/vcenter/data-structures/VM/Info/) on VMware Developper Documentation.
-
-[ [Top](#table-of-contents) ] [ [Blog](../categories.html) ]

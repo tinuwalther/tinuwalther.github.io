@@ -15,7 +15,6 @@ permalink: /posts/:title:output_ext
 - [Get the latest VMware Modules](#get-the-latest-vmware-modules)
   - [Download Modules](#download-modules)
   - [Compress the PowerCLI-Modules](#compress-the-powercli-modules)
-- [See also](#see-also)
 
 ## Get the latest VMware Modules
 
@@ -78,7 +77,3 @@ $ArchiveFilePath = "F:\temp\VMware\VMware-Moduel.13.0.zip"
 
 Compress-Archive -Path $Source -DestinationPath $ArchiveFilePath -CompressionLevel Optimal
 ````
-
-## See also
-
-[ [Top](#table-of-contents) ] [ [Blog](../categories.html) ]

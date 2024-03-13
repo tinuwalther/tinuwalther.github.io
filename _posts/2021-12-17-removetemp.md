@@ -54,5 +54,3 @@ Get-ChildItem $folders -ErrorAction SilentlyContinue | Sort LastWriteTime |
 ## See also
 
 [Weekend Scripter: Use PowerShell to Clean Out Temp Folders](https://devblogs.microsoft.com/scripting/weekend-scripter-use-powershell-to-clean-out-temp-folders/) on devblogs.microsoft.com
-
-[ [Top](#table-of-contents) ] [ [Blog](../categories.html) ]

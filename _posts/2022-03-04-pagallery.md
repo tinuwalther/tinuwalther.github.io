@@ -159,5 +159,3 @@ end {
     Write-Host "Duration: $(New-TimeSpan -Start $StartTime -End (Get-Date) | % { "{1:0}h {2:0}m {3:0}s {4:000}ms" -f $_.Days, $_.Hours, $_.Minutes, $_.Seconds, $_.Milliseconds })`n"
 }
 ````
-
-[ [Top](#table-of-contents) ] [ [Blog](../categories.html) ]

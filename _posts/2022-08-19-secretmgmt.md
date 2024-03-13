@@ -472,5 +472,3 @@ Password : System.Security.SecureString
 ## See also
 
 [Microsoft.PowerShell.SecretManagement](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.secretmanagement/?view=ps-modules/) on docs.microsoft.com, [KeePassXC: User Guide](https://keepassxc.org/docs/KeePassXC_UserGuide#_creating_your_first_database)
-
-[ [Top](#table-of-contents) ] [ [Blog](../categories.html) ]

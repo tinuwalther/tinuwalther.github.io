@@ -362,5 +362,3 @@ Uninstall-Script -Name New-PSiCalendarEvent
 ## See also
 
 [Working with Private PowerShellGet Repositories](https://docs.microsoft.com/en-us/powershell/scripting/gallery/how-to/working-with-local-psrepositories?view=powershell-7.1) on Microsoft Docs, [Nexus Docker](https://github.com/sonatype/docker-nexus) on github.com, [Nexus3](https://registry.hub.docker.com/r/sonatype/nexus3#!) on Docker Hub.
-
-[ [Top](#table-of-contents) ] [ [Blog](../categories.html) ]
