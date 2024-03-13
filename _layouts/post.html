@@ -26,7 +26,8 @@ layout: default
   <hr>
   {{content}}
   <hr>
-  <p><small><b>published on </b> <em>{{ post.date | date: "%B %-d, %Y" }}</em><b> by </b> <em>{{ site.github.owner_name }}</em></small></p>
+  <p><small><b>published on </b> <em>{{ page.date | date: '%B %d, %Y' }} &middot; {% include read_time.html content=page.content %}</em> by </b> <em>{{ site.github.owner_name }}</em></small></p>
+  
 </p>
 
 <footer>
