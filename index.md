@@ -1,3 +1,8 @@
+---
+layout: post
+author: Tinu
+---
+
 # Home
 
 I ♥ PS 7.3.6 > Hello PowerShell enthusiasts. Here you can find some example for using PowerShell on Windows, Mac or Linux.
