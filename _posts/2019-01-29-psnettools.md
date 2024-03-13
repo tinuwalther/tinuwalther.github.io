@@ -1,13 +1,14 @@
 ---
 layout: post
-title:  "PsNetTools"
+title:  PsNetTools
 author: Tinu
 categories: "PowerShell-Module"
 tags:   PowerShell
 permalink: /posts/:title:output_ext
+date: 2019-01-29
 ---
 
-# Table of Contents
+## Table of Contents
 
 - [Table of Contents](#table-of-contents)
 - [PsNetTools](#psnettools)
@@ -31,7 +32,7 @@ permalink: /posts/:title:output_ext
   - [How to Export settings](#how-to-export-settings)
   - [Start-PsNetPortListener](#start-psnetportlistener)
 
-# PsNetTools
+## PsNetTools
 
 PsNetTools is a cross platform PowerShell module to test some network features on Windows, Mac and Linux.  
 
@@ -39,7 +40,7 @@ PsNetTools is a cross platform PowerShell module to test some network features o
 
 Image generated with [PSWordCloud](https://github.com/vexx32/PSWordCloud) by Joel Sallow.
 
-## Why do I need PsNetTools
+### Why do I need PsNetTools
 
 On Windows I often use commands like ping, tracert, route, ipconfig and other network-commands like this. When I work on a Mac, most of these tools have output differently than on Windows or they have a different syntax.  
 
@@ -122,9 +123,9 @@ True
 
 My goal was to use the same commands on Windows, Mac and Linux and they should have the same output format.
 
-# Use PsNetTools
+## Use PsNetTools
 
-## Download Module
+### Download Module
 
 You can use one of the following methods to download my module:
 
@@ -138,13 +139,13 @@ Or download the latest version from GitHub:
 
 Go to [https://github.com/tinuwalther/PsNetTools/releases](https://github.com/tinuwalther/PsNetTools/releases/), download the latest Version of PsNetTools.zip and extract it.
 
-## Import Module
+### Import Module
 
 ````powershell
 Import-Module .\PsNetTools.psd1 -Force
 ````
 
-## List all Commands
+### List all Commands
 
 ````powershell
 Get-Command -Module PsNetTools
@@ -166,7 +167,7 @@ Function        Test-PsNetUping                                    0.7.7      Ps
 Function        Test-PsNetWping                                    0.7.7      PsNetTools
 ````
 
-## Test-PsNetDig
+### Test-PsNetDig
 
 Resolves a hostname to the IP addresses or an IP Address to the hostname.  
 
@@ -209,7 +210,7 @@ Succeeded InputString Destination IpV4Address     IpV6Address                   
      True google.com  google.com  216.58.215.238  2a00:1450:400a:801::200e           26
 ````
 
-## Test-PsNetPing
+### Test-PsNetPing
 
 Attempts to send an ICMP echo message to a remote computer and receive a corresponding ICMP echo reply message from the remote computer.
 
@@ -272,7 +273,7 @@ Test-PsNetPing -Destination sbb.ch, microsoft.com, google.com -try 2
 2019-05-26 09:41:13.110 ICMP ping google.com, IPAddress: 2a00:1450:400a:800::200e, time: 19, send: 32, received: 32, ICMP Success
 ````
 
-## Test-PsNetTping
+### Test-PsNetTping
 
 Test connectivity to an endpoint over the specified Tcp port.  
 It's like the cmdlet Test-NetConnection, but with the ability to specify a timeout in ms.  
@@ -344,7 +345,7 @@ TcpSucceeded TcpPort Destination StatusDescription MinTimeout MaxTimeout TimeMs
         True     443 google.com  TCP Test success           0        100      2
 ````
 
-## Test-PsNetTracert
+### Test-PsNetTracert
 
 Test Trace Route to a destination
 
@@ -405,7 +406,7 @@ Hops, RTT, Send, Received, Destination, Hostname, IPAddress, Status, Messages
 9, 18, 32, 32, www.google.com, zrh04s14-in-x04.1e100.net, 2a00:1450:400a:802::2004, Success, Trace route completed
 ````
 
-## Test-PsNetUping
+### Test-PsNetUping
 
 Test connectivity to an endpoint over the specified Udp port.  
 It's like the cmdlet Test-NetConnection, but with the ability to specify a timeout in ms and query for udp.  
@@ -459,7 +460,7 @@ Succeeded TargetName UdpPort UdpSucceeded Duration MinTimeout MaxTimeout
      True google.com     139        False 1025ms   0ms        1000ms
 ````
 
-## Test-PsNetWping
+### Test-PsNetWping
 
 It's like the cmdlet Invoke-WebRequest, but with the ability to specify 'noproxy' with PowerShell 5.1.  
 
@@ -510,7 +511,7 @@ HttpSucceeded ResponsedUrl            NoProxy Destination        StatusDescripti
          True https://www.google.com/    True https://google.com OK                         0       1000    307
 ````
 
-## Get-PsNetAdapters
+### Get-PsNetAdapters
 
 List all network adapters.
 
@@ -530,7 +531,7 @@ IpV4Addresses        : {169.254.68.121}
 IpV6Addresses        : {}
 ````
 
-## Get-PsNetAdapterConfiguration
+### Get-PsNetAdapterConfiguration
 
 Get-PsNetAdapterConfiguration - get the network interface configuration for all adapters.  
 
@@ -567,7 +568,7 @@ GatewayIpV4Addresses : {<IP Address V4>}
 GatewayIpV6Addresses : {<IP Address V6>}
 ````
 
-## Get-PsNetRoutingTable
+### Get-PsNetRoutingTable
 
 Get-PsNetRoutingTable - Get Routing Table
 Format the Routing Table to an object.
@@ -592,7 +593,7 @@ Succeeded AddressFamily Destination     Netmask         Gateway     Interface   
      True IPv4          255.255.255.255 255.255.255.255 On-link     10.29.191.zzz 301
 ````
 
-## Get-PsNetHostsTable
+### Get-PsNetHostsTable
 
 Get-PsNetHostsTable - Get hostsfile
 Format the hostsfile to an object.
@@ -609,7 +610,7 @@ Succeeded IpAddress    Compuername FullyQualifiedName
      True 192.168.1.29 computer3   computername3.fqdn
 ````
 
-## Add-PsNetHostsEntry
+### Add-PsNetHostsEntry
 
 **WARNING:** Running this command with elevated privilege.
 
@@ -634,7 +635,7 @@ Succeeded HostsEntry                     BackupPath                   Message
      True 127.0.0.1 tinu tinu.walther.ch D:\hosts_20190301-185838.txt Entry added
 ````
 
-## Remove-PsNetHostsEntry
+### Remove-PsNetHostsEntry
 
 **WARNING:** Running this command with elevated privilege.
 
@@ -657,7 +658,7 @@ Succeeded HostsEntry                     BackupPath                   Message
      True 127.0.0.1 tinu tinu.walther.ch D:\hosts_20190301-190104.txt Entry removed
 ````
 
-## How to Export settings
+### How to Export settings
 
 You can easy export all the output of the commands as a JSON-file with the following CmdLets:
 
@@ -716,7 +717,7 @@ Export the JSON-Object from Test-PsNetDig to a file:
 Test-PsNetDig sbb.ch | ConvertTo-Json | Set-Content D:\PsNetDig.json
 ````
 
-## Start-PsNetPortListener
+### Start-PsNetPortListener
 
 Temporarily listen on a given TCP port for connections dumps connections to the screen
 
@@ -736,4 +737,4 @@ DateTime            AddressFamily Address    Port
 Listener Closed Safely
 ````
 
-[ [Top] ](#table-of-contents)
+[ [Top](#table-of-contents) ] [ [Blog](../categories.html) ]
