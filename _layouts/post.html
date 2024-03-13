@@ -45,17 +45,19 @@ layout: default
         <a class="btn btn-primary float-left" href="{{ page.previous.url | prepend: site.baseurl | replace: '//', '/' }}" 
           data-toggle="tooltip" data-placement="top" title="{{ page.previous.title }}">&larr; Previous Post
         </a>
-        <em> | </em>
+        <p> | </p>
         {% endif %}
 
 
         <a href="{{ page.url }}"> [ Top ] </a>
-        <em> | Copyright © 2024 by {{ site.github.owner_name }} | </em>
+        <p> | </p>
+        <em> Copyright © 2024 by {{ site.github.owner_name }} </em>
+        <p> | </p>
         <a href="/categories.html"> [ Blog ] </a>
         
         
         {% if page.next.url %}
-        <em> | </em>
+        <p> | </p>
         <a class="btn btn-primary float-right" href="{{ page.next.url | prepend: site.baseurl | replace: '//', '/' }}" 
           data-toggle="tooltip" data-placement="top" title="{{ page.next.title }}">Next Post &rarr;
         </a>
