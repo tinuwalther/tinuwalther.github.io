@@ -26,8 +26,9 @@ layout: default
   <hr>
   {{content}}
   <hr>
+  <p><small><b>published on </b> <em>{{ post.date | date: "%B %-d, %Y" }}</em><b> by </b> <em>{{ site.github.owner_name }}</em></small></p>
 </p>
 
 <footer>
-  <small>Copyright © 2024 by {{ page.author }}</small>
+  <small>Copyright © 2024 by {{ site.github.owner_name }}</small>
 </footer>
