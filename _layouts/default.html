@@ -59,13 +59,13 @@
 
       {{ content }}
 
+      {% if post.date %}
+        <p><small><b>published on </b> <em>{{ post.date | date: "%B %-d, %Y" }}</em><b> by </b> <em>{{ site.github.owner_name }}</em></small></p>
+      {% endif %}
+
       </section>
 
       <footer>
-        {% if post.date %}
-          <p><small><b>published on </b> <em>{{ post.date | date: "%B %-d, %Y" }}</em><b> by </b> <em>{{ site.github.owner_name }}</em></small></p>
-        {% endif %}
-
         {% if site.github.is_project_page %}
           <p>This project is maintained by <a href="{{ site.github.owner_url }}">{{ site.github.owner_name }}</a></p>
         {% endif %}
