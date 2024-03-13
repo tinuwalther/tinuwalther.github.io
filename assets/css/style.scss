@@ -69,14 +69,14 @@ body {
   
   code, pre {
     font-family:Monaco, Bitstream Vera Sans Mono, Lucida Console, Terminal, Consolas, Liberation Mono, DejaVu Sans Mono, Courier New, monospace;
-    color:#333;
+    color:#1eaf45; //#333;
   }
   
   pre {
     padding:8px 15px;
-    background: #f8f8f8;
+    background: #000000; //#f8f8f8;
     border-radius:5px;
-    border:1px solid #e5e5e5;
+    border:1px solid #000000; //#e5e5e5;
     overflow-x: auto;
   }
   
