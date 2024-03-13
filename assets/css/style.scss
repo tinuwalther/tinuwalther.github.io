@@ -2,29 +2,35 @@
 ---
 html {
   --bg: #fff;
+  --bg-code: #b6b6b6;
   --bg-secondary: #fcfcfc;
   --headings: #07f;
   --text: #333;
+  --code: #333;
 }
 
 html[data-theme='dark'] {
   --bg: #333;
+  --bg-code: #1f1f1f;
   --bg-secondary: #444;
   --headings: #39f;
   --text: #bbb;
+  --code: #05f946;
 }
 
 body {
   background-color: var(--bg); //#fafafa;
     padding:50px;
     font: 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-    color:#1f1f1f; //
+    //color:#1f1f1f;
     font-weight:400;
   }
   
+  /*
   .container {
     background-color: var(--bg-secondary);
   }
+  */
 
   h1, h2, h3, h4, h5, h6 {
     color: var(--headings); //#069;
@@ -90,14 +96,14 @@ body {
   
   code, pre {
     font-family:Monaco, Bitstream Vera Sans Mono, Lucida Console, Terminal, Consolas, Liberation Mono, DejaVu Sans Mono, Courier New, monospace;
-    color:#05f946; //#333;
+    color: var(--code);
   }
   
   pre {
     padding:8px 15px;
-    background: #282626;
+    //background: #282626;
     border-radius:5px;
-    border:1px solid #282626;
+    //border:1px solid #282626;
     overflow-x: auto;
   }
   
@@ -162,7 +168,7 @@ body {
   header ul a {
     line-height:1;
     font-size:11px;
-    color:#999;
+    color:var(--headings); //#999;
     display:block;
     text-align:center;
     padding-top:6px;
@@ -170,7 +176,7 @@ body {
   }
   
   header ul a:hover {
-    color:#999;
+    color:var(--headings); //#999;
   }
   
   header ul a:active {
@@ -178,7 +184,7 @@ body {
   }
   
   strong {
-    color:#222;
+    //color:#222;
     font-weight:500;
   }
   
@@ -190,7 +196,7 @@ body {
   header ul a strong {
     font-size:14px;
     display:block;
-    color:#222;
+    color:var(--headings); //#222;
   }
   
   section {
