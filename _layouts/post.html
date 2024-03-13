@@ -5,6 +5,10 @@ layout: default
 <h1>{{ page.title }}</h1>
 
 <p>
+  {% if post.date %}
+    <small><b>published:</b> <em>{{ post.date | date: "%B %-d, %Y" | join: "</em> - <em>" }}</em></small>
+  {% endif %}
+
   {% if page.author %}
     <small><b>author:</b> <em>{{ page.author | join: "</em> - <em>" }}</em></small>
   {% endif %}
@@ -20,4 +24,6 @@ layout: default
 
 <p>{{content}}</p>
 
-<p>Published on {{ post.date | date: "%B %-d, %Y" }} by {{ post.author }}</p>
+<p>
+  <small><b>Published on:</b> <em>{{ post.date | date: "%B %-d, %Y" }} by {{ post.author }}</em></small>
+</p>
