@@ -1,19 +1,40 @@
 ---
 ---
+html {
+  --bg: #fff;
+  --bg-secondary: #fcfcfc;
+  --headings: #07f;
+  --text: #333;
+}
+
+html[data-theme='dark'] {
+  --bg: #333;
+  --bg-secondary: #444;
+  --headings: #39f;
+  --text: #bbb;
+}
 
 body {
-    background-color: #fafafa;
+  background-color: var(--bg); //#fafafa;
     padding:50px;
     font: 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
     color:#1f1f1f; //
     font-weight:400;
   }
   
+  .container {
+    background-color: var(--bg-secondary);
+  }
+
   h1, h2, h3, h4, h5, h6 {
-    color:#069;
+    color: var(--headings); //#069;
     margin:0 0 20px;
   }
   
+  p, strong, b, em, span, code, small {
+    color: var(--text);
+  }
+
   p, ul, ol, table, pre, dl {
     margin:0 0 20px;
   }
@@ -74,9 +95,9 @@ body {
   
   pre {
     padding:8px 15px;
-    background: #f8f8f8;
+    background: #282626;
     border-radius:5px;
-    border:1px solid #e5e5e5;
+    border:1px solid #282626;
     overflow-x: auto;
   }
   
@@ -102,7 +123,7 @@ body {
   
   img {
     max-width:100%;
-    background: #000000;
+    background: #282626;
   }
   
   header {
