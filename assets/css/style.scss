@@ -37,10 +37,16 @@ body {
     margin:0 0 20px;
   }
   
-  p, strong, em, span, small {
+  /*
+  p, strong, b, em, span, small {
     color: var(--text);
   }
-  
+  */
+
+  strong, b, em, span, small {
+    color: var(--text);
+  }
+
   p, ul, ol, table, pre, dl {
     color: var(--text);
     margin:0 0 20px;
@@ -226,6 +232,17 @@ body {
     position:fixed;
     bottom:50px;
     -webkit-font-smoothing:subpixel-antialiased;
+  }
+  
+  div.container6 {
+    height: 5em;
+    display: flex;
+    align-items: center;
+    justify-content: center 
+  }
+
+  div.container6 p {
+    margin: 0 
   }
   
   @media print, screen and (max-width: 960px) {
