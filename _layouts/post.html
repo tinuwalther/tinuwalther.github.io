@@ -22,8 +22,12 @@ layout: default
   {% endif %}
 </p>
 
-<p>{{content}}</p>
-
 <p>
-  <small><b>Published on:</b> <em>{{ post.date | date: "%B %-d, %Y" }} by {{ post.author }}</em></small>
+  <hr>
+  {{content}}
+  <hr>
 </p>
+
+<footer>
+  <small>Copyright (c) 2024 by {{ page.author }}</small>
+</footer>
