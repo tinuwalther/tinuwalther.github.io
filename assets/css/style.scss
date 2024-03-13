@@ -43,6 +43,10 @@ body {
   }
   */
 
+  em, small {
+    color: var(--text);
+  }
+
   p, ul, ol, table, pre, dl {
     color: var(--text);
     margin:0 0 20px;
@@ -231,7 +235,6 @@ body {
   }
   
   div.container6 {
-    height: 5em;
     display: flex;
     align-items: center;
     justify-content: center 
