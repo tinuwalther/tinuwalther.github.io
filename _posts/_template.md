@@ -13,7 +13,6 @@ permalink: /posts/:title:output_ext
 - [Read-FromWMIClass](#read-fromwmiclass)
 - [See also](#see-also)
 
-
 ## Read-FromWMIClass
 
 ````powershell
