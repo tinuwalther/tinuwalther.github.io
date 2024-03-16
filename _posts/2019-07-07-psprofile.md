@@ -50,66 +50,49 @@ code $PROFILE.CurrentUserAllHosts
 
 ## Functions in your Profile
 
-My prefered functions in my own profile.ps1
-
-### Windows
+My prefered functions in my own profile.ps1 on Windows, Mac and Linux:
 
 ````powershell
-function Test-IsAdministrator {
-    $user = [Security.Principal.WindowsIdentity]::GetCurrent();
-    (New-Object Security.Principal.WindowsPrincipal $user).IsInRole([Security.Principal.WindowsBuiltinRole]::Administrator)
+function Test-IsElevated {
+    if($PSVersionTable.PSVersion.Major -lt 6){
+        # Windows only
+        $user = [Security.Principal.WindowsIdentity]::GetCurrent()
+        $ret  = (New-Object Security.Principal.WindowsPrincipal $user).IsInRole([Security.Principal.WindowsBuiltinRole]::Administrator)
+    }else{
+        if($IsWindows){
+            $user = [Security.Principal.WindowsIdentity]::GetCurrent()
+            $ret  = (New-Object Security.Principal.WindowsPrincipal $user).IsInRole([Security.Principal.WindowsBuiltinRole]::Administrator)
+        }
+        if($IsLinux -or $IsMacOS){
+            $ret  = (id -u) -eq 0
+        }
+    }
+    $ret
 }
 
-function prompt{
-
-    if (Test-IsAdministrator) {
+function prompt
+{
+    if (Test-IsElevated) {
         $color = 'Red'
     }
     else{
         $color = 'Green'
     }
-    
+    [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+    Import-Module -Name CompletionPredictor
+    Set-PSReadLineOption -PredictionViewStyle ListView
     $history = Get-History -ErrorAction Ignore
-    $vscode  = (code --version)[0]
-    $Version = "$($PSVersionTable.PSVersion.ToString())"
+
+    $Version = "$($PSVersionTable.PSVersion.Major).$($PSVersionTable.PSVersion.Minor).$($PSVersionTable.PSVersion.Patch)"
+
     Write-Host "[$($history.count[-1])] " -NoNewline
-    Write-Host ("$(($env:UserName).ToLower())@$(($env:ComputerName).ToLower()) [VS Code $($vscode)]") -nonewline -foregroundcolor $color
-    Write-Host (" I ") -nonewline
+    Write-Host "[$([Environment]::UserName)@$([Environment]::MachineName)] " -ForegroundColor $color -NoNewline
+    Write-Host ("I ") -nonewline
     Write-Host (([char]9829) ) -ForegroundColor $color -nonewline
-    Write-Host (" PS $Version ") -nonewline
-    Write-Host ("$(get-location) ") -foregroundcolor $color -nonewline
-    Write-Host (">") -nonewline -foregroundcolor $color
-    return " "
+    Write-Host ("  PS $Version ") -nonewline
 
-}
-````
-
-### Mac OS
-
-````powershell
-function Test-IsRoot {
-    return ((id -u) -eq 0)
-}
-
-function prompt{
-
-    if (Test-IsRoot) {
-        $color = 'Red'
-    }
-    else{
-        $color = 'Green'
-    }
-
-    $history = Get-History -ErrorAction Ignore
-    $vscode  = (code --version)[0]
-    $Version = "$($PSVersionTable.PSVersion.ToString())"
-    Write-Host "[$($history.count[-1])] " -NoNewline
-    Write-Host ("$((id -un).ToLower())@$((hostname).ToLower()) [VS Code $($vscode)]") -nonewline -foregroundcolor $color
-    Write-Host (" I ") -nonewline
-    Write-Host (([char]9829) ) -ForegroundColor $color -nonewline
-    Write-Host (" PS $Version ") -nonewline
-    Write-Host ("$(get-location) ") -foregroundcolor $color -nonewline
-    Write-Host (">") -nonewline
+    Write-Host ("$(get-location)") -foregroundcolor $color -nonewline
+    Write-Host (" >") -nonewline
     return " "
 
 }
