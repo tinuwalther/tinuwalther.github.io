@@ -3,7 +3,7 @@ layout: post
 title:  "API Content Library"
 author: Tinu
 categories: "VMware"
-tags:   PowerShell News
+tags:   PowerShell
 permalink: /posts/:title:output_ext
 ---
 

@@ -3,7 +3,7 @@ layout: post
 title:  "API Aria Operations for Logs"
 author: Tinu
 categories: "VMware"
-tags:   PowerShell News
+tags:   PowerShell
 permalink: /posts/:title:output_ext
 ---
 
