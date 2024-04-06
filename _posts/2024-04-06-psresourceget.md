@@ -3,7 +3,7 @@ layout: post
 title:  "From PowerShellGet to PSResourceGet"
 author: Tinu
 categories: "PowerShell-Module"
-tags:   PowerShell
+tags:   PowerShell News
 permalink: /posts/:title:output_ext
 ---
 
