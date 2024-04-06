@@ -19,6 +19,7 @@ permalink: /posts/:title:output_ext
 - [Registers a repository for PSResourceGet](#registers-a-repository-for-psresourceget)
 - [Find Modules](#find-modules)
 - [Install Modules](#install-modules)
+- [Remove a Module](#remove-a-module)
 - [Get installed Modules](#get-installed-modules)
 - [See also](#see-also)
 
@@ -35,7 +36,7 @@ Required PowerShellGet v2.
 In PowerShell version 7.4 the PSResourceGet is installed with version 1.0.1, to install the newest version add the -Force parameter to the Install-Module-Command.
 
 ````powershell
-Install-Module -Name Microsoft.PowerShell.PSResourceGet -Scope AllUsers -Verbose -Force
+Install-Module -Name Microsoft.PowerShell.PSResourceGet -Scope AllUsers -PassThru -Force -Verbose
 ````
 
 After the installation of the module, you can list all installed PSResourceGet-version.
@@ -52,28 +53,28 @@ Version Name                               Path
 List all commands of the PSResourceGet.
 
 ````powershell
-Get-Command -Module Microsoft.PowerShell.PSResourceGet | Sort-Object Name
+Get-Command -Module Microsoft.PowerShell.PSResourceGet | Sort-Object Name | Select-Object Version,Name
 
-CommandType     Name                                               Version    Source
------------     ----                                               -------    ------
-Cmdlet          Find-PSResource                                    1.0.4.1    Microsoft.PowerShell.PSResourceGet
-Cmdlet          Get-InstalledPSResource                            1.0.4.1    Microsoft.PowerShell.PSResourceGet
-Alias           Get-PSResource                                     1.0.4.1    Microsoft.PowerShell.PSResourceGet
-Cmdlet          Get-PSResourceRepository                           1.0.4.1    Microsoft.PowerShell.PSResourceGet
-Cmdlet          Get-PSScriptFileInfo                               1.0.4.1    Microsoft.PowerShell.PSResourceGet
-Function        Import-PSGetRepository                             1.0.4.1    Microsoft.PowerShell.PSResourceGet
-Cmdlet          Install-PSResource                                 1.0.4.1    Microsoft.PowerShell.PSResourceGet
-Cmdlet          New-PSScriptFileInfo                               1.0.4.1    Microsoft.PowerShell.PSResourceGet
-Cmdlet          Publish-PSResource                                 1.0.4.1    Microsoft.PowerShell.PSResourceGet
-Cmdlet          Register-PSResourceRepository                      1.0.4.1    Microsoft.PowerShell.PSResourceGet
-Cmdlet          Save-PSResource                                    1.0.4.1    Microsoft.PowerShell.PSResourceGet
-Cmdlet          Set-PSResourceRepository                           1.0.4.1    Microsoft.PowerShell.PSResourceGet
-Cmdlet          Test-PSScriptFileInfo                              1.0.4.1    Microsoft.PowerShell.PSResourceGet
-Cmdlet          Uninstall-PSResource                               1.0.4.1    Microsoft.PowerShell.PSResourceGet
-Cmdlet          Unregister-PSResourceRepository                    1.0.4.1    Microsoft.PowerShell.PSResourceGet
-Cmdlet          Update-PSModuleManifest                            1.0.4.1    Microsoft.PowerShell.PSResourceGet
-Cmdlet          Update-PSResource                                  1.0.4.1    Microsoft.PowerShell.PSResourceGet
-Cmdlet          Update-PSScriptFileInfo                            1.0.4.1    Microsoft.PowerShell.PSResourceGet
+Version     Name
+-------     ----
+1.0.4.1     Find-PSResource
+1.0.4.1     Get-InstalledPSResource
+1.0.4.1     Get-PSResource
+1.0.4.1     Get-PSResourceRepository
+1.0.4.1     Get-PSScriptFileInfo
+1.0.4.1     Import-PSGetRepository
+1.0.4.1     Install-PSResource
+1.0.4.1     New-PSScriptFileInfo
+1.0.4.1     Publish-PSResource
+1.0.4.1     Register-PSResourceRepository
+1.0.4.1     Save-PSResource
+1.0.4.1     Set-PSResourceRepository
+1.0.4.1     Test-PSScriptFileInfo
+1.0.4.1     Uninstall-PSResource
+1.0.4.1     Unregister-PSResourceRepository
+1.0.4.1     Update-PSModuleManifest
+1.0.4.1     Update-PSResource
+1.0.4.1     Update-PSScriptFileInfo
 ````
 
 ### The content of PSResourceGet
@@ -81,48 +82,48 @@ Cmdlet          Update-PSScriptFileInfo                            1.0.4.1    Mi
 List the content of the PSResourceGet-Module.
 
 ````powershell
-Get-ChildItem -Path /usr/local/share/powershell/Modules/Microsoft.PowerShell.PSResourceGet/1.0.4.1
+Get-ChildItem -Path /usr/local/share/powershell/Modules/Microsoft.PowerShell.PSResourceGet/1.0.4.1 | Sort-Object Name | Select-Object LastWriteTime,Size,Name
 
-UnixMode         User Group         LastWriteTime         Size Name
---------         ---- -----         -------------         ---- ----
-drwxr-xr-x       root root       04/06/2024 10:03         4096 dependencies
--rw-r--r--       root root       04/05/2024 21:21         1095 LICENSE
--rw-r--r--       root root       04/05/2024 21:21       343584 Microsoft.PowerShell.PSResourceGet.dll
--rw-r--r--       root root       04/05/2024 21:21        26144 Microsoft.PowerShell.PSResourceGet.psd1
--rw-r--r--       root root       04/05/2024 21:21        17926 Microsoft.PowerShell.PSResourceGet.psm1
--rw-r--r--       root root       04/05/2024 21:21       158819 Notice.txt
--rw-r--r--       root root       04/05/2024 21:21        23512 PSGet.Format.ps1xml
--rw-r--r--       root root       04/06/2024 10:03        30507 PSGetModuleInfo.xml
+LastWriteTime           Size  Name
+-------------           ----  ----
+04/06/2024 10:03:10     4096  dependencies
+04/05/2024 21:21:46     1095  LICENSE
+04/05/2024 21:21:48   343584  Microsoft.PowerShell.PSResourceGet.dll
+04/05/2024 21:21:46    26144  Microsoft.PowerShell.PSResourceGet.psd1
+04/05/2024 21:21:46    17926  Microsoft.PowerShell.PSResourceGet.psm1
+04/05/2024 21:21:46   158819  Notice.txt
+04/05/2024 21:21:46    23512  PSGet.Format.ps1xml
+04/06/2024 10:03:10    30507  PSGetModuleInfo.xml
 ````
 
 List the content of the dependencies-folder to understand what is included. As we can see, NuGet is included.
 
 ````powershell
-Get-ChildItem -Path /usr/local/share/powershell/Modules/Microsoft.PowerShell.PSResourceGet/1.0.4.1/dependencies/
+Get-ChildItem -Path /usr/local/share/powershell/Modules/Microsoft.PowerShell.PSResourceGet/1.0.4.1/dependencies/ | Sort-Object Name | Select-Object LastWriteTime,Size,Name
 
-UnixMode         User Group         LastWriteTime         Size Name
---------         ---- -----         -------------         ---- ----
--rw-r--r--       root root       04/05/2024 21:21        26656 Microsoft.Bcl.AsyncInterfaces.dll
--rw-r--r--       root root       04/05/2024 21:21       722160 Newtonsoft.Json.dll
--rw-r--r--       root root       04/05/2024 21:21       613824 NuGet.Commands.dll
--rw-r--r--       root root       04/05/2024 21:21       122800 NuGet.Common.dll
--rw-r--r--       root root       04/05/2024 21:21       170424 NuGet.Configuration.dll
--rw-r--r--       root root       04/05/2024 21:21        67616 NuGet.Credentials.dll
--rw-r--r--       root root       04/05/2024 21:21        93728 NuGet.DependencyResolver.Core.dll
--rw-r--r--       root root       04/05/2024 21:21       131104 NuGet.Frameworks.dll
--rw-r--r--       root root       04/05/2024 21:21        56760 NuGet.LibraryModel.dll
--rw-r--r--       root root       04/05/2024 21:21       689088 NuGet.Packaging.dll
--rw-r--r--       root root       04/05/2024 21:21       219056 NuGet.ProjectModel.dll
--rw-r--r--       root root       04/05/2024 21:21       786368 NuGet.Protocol.dll
--rw-r--r--       root root       04/05/2024 21:21        65984 NuGet.Versioning.dll
--rw-r--r--       root root       04/05/2024 21:21        20856 System.Buffers.dll
--rw-r--r--       root root       04/05/2024 21:21       142240 System.Memory.dll
--rw-r--r--       root root       04/05/2024 21:21       115856 System.Numerics.Vectors.dll
--rw-r--r--       root root       04/05/2024 21:21        18024 System.Runtime.CompilerServices.Unsafe.dll
--rw-r--r--       root root       04/05/2024 21:21        79024 System.Text.Encodings.Web.dll
--rw-r--r--       root root       04/05/2024 21:21       642832 System.Text.Json.dll
--rw-r--r--       root root       04/05/2024 21:21        25984 System.Threading.Tasks.Extensions.dll
--rw-r--r--       root root       04/05/2024 21:21        25232 System.ValueTuple.dll
+LastWriteTime           Size  Name
+-------------           ----  ----
+04/05/2024 21:21:46   26656  Microsoft.Bcl.AsyncInterfaces.dll
+04/05/2024 21:21:46  722160  Newtonsoft.Json.dll
+04/05/2024 21:21:46  613824  NuGet.Commands.dll
+04/05/2024 21:21:46  122800  NuGet.Common.dll
+04/05/2024 21:21:46  170424  NuGet.Configuration.dll
+04/05/2024 21:21:46   67616  NuGet.Credentials.dll
+04/05/2024 21:21:46   93728  NuGet.DependencyResolver.Core.dll
+04/05/2024 21:21:46  131104  NuGet.Frameworks.dll
+04/05/2024 21:21:46   56760  NuGet.LibraryModel.dll
+04/05/2024 21:21:46  689088  NuGet.Packaging.dll
+04/05/2024 21:21:46  219056  NuGet.ProjectModel.dll
+04/05/2024 21:21:48  786368  NuGet.Protocol.dll
+04/05/2024 21:21:46   65984  NuGet.Versioning.dll
+04/05/2024 21:21:46   20856  System.Buffers.dll
+04/05/2024 21:21:46  142240  System.Memory.dll
+04/05/2024 21:21:46  115856  System.Numerics.Vectors.dll
+04/05/2024 21:21:46   18024  System.Runtime.CompilerServices.Unsafe.dll
+04/05/2024 21:21:46   79024  System.Text.Encodings.Web.dll
+04/05/2024 21:21:48  642832  System.Text.Json.dll
+04/05/2024 21:21:46   25984  System.Threading.Tasks.Extensions.dll
+04/05/2024 21:21:46   25232  System.ValueTuple.dll
 ````
 
 ## Register NuGet-Repositories for PSResourceGet
@@ -141,6 +142,7 @@ Registers the default PSGallery repository. The PSGallery repository is register
 
 ````powershell
 Register-PSResourceRepository -PSGallery -Verbose
+
 Get-PSResourceRepository -Name PSGallery
 ````
 
@@ -199,18 +201,38 @@ Set the PSGallery as trusted.
 
 ````powershell
 Set-PSResourceRepository -Name "PSGallery" -Priority 25 -Trusted -PassThru
+
+Name      Uri                                      Trusted Priority
+----      ---                                      ------- --------
+PSGallery https://www.powershellgallery.com/api/v2 True    25
 ````
 
 Install a Module.
 
 ````powershell
-Install-PSResource -Name PsNetTools -Scope AllUsers -Verbose
+Install-PSResource -Name PsNetTools -Scope AllUsers -PassThru -Verbose
+
+Name       Version Prerelease Repository Description
+----       ------- ---------- ---------- -----------
+PsNetTools 0.7.8              PSGallery  Cross platform PowerShell module to test network functions.
 ````
 
 Re-install a Module.
 
 ````powershell
-Install-PSResource -Name PsNetTools -Scope AllUsers -Reinstall -Verbose
+Install-PSResource -Name PsNetTools -Scope AllUsers -PassThru -Reinstall -Verbose
+
+Name       Version Prerelease Repository Description
+----       ------- ---------- ---------- -----------
+PsNetTools 0.7.8              PSGallery  Cross platform PowerShell module to test network functions.
+````
+
+## Remove a Module
+
+To remove a Module.
+
+````powershell
+Uninstall-PSResource -Name PsNetTools -Scope AllUsers -Verbose
 ````
 
 ## Get installed Modules
