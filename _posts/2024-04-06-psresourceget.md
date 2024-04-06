@@ -21,6 +21,7 @@ permalink: /posts/:title:output_ext
 - [Install Modules](#install-modules)
 - [Remove a Module](#remove-a-module)
 - [Get installed Modules](#get-installed-modules)
+- [Remove PSRepository](#remove-psrepository)
 - [See also](#see-also)
 
 <!-- /TOC -->
@@ -82,7 +83,8 @@ Version     Name
 List the content of the PSResourceGet-Module.
 
 ````powershell
-Get-ChildItem -Path /usr/local/share/powershell/Modules/Microsoft.PowerShell.PSResourceGet/1.0.4.1 | Sort-Object Name | Select-Object LastWriteTime,Size,Name
+$Path = '/usr/local/share/powershell/Modules/Microsoft.PowerShell.PSResourceGet/1.0.4.1'
+Get-ChildItem -Path $Path | Sort-Object Name | Select-Object LastWriteTime,Size,Name
 
 LastWriteTime           Size  Name
 -------------           ----  ----
@@ -99,7 +101,8 @@ LastWriteTime           Size  Name
 List the content of the dependencies-folder to understand what is included. As we can see, NuGet is included.
 
 ````powershell
-Get-ChildItem -Path /usr/local/share/powershell/Modules/Microsoft.PowerShell.PSResourceGet/1.0.4.1/dependencies/ | Sort-Object Name | Select-Object LastWriteTime,Size,Name
+$Path = '/usr/local/share/powershell/Modules/Microsoft.PowerShell.PSResourceGet/1.0.4.1/dependencies/'
+Get-ChildItem -Path $Path | Sort-Object Name | Select-Object LastWriteTime,Size,Name
 
 LastWriteTime           Size  Name
 -------------           ----  ----
@@ -141,9 +144,11 @@ Import-PSGetRepository -Verbose
 Registers the default PSGallery repository. The PSGallery repository is registered by default but can be removed.
 
 ````powershell
-Register-PSResourceRepository -PSGallery -Verbose
+Register-PSResourceRepository -PSGallery -Trusted -PassThru -Verbose
 
-Get-PSResourceRepository -Name PSGallery
+Name      Uri                                      Trusted Priority
+----      ---                                      ------- --------
+PSGallery https://www.powershellgallery.com/api/v2 True    50
 ````
 
 Register the PSGallery v2.
@@ -153,6 +158,7 @@ $parameters = @{
   Name     = 'PSGalleryV2'
   Uri      = 'https://www.powershellgallery.com/api/v2'
   Trusted  = $true
+  PassThru = $true
   Priority = 20 # default is 50
 }
 Register-PSResourceRepository @parameters -Verbose
@@ -172,6 +178,7 @@ $parameters = @{
   Name     = 'PSGv3'
   Uri      = 'https://www.powershellgallery.com/api/v3'
   Trusted  = $true
+  PassThru = $true
   Priority = 10 # default is 50
   CredentialInfo = [Microsoft.PowerShell.PSResourceGet.UtilClasses.PSCredentialInfo]::new(
     'LocalSecretStore', 'PSGv3Secret')
@@ -197,7 +204,7 @@ Version Name              Repository  Description
 
 ## Install Modules
 
-Set the PSGallery as trusted.
+Set the PSGallery as trusted if it's not.
 
 ````powershell
 Set-PSResourceRepository -Name "PSGallery" -Priority 25 -Trusted -PassThru
@@ -251,6 +258,14 @@ Version Name                               InstalledLocation
 1.9.0   PSWorkItem                         /usr/local/share/powershell/Modules/PSWorkItem/1.9.0
 0.13.0  mySQLite                           /usr/local/share/powershell/Modules/mySQLite/0.13.0
 1.0.4.1 Microsoft.PowerShell.PSResourceGet /usr/local/share/powershell/Modules/Microsoft.PowerShell.PSResourceGet/1.0.4.1
+````
+
+## Remove PSRepository
+
+To remove a reposotory.
+
+````powershell
+Unregister-PSResourceRepository -Name PSGalleryV2 -Verbose
 ````
 
 [ [Top](#table-of-contents) ]
