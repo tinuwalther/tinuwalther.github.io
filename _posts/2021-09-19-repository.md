@@ -2,7 +2,7 @@
 layout: post
 title:  "PowerShellGet Repositories"
 author: Tinu
-categories: "PowerShell-Module"
+categories: "PowerShell-Repositories"
 tags:   PowerShell
 permalink: /posts/:title:output_ext
 ---
@@ -16,6 +16,8 @@ permalink: /posts/:title:output_ext
   - [Registering a local repository](#registering-a-local-repository)
 - [Sonatype Nexus Repository](#sonatype-nexus-repository)
   - [Using Docker](#using-docker)
+  - [Get admin password](#get-admin-password)
+  - [Change admin password](#change-admin-password)
   - [Create a user](#create-a-user)
     - [Activate NuGet API Key](#activate-nuget-api-key)
   - [Create Nuget Repositories](#create-nuget-repositories)
@@ -93,9 +95,21 @@ To run, binding the exposed port 8081 to the host, use:
 docker run -d -p 8081:8081 --name nexus sonatype/nexus3
 ````
 
+### Get admin password
+
+````bash
+docker exec -it nexus1 /bin/bash
+cd /nexus-data
+cat admin.password
+````
+
+### Change admin password
+
+Open http://localhost:8081 and login as admin. Change the password in the wizard.
+
 ### Create a user
 
-Open http://localhost:8081 and login as admin. Navigate to Repository administration, click Security, Users and create a new user. Add the user to the **nx-admin** group.
+Navigate to Repository administration, click Security, Users and create a new user. Add the user to the **nx-admin** group.
 
 #### Activate NuGet API Key
 

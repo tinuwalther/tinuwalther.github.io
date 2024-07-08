@@ -2,7 +2,7 @@
 layout: post
 title:  "From PowerShellGet to PSResourceGet"
 author: Tinu
-categories: "PowerShell-Module"
+categories: "PowerShell-Repositories"
 tags:   PowerShell News
 permalink: /posts/:title:output_ext
 ---
