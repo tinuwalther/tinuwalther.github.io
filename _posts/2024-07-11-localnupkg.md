@@ -12,16 +12,17 @@ permalink: /posts/:title:output_ext
 <!-- TOC -->
 
 - [Table of Contents](#table-of-contents)
-- [Offline Installation NuPkg](#offline-installation-nupkg)
+- [Offline Installation Nuget Package](#offline-installation-nuget-package)
 - [See also](#see-also)
 
 <!-- /TOC -->
 
-## Offline Installation NuPkg
+## Offline Installation Nuget Package
 
-Download the Package:
+Download the Package from a remote NuGet Repository:
 
 ````powershell
+$RemoteRepoCreds  = Get-Credential
 $RemoteRepository = 'http://nexus:8081/repository/PSModules'
 $PackageName      = 'PsNetTools'
 $PackageVersion   = '0.7.8'
@@ -29,13 +30,14 @@ $LocalPackagePath = '/home/nupkg'
 $LocalRepoName    = 'LocalPackages'
 
 $Properties = @{
-  Uri     = "$($RemoteRepository)/$($PackageName)/$($PackageVersion)"
-  OutFile = "$($LocalPackagePath)/$($PackageName).nupkg"
+  Uri        = "$($RemoteRepository)/$($PackageName)/$($PackageVersion)"
+  OutFile    = "$($LocalPackagePath)/$($PackageName).nupkg"
+  Credential = $RemoteRepoCreds
 }
 Invoke-WebRequest @Properties -Verbose
 ````
 
-Register a local path as local Repository:
+Register a local path as Nuget Repository:
 
 ````powershell
 $Properties = @{
