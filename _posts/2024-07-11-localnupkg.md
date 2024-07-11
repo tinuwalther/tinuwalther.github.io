@@ -38,7 +38,12 @@ Invoke-WebRequest @Properties -Verbose
 Register a local path as local Repository:
 
 ````powershell
-Register-PSRepository -Name $LocalRepoName -SourceLocation $LocalPackagePath -InstallationPolicy Trusted
+$Properties = @{
+  Name               = $LocalRepoName
+  SourceLocation     = $LocalPackagePath
+  InstallationPolicy = 'Trusted'
+}
+Register-PSRepository @Properties -Verbose
 ````
 
 Install the Module from the local Repository:
