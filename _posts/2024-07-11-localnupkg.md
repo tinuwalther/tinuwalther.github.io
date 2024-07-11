@@ -12,18 +12,25 @@ permalink: /posts/:title:output_ext
 <!-- TOC -->
 
 - [Table of Contents](#table-of-contents)
-- [Offline Installation Nuget Package](#offline-installation-nuget-package)
+- [Offline Installation of Nuget Packages](#offline-installation-of-nuget-packages)
+    - [Download the Package](#download-the-package)
+    - [Register a local Repository](#register-a-local-repository)
+    - [Install the Module](#install-the-module)
 - [See also](#see-also)
 
 <!-- /TOC -->
 
-## Offline Installation Nuget Package
+## Offline Installation of Nuget Packages
+
+To install a Nuget package without registering a remote repository, you must download the package, register a local path as a local repository and install the package from the local repository.
+
+### Download the Package
 
 Download the Package from a remote NuGet Repository:
 
 ````powershell
 $RemoteRepoCreds  = Get-Credential
-$RemoteRepository = 'http://nexus:8081/repository/PSModules'
+$RemoteRepository = 'http://nexus:8081/repository/PSModules' # https://www.powershellgallery.com/api/v2
 $PackageName      = 'PsNetTools'
 $PackageVersion   = '0.7.8'
 $LocalPackagePath = '/home/nupkg'
@@ -37,6 +44,8 @@ $Properties = @{
 Invoke-WebRequest @Properties -Verbose
 ````
 
+### Register a local Repository
+
 Register a local path as local Repository:
 
 ````powershell
@@ -47,6 +56,8 @@ $Properties = @{
 }
 Register-PSRepository @Properties -Verbose
 ````
+
+### Install the Module
 
 Install the Module from the local Repository:
 
