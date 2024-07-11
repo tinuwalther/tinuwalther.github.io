@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "From PowerShellGet to PSResourceGet"
+title:  "PowerShellGet to PSResourceGet"
 author: Tinu
 categories: "PowerShell-Repositories"
 tags:   PowerShell News
