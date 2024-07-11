@@ -37,7 +37,7 @@ $Properties = @{
 Invoke-WebRequest @Properties -Verbose
 ````
 
-Register a local path as Nuget Repository:
+Register a local path as local Repository:
 
 ````powershell
 $Properties = @{
