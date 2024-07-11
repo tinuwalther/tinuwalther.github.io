@@ -19,7 +19,7 @@ permalink: /posts/:title:output_ext
 
 ## Offline Installation NuPkg
 
-1. Download the Package:
+Download the Package:
 
 ````powershell
 $RemoteRepository = 'http://nexus:8081/repository/PSModules'
@@ -35,13 +35,13 @@ $Properties = @{
 Invoke-WebRequest @Properties -Verbose
 ````
 
-2. Register a local path as local Repository:
+Register a local path as local Repository:
 
 ````powershell
 Register-PSRepository -Name $LocalRepoName -SourceLocation $LocalPackagePath -InstallationPolicy Trusted
 ````
 
-3. Install the Module from the local Repository:
+Install the Module from the local Repository:
 
 ````powershell
 Install-Module $PackageName -Scope AllUsers -Repository $LocalRepoName -Force
