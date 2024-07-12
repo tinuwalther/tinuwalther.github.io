@@ -13,6 +13,7 @@ permalink: /posts/:title:output_ext
 
 - [Table of Contents](#table-of-contents)
 - [Offline Installation of Nuget Packages](#offline-installation-of-nuget-packages)
+    - [Find the Package](#find-the-package)
     - [Download the Package](#download-the-package)
     - [Register a local Repository](#register-a-local-repository)
     - [Install the Module](#install-the-module)
@@ -26,15 +27,31 @@ permalink: /posts/:title:output_ext
 
 To install a Nuget package without registering a remote repository, you must download the package, register a local path as a local repository and install the package from the local repository.
 
+### Find the Package
+
+Find the Package and Version in a remote NuGet Repository:
+
+````powershell
+$RemoteRepoCreds  = Get-Credential
+$RemoteRepository = 'http://nexus:8081/repository/PSModules' # https://www.powershellgallery.com/api/v2
+$PackageName      = 'PsNetTools'
+
+$Properties = @{
+  Uri        = "$($RemoteRepository)/FindPackagesById()?id='$($PackageName)'"
+  Credential = $RemoteRepoCreds
+}
+$Response = Invoke-WebRequest @Properties -AllowUnencryptedAuthentication -Verbose
+[xml]$xml = $Response.Content
+````
+
 ### Download the Package
 
 Download the Package from a remote NuGet Repository:
 
 ````powershell
 $RemoteRepoCreds  = Get-Credential
-$RemoteRepository = 'http://nexus:8081/repository/PSModules' # https://www.powershellgallery.com/api/v2
-$PackageName      = 'PsNetTools'
-$PackageVersion   = '0.7.8'
+$PackageName      = $xml.feed.entry.properties.Title
+$PackageVersion   = $xml.feed.entry.properties.Version
 $LocalPackagePath = '/tmp/nupkg'
 $LocalRepoName    = 'LocalPackages'
 if(-not(Test-Path $LocalPackagePath)){New-Item -Path $LocalPackagePath -ItemType Directory -Force}
@@ -43,6 +60,7 @@ $Properties = @{
   Uri        = "$($RemoteRepository)/$($PackageName)/$($PackageVersion)"
   OutFile    = "$($LocalPackagePath)/$($PackageName).nupkg"
   Credential = $RemoteRepoCreds
+  PassThru   = $true
 }
 Invoke-WebRequest @Properties -AllowUnencryptedAuthentication -Verbose
 Get-ChildItem $LocalPackagePath
@@ -53,8 +71,22 @@ Output:
 ````powershell
 VERBOSE: Requested HTTP/1.1 GET with 0-byte payload
 VERBOSE: Received HTTP/1.1 21510-byte response of content type application/zip
-VERBOSE: File Name: PsNetTools.nupkg
 
+StatusCode        : 200
+StatusDescription : OK
+Content           : {80, 75, 3, 4…}
+RawContent        : HTTP/1.1 200 OK
+                    Date: Fri, 12 Jul 2024 07:28:48 GMT
+                    Server: Nexus/3.70.1-02
+                    Server: (OSS)
+                    X-Content-Type-Options: nosniff
+                    Content-Security-Policy: sandbox allow-forms allow-modals allow-popups allow-p…
+Headers           : {[Date, System.String[]], [Server, System.String[]], [X-Content-Type-Options, System.String[]], [Co
+                    ntent-Security-Policy, System.String[]]…}
+RawContentLength  : 21510
+RelationLink      : {}
+
+VERBOSE: File Name: PsNetTools.nupkg
     Directory: /tmp/nupkg
 
 UnixMode         User Group         LastWriteTime         Size Name
