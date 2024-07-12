@@ -152,6 +152,8 @@ VERBOSE: Test-ModuleManifest successfully validated the module manifest file '/t
 VERBOSE: Module 'PsNetTools' was installed successfully to path '/usr/local/share/powershell/Modules/PsNetTools/0.7.8'.
 ````
 
+[ [Top](#) ] 
+
 ## Extract the Nuget Package
 
 It's also possible, to expand the Nuget Package:
@@ -219,6 +221,8 @@ VERBOSE: Performing the operation "Remove Directory" on target "/tmp/PsNetTools/
 VERBOSE: Performing the operation "Remove File" on target "/tmp/PsNetTools/0.7.8/[Content_Types].xml".
 VERBOSE: Performing the operation "Remove File" on target "/tmp/PsNetTools/0.7.8/PsNetTools.nuspec".
 ````
+
+[ [Top](#) ] 
 
 ## CleanUp
 
