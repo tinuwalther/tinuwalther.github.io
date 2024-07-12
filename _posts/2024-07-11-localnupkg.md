@@ -44,7 +44,7 @@ $Properties = @{
   OutFile    = "$($LocalPackagePath)/$($PackageName).nupkg"
   Credential = $RemoteRepoCreds
 }
-Invoke-WebRequest @Properties -Verbose
+Invoke-WebRequest @Properties -AllowUnencryptedAuthentication -Verbose
 Get-ChildItem $LocalPackagePath
 ````
 
@@ -194,14 +194,14 @@ CleanUp Module:
 
 ````powershell
 Uninstall-Module -Name $PackageName -Force
-rm -r "/tmp/$($PackageName)/"
+Remove-Item "/tmp/$($PackageName)/" -Recurse -Force
 ````
 
 CleanUp Repository:
 
 ````powershell
 Unregister-PSRepository -Name $LocalRepoName
-rm -r $LocalPackagePath
+Remove-Item $LocalPackagePath -Recurse -Force
 ````
 
 [ [Top](#table-of-contents) ] 
