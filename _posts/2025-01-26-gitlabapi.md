@@ -140,9 +140,9 @@ function Invoke-DownloadFileFromGitLab {
         #endregion
 
         #region Download file from gitlab
-        $FileDownloadUrl = "$($GitLabBaseUrl)/api/v4/projects/$($GitLabProjectID)/repository/files/$($EncodedFilePath)/raw?ref=$($EncodedBranch)"
+        $ApiUrl = "$($GitLabBaseUrl)/api/v4/projects/$($GitLabProjectID)/repository/files/$($EncodedFilePath)/raw?ref=$($EncodedBranch)"
         try {
-            $null = Invoke-RestMethod -Uri $FileDownloadUrl -Headers $Headers -OutFile $LocalFilePath -Proxy $Proxy -ProxyUseDefaultCredentials
+            $null = Invoke-RestMethod -Uri $ApiUrl -Headers $Headers -OutFile $LocalFilePath -Proxy $Proxy -ProxyUseDefaultCredentials
             Write-Host " - File downloaded to $($LocalFilePath)" -ForegroundColor Green
             $true
         } catch {
