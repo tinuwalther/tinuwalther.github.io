@@ -10,19 +10,19 @@ permalink: /posts/:title:output_ext
 ## Table of Contents
 
 - [Using GitLab with API](#using-gitlab-with-api)
-  - [Generate a Personal Access Token](#generate-a-personal-access-token)
-  - [Make API Requests](#make-api-requests)
-  - [Common API Endpoints](#common-api-endpoints)
-  - [Handling Responses](#handling-responses)
-  - [Error Handling](#error-handling)
-  - [Example using PowerShell](#example-using-powershell)
+- [Generate a Personal Access Token](#generate-a-personal-access-token)
+- [Make API Requests](#make-api-requests)
+- [Common API Endpoints](#common-api-endpoints)
+- [Handling Responses](#handling-responses)
+- [Error Handling](#error-handling)
+- [PowerShell](#powershell)
 - [See also](#see-also)
 
 ## Using GitLab with API
 
 To use GitLab with its API, follow these steps:
 
-### Generate a Personal Access Token
+## Generate a Personal Access Token
 
 First, you need to generate a personal access token (PAT) from your GitLab account or GitLab project:
 
@@ -30,11 +30,11 @@ First, you need to generate a personal access token (PAT) from your GitLab accou
 2. Go to the "Access Tokens" section.
 3. Create a new token with the required scopes (e.g., `api`).
 
-### Make API Requests
+## Make API Requests
 
 You can make API requests by writing scripts in PowerShell.
 
-### Common API Endpoints
+## Common API Endpoints
 
 - **List Projects**: `/projects`
 - **Get a Single Project**: `/projects/:id`
@@ -44,21 +44,38 @@ You can make API requests by writing scripts in PowerShell.
 
 [ [Top](#table-of-contents) ]
 
-### Handling Responses
+## Handling Responses
 
-The API responses are typically in JSON format. Ensure you handle the responses appropriately in your application or script.
+PowerShell provides two cmdlets for making HTTP requests: `Invoke-WebRequest` and `Invoke-RestMethod`.
+Both cmdlets can be used to interact with REST APIs, but they have some differences in their usage and output.
 
-### Error Handling
+### Invoke-WebRequest
+
+`Invoke-WebRequest` is a versatile cmdlet that can be used to make HTTP requests and retrieve web content.
+It returns a detailed response object that includes the status code, headers, and the content of the response.
+
+Use `Invoke-WebRequest` when you need detailed information about the HTTP response or when working with non-JSON content.
+
+### Invoke-RestMethod
+
+`Invoke-RestMethod` is specifically designed for interacting with REST APIs.
+It automatically parses the JSON response and returns a PowerShell object, making it easier to work with the data.
+
+Use `Invoke-RestMethod` when interacting with REST APIs that return JSON data.
+
+[ [Top](#table-of-contents) ]
+
+## Error Handling
 
 Check for common HTTP status codes like `200 OK`, `201 Created`, `400 Bad Request`, `401 Unauthorized`, etc., to handle errors effectively.
 
 [ [Top](#table-of-contents) ]
 
-### Example using PowerShell
+## PowerShell
 
----
+PowerShell functions for upload and download a file from a GitLab project.
 
-**Download a file from your GitLab project**
+### Download a file from your GitLab project
 
 Summary:
 
@@ -66,10 +83,6 @@ The `Invoke-DownloadFileFromGitLab` function downloads a file from a specified G
 It takes parameters for the repository URL, file path, branch name, and destination path.
 The function constructs the appropriate GitLab API URL, sends a request to download the file,
 and saves the file to the specified destination on the local machine.
-
-<details>
-
-<summary>Click to expand the PowerShell function</summary>
 
 ```powershell
 function Invoke-DownloadFileFromGitLab {
@@ -105,6 +118,7 @@ function Invoke-DownloadFileFromGitLab {
     )
     
     process{
+        # We use EscapeDataString to ensure that any special characters in the variables are encoded for use in a URL
         $EncodedBranch   = [uri]::EscapeDataString($GitLabBranch)
         $EncodedProject  = [uri]::EscapeDataString($GitLabProject)
         $EncodedFilePath = [uri]::EscapeDataString($GitLabFilePath)
@@ -141,9 +155,7 @@ function Invoke-DownloadFileFromGitLab {
 }
 ```
 
-</details>
-
-**Upload a file to your GitLab project**
+## Upload a file to your GitLab project
 
 Summary:
 
@@ -151,10 +163,6 @@ The `Invoke-UploadFileToGitLab` function uploads a file to a specified GitLab re
 It takes parameters for the repository URL, file path, branch name, and local file path.
 The function constructs the appropriate GitLab API URL, checks if the file already exists,
 and either updates the existing file or creates a new file in the specified branch of the repository.
-
-<details>
-
-<summary>Click to expand the PowerShell function</summary>
 
 ```powershell
 function Invoke-UploadFileToGitLab {
@@ -190,6 +198,7 @@ function Invoke-UploadFileToGitLab {
     )
 
     process{
+        # We use EscapeDataString to ensure that any special characters in the variables are encoded for use in a URL
         $EncodedBranch   = [uri]::EscapeDataString($GitLabBranch)
         $EncodedProject  = [uri]::EscapeDataString($GitLabProject)
         $EncodedFilePath = [uri]::EscapeDataString($GitLabFilePath)
@@ -275,8 +284,6 @@ function Invoke-UploadFileToGitLab {
     }
 }
 ```
-
-</details>
 
 The functions above are written for Windows PowerShell and GitLab behind a Proxy with a little help from GitHub Copilot.
 
