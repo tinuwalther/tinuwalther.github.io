@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Local Nuget Repositories"
+title:  "API Local Nuget Repositories"
 author: Tinu
 categories: "PowerShell-Repositories"
 tags:   PowerShell News
@@ -148,7 +148,7 @@ VERBOSE: Test-ModuleManifest successfully validated the module manifest file '/t
 VERBOSE: Module 'PsNetTools' was installed successfully to path '/usr/local/share/powershell/Modules/PsNetTools/0.7.8'.
 ````
 
-[ [Top](#) ] 
+[ [Top](#) ]
 
 ## Extract the Nuget Package
 
