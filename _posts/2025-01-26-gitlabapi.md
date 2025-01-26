@@ -56,7 +56,20 @@ Check for common HTTP status codes like `200 OK`, `201 Created`, `400 Bad Reques
 
 ### Example using PowerShell
 
-Download a file from your GitLab project:
+---
+
+**Download a file from your GitLab project**
+
+Summary:
+
+The `Invoke-DownloadFileFromGitLab` function downloads a file from a specified GitLab repository.
+It takes parameters for the repository URL, file path, branch name, and destination path.
+The function constructs the appropriate GitLab API URL, sends a request to download the file,
+and saves the file to the specified destination on the local machine.
+
+<details>
+
+<summary>Click to expand the PowerShell function</summary>
 
 ```powershell
 function Invoke-DownloadFileFromGitLab {
@@ -128,9 +141,20 @@ function Invoke-DownloadFileFromGitLab {
 }
 ```
 
-[ [Top](#table-of-contents) ]
+</details>
 
-Upload a file to your GitLab project:
+**Upload a file to your GitLab project**
+
+Summary:
+
+The `Invoke-UploadFileToGitLab` function uploads a file to a specified GitLab repository.
+It takes parameters for the repository URL, file path, branch name, and local file path.
+The function constructs the appropriate GitLab API URL, checks if the file already exists,
+and either updates the existing file or creates a new file in the specified branch of the repository.
+
+<details>
+
+<summary>Click to expand the PowerShell function</summary>
 
 ```powershell
 function Invoke-UploadFileToGitLab {
@@ -252,7 +276,11 @@ function Invoke-UploadFileToGitLab {
 }
 ```
 
-The functions above are written for Windows PowerShell with a Proxy with a little help from GitHub Copilot.
+</details>
+
+The functions above are written for Windows PowerShell and GitLab behind a Proxy with a little help from GitHub Copilot.
+
+---
 
 [ [Top](#table-of-contents) ]
 
