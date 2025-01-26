@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "vSphere REST API"
+title:  "API vSphere"
 author: Tinu
 categories: "VMware"
 tags:   PowerShell News

@@ -3,25 +3,21 @@ layout: post
 title:  "Local Nuget Repositories"
 author: Tinu
 categories: "PowerShell-Repositories"
-tags:   PowerShell
+tags:   PowerShell News
 permalink: /posts/:title:output_ext
 ---
 
 ## Table of Contents
 
-<!-- TOC -->
-
 - [Table of Contents](#table-of-contents)
 - [Offline Installation of Nuget Packages](#offline-installation-of-nuget-packages)
-    - [Find the Package](#find-the-package)
-    - [Download the Package](#download-the-package)
-    - [Register a local Repository](#register-a-local-repository)
-    - [Install the Module](#install-the-module)
+  - [Find the Package](#find-the-package)
+  - [Download the Package](#download-the-package)
+  - [Register a local Repository](#register-a-local-repository)
+  - [Install the Module](#install-the-module)
 - [Extract the Nuget Package](#extract-the-nuget-package)
 - [CleanUp](#cleanup)
 - [See also](#see-also)
-
-<!-- /TOC -->
 
 ## Offline Installation of Nuget Packages
 
