@@ -67,7 +67,41 @@ Use `Invoke-RestMethod` when interacting with REST APIs that return JSON data.
 
 ## Error Handling
 
-Check for common HTTP status codes like `200 OK`, `201 Created`, `400 Bad Request`, `401 Unauthorized`, etc., to handle errors effectively.
+`Invoke-WebRequest` and `Invoke-RestMethod` can return various HTTP status codes depending on the outcome of the request. Here are some common HTTP status codes you might encounter:
+
+| Status Code | Status Message | Description                                                                 |
+|---|---|---|
+| **200** | OK | The request was successful, and the server returned the requested data.     |
+| **201** | Created | The request was successful, and a new resource was created.             |
+| **204** | No Conten | The request was successful, but there is no content to return.       |
+| **400** | Bad Request | The server could not understand the request due to invalid syntax.  |
+| **401** | Unauthorized | Authentication is required, and it has failed or has not yet been provided. |
+| **403** | Forbidden | The server understood the request, but it refuses to authorize it.    |
+| **404** | Not Found | The requested resource could not be found on the server.              |
+| **500** | Internal Server Error | The server encountered an unexpected condition that prevented it from fulfilling the request. |
+| **502** | Bad Gateway | The server was acting as a gateway or proxy and received an invalid response from the upstream server. |
+| **503** | Service Unavailable | The server is not ready to handle the request, usually due to maintenance or overload. |
+
+To handle these status codes effectively in your PowerShell script, you can use try-catch blocks to catch exceptions and inspect the status code. Here is an example:
+
+```powershell
+try {
+    $response = Invoke-RestMethod -Uri "https://api.example.com/resource" -Method Get
+    Write-Output "Request succeeded with status code: $($response.StatusCode)"
+} catch {
+    if ($_.Exception.Response.StatusCode -eq 400) {
+        Write-Output "Bad Request: Check your request syntax."
+    } elseif ($_.Exception.Response.StatusCode -eq 401) {
+        Write-Output "Unauthorized: Check your authentication token."
+    } elseif ($_.Exception.Response.StatusCode -eq 404) {
+        Write-Output "Not Found: The requested resource does not exist."
+    } else {
+        Write-Output "An error occurred: $($_.Exception.Message)"
+    }
+}
+```
+
+This example demonstrates how to handle different HTTP status codes returned by `Invoke-RestMethod`. The same code can be used for `Invoke-WebRequest`.
 
 [ [Top](#table-of-contents) ]
 
