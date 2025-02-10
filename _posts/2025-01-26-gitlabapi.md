@@ -16,6 +16,7 @@ permalink: /posts/:title:output_ext
 - [Handling Responses](#handling-responses)
 - [Error Handling](#error-handling)
 - [PowerShell](#powershell)
+- [GitLab CLI](#gitlab-cli)
 - [See also](#see-also)
 
 ## Using GitLab with API
@@ -320,6 +321,52 @@ function Invoke-UploadFileToGitLab {
 ```
 
 The functions above are written for Windows PowerShell and GitLab behind a Proxy with a little help from GitHub Copilot.
+
+## GitLab CLI
+
+Old school GitLab CLI with PowerShell and PAT.
+
+```powershell
+function Invoke-IXPushToGitLab{
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory=$true)]
+        [string]$GitLabToken,
+
+        [Parameter(Mandatory=$false)]
+        [string]$GitLabBaseUrl = 'gitlab.company.ch',
+
+        [ValidateNotNullOrEmpty()]
+        [Parameter(Mandatory=$true)]
+        [string]$GitLabProject,
+
+        [ValidateNotNullOrEmpty()]
+        [Parameter(Mandatory=$true)]
+        [string]$GitLabBranch,
+
+        [ValidateNotNullOrEmpty()]
+        [Parameter(Mandatory=$true)]
+        [string]$FileToPush,
+
+        [ValidateNotNullOrEmpty()]
+        [Parameter(Mandatory=$true)]
+        [string]$LocalFilePath
+        )
+
+    $GitLabRepo = "https://oauth2:$($GitLabToken)@$($GitLabBaseUrl)/$($GitLabProject).git"
+    # git remote set-url origin $GitLabRepo
+    $clone = git clone $GitLabRepo 2>"gitout.txt"
+
+    Set-Location $LocalFilePath
+
+    $pull = git pull $GitLabRepo $GitLabBranch 2>"gitout.txt"
+
+    git add $FileToPush
+    git commit -m "Automatic Update on $($FileToPush) at $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')"
+    git push $GitLabRepo $GitLabBranch 2>"gitout.txt"
+    Remove-Item "gitout.txt" -confirm:$false -force
+}
+```
 
 ---
 
