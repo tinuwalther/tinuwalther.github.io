@@ -20,6 +20,49 @@ permalink: /posts/:title:output_ext
 
 [PowerShell Gallery API](https://www.powershellgallery.com/api/v2)
 
+'C:\Users\\<username\>\AppData\Local\Microsoft\Windows\PowerShell\PowershellGet\PSRepositories.xml' contains the properties of the registered PSGallery:
+
+````xml
+<Objs Version="1.1.0.1" xmlns="http://schemas.microsoft.com/powershell/2004/04">
+  <Obj RefId="0">
+    <TN RefId="0">
+      <T>System.Collections.Specialized.OrderedDictionary</T>
+      <T>System.Object</T>
+    </TN>
+    <DCT>
+      <En>
+        <S N="Key">PSGallery</S>
+        <Obj N="Value" RefId="1">
+          <TN RefId="1">
+            <T>Microsoft.PowerShell.Commands.PSRepository</T>
+            <T>System.Management.Automation.PSCustomObject</T>
+            <T>System.Object</T>
+          </TN>
+          <MS>
+            <S N="Name">PSGallery</S>
+            <S N="SourceLocation">https://www.powershellgallery.com/api/v2/</S>
+            <S N="PublishLocation">https://www.powershellgallery.com/api/v2/package/</S>
+            <S N="ScriptSourceLocation">https://www.powershellgallery.com/api/v2/items/psscript/</S>
+            <S N="ScriptPublishLocation">https://www.powershellgallery.com/api/v2/package</S>
+            <B N="Trusted">true</B>
+            <B N="Registered">true</B>
+            <S N="InstallationPolicy">Trusted</S>
+            <S N="PackageManagementProvider">NuGet</S>
+            <Obj N="ProviderOptions" RefId="2">
+              <TN RefId="2">
+                <T>System.Collections.Hashtable</T>
+                <T>System.Object</T>
+              </TN>
+              <DCT />
+            </Obj>
+          </MS>
+        </Obj>
+      </En>
+    </DCT>
+  </Obj>
+</Objs>
+````
+
 ## Internal Gallery
 
 [Working with Private PowerShellGet Repositories](https://docs.microsoft.com/en-us/powershell/scripting/gallery/how-to/working-with-local-psrepositories?view=powershell-7.1)
