@@ -2,7 +2,7 @@
 layout: post
 title:  "Module & Script Management"
 author: Tinu
-categories: "PowerShell-Module"
+categories: "PowerShell-Repositories"
 tags:   PowerShell
 permalink: /posts/:title:output_ext
 ---
