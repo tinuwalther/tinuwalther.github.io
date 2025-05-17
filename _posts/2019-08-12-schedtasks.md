@@ -11,6 +11,7 @@ permalink: /posts/:title:output_ext
 
 - [Table of Contents](#table-of-contents)
 - [Task Scheduler](#task-scheduler)
+  - [Create a PowerShell Script](#create-a-powershell-script)
   - [Create a Scheduled Task](#create-a-scheduled-task)
   - [Delete a Scheduled Task](#delete-a-scheduled-task)
   - [Task Actions](#task-actions)
@@ -21,7 +22,7 @@ permalink: /posts/:title:output_ext
 
 ## Task Scheduler
 
-### Create a Scheduled Task
+### Create a PowerShell Script
 
 ````powershell
 # Create the script
@@ -32,7 +33,11 @@ $Content = @"
 Restart-Computer -Force
 "@
 $Content | Out-File -FilePath $ScriptFullname -Encoding utf8 -Force
+````
 
+### Create a Scheduled Task
+
+````powershell
 # Create a new task action
 $taskAction = @{
     Execute  = '%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe'
@@ -76,6 +81,21 @@ Register-ScheduledTask @registerTask
 Get-ScheduledTask -TaskName "RestartOnce" | Select *
 
 Get-ScheduledTask "RestartOnce" | Get-ScheduledTaskInfo | Select *
+````
+
+### Register a Scheduled Task as User
+
+````powershell
+$registerTask = @{
+    TaskName    = "PowerShell Tasks"
+    Description = "Run a PowerShell Script"
+    Action      = $ScheduledTaskAction
+    Trigger     = $ScheduledTaskTrigger
+    TaskPath    = 'PSTasks'
+    RunLevel    = 'Highest'
+}
+
+Register-ScheduledTask @registerTask -User "MyComputer\Administrator" -Password 'verySecUreP@ssw0rd!'
 ````
 
 ### Delete a Scheduled Task
