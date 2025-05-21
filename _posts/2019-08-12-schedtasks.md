@@ -34,9 +34,9 @@ permalink: /posts/:title:output_ext
 $ScriptFullname = 'C:\Temp\Maintenace\RebootOnce.ps1'
 if(-not(Test-Path $ScriptFullname)){$null = New-Item -Path $ScriptFullname -ItemType File -Force}
 
-$Content = @"
-Get-Date | Set-Content 'C:\Temp\Maintenace\RebootOnce.log'
-"@
+$Content = @'
+"Last boot: $(Get-Date)" | Add-Content "C:\Temp\Maintenace\boot.log"
+'@
 $Content | Out-File -FilePath $ScriptFullname -Encoding utf8 -Force
 ````
 
@@ -69,8 +69,7 @@ Parameters:
 
 ````powershell
 $taskTrigger = @{
-    Once = $true
-    At   = '2021/02/20 03:00:00'
+    AtStartup = $true
 }
 $ScheduledTaskTrigger = New-ScheduledTaskTrigger @taskTrigger
 ````
@@ -106,7 +105,40 @@ $ScheduledTaskPrincipal = New-ScheduledTaskPrincipal @taskPrincipal
 
 ### Create new task settings
 
-Settings for teh Task ...
+Settings for the Task.
+
+Parameters:
+
+- DisallowDemandStart
+- DisallowHardTerminate
+- Compatibility
+- DeleteExpiredTaskAfter
+- AllowStartIfOnBatteries
+- Disable
+- MaintenanceExclusive
+- Hidden
+- RunOnlyIfIdle
+- IdleWaitTimeout
+- NetworkId
+- NetworkName
+- DisallowStartOnRemoteAppSession
+- MaintenancePeriod
+- MaintenanceDeadline
+- StartWhenAvailable
+- DontStopIfGoingOnBatteries
+- WakeToRun
+- IdleDuration
+- RestartOnIdle
+- DontStopOnIdleEnd
+- ExecutionTimeLimit
+- MultipleInstances
+- Priority
+- RestartCount
+- RestartInterval
+- RunOnlyIfNetworkAvailable
+- CimSession
+- ThrottleLimit
+- AsJob
 
 ````powershell
 $taskSettings = @{
@@ -119,8 +151,8 @@ $ScheduledTaskSettingsSet = New-ScheduledTaskSettingsSet @taskSettings
 
 ````powershell
 $registerTask = @{
-    TaskName    = "RestartOnce"
-    Description = "Restart the computer one time"
+    TaskName    = "BootLog"
+    Description = "Log the last boot time"
     Action      = $ScheduledTaskAction
     Trigger     = $ScheduledTaskTrigger
     Principal   = $ScheduledTaskPrincipal
@@ -144,11 +176,11 @@ Running the Task with Different Privileges. (Have to test the differences betwee
 $Credentials = Get-Credential
 
 $registerTask = @{
-    TaskName    = "PowerShell Task"
-    Description = "Run a PowerShell Script"
+    TaskName    = "BootLog"
+    Description = "Log the last boot time"
     Action      = $ScheduledTaskAction
     Trigger     = $ScheduledTaskTrigger
-    TaskPath    = 'PSTasks'
+    TaskPath    = '\Maintenace'
     User        = $Credentials.UserName
     Password    = $Credentials.GetNetworkCredential().Password
     RunLevel    = 'Highest'
