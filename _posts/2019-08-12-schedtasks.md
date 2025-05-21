@@ -35,7 +35,7 @@ $ScriptFullname = 'C:\Temp\Maintenace\RebootOnce.ps1'
 if(-not(Test-Path $ScriptFullname)){$null = New-Item -Path $ScriptFullname -ItemType File -Force}
 
 $Content = @"
-Restart-Computer -WhatIf | Set-Content 'C:\Temp\Maintenace\RebootOnce.log'
+Get-Date | Set-Content 'C:\Temp\Maintenace\RebootOnce.log'
 "@
 $Content | Out-File -FilePath $ScriptFullname -Encoding utf8 -Force
 ````
