@@ -20,7 +20,15 @@ permalink: /posts/:title:output_ext
 
 [PowerShell Gallery API](https://www.powershellgallery.com/api/v2)
 
-'C:\Users\\<username\>\AppData\Local\Microsoft\Windows\PowerShell\PowershellGet\PSRepositories.xml' contains the properties of the registered PSGallery:
+## PSRepositories.xml
+
+The definitions for registered repositories are saved in the `PSRepositories.xml` file. This file contains the properties and configuration details for each registered repository, such as PSGallery or any internal repositories you add. You can find the file with the following command:
+
+````powershell
+Get-ChildItem -Path / -Filter PSRepositories.xml -Recurse -ErrorAction SilentlyContinue -Force
+````
+
+Windows: C:\Users\\<username\>\AppData\Local\Microsoft\Windows\PowerShell\PowershellGet\PSRepositories.xml
 
 ````xml
 <Objs Version="1.1.0.1" xmlns="http://schemas.microsoft.com/powershell/2004/04">
