@@ -9,3 +9,17 @@ logo: /assets/PsEngOps.png
 show_downloads: false
 
 permalink: /posts/:title:output_ext
+
+collections:
+  wiki:
+    output: true
+    permalink: /wiki/:path/
+
+defaults:
+  - scope:
+      path: ""
+      type: wiki
+    values:
+      layout: default
+
+repository: tinuwalther/tinuwalther.github.io

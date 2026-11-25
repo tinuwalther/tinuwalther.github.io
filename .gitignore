@@ -1,3 +1,19 @@
+# Jekyll generated files
+_site/
+.sass-cache/
+.jekyll-cache/
+.jekyll-metadata
+
+# Ruby Bundler
+.bundle/
+vendor/bundle/
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+archiv/
 
 .DS_Store
 *.bak
