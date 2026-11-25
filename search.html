@@ -15,14 +15,19 @@ layout: default
 <p><div id="search-results"></div></p>
 
 <script>
+  {% assign documents = site.posts | concat: site.wiki %}
+
   window.store = {
-    {% for post in site.posts %}
-      "{{ post.url | slugify }}": {
-        "title": "{{ post.title | xml_escape }}",
-        "author": "{{ post.author | xml_escape }}",
-        "category": "{{ post.categories | xml_escape }}",
+    {% for post in documents %}
+      {{ post.url | jsonify }}: {
+        "title": {{ post.title | jsonify }},
+        "author": {{ post.author | jsonify }},
+        "category": {{ post.categories | join: ", " | jsonify }},
+        "tags": {{ post.tags | join: ", " | jsonify }},
         "content": {{ post.content | strip_html | strip_newlines | jsonify }},
-        "url": "{{ post.url | xml_escape }}"
+        "url": {{ post.url | relative_url | jsonify }},
+        "collection": {{ post.collection | jsonify }},
+        "date": {{ post.date | date: "%Y-%m-%d" | jsonify }}
       }
       {% unless forloop.last %},{% endunless %}
     {% endfor %}
